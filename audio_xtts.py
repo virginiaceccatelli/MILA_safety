@@ -19,7 +19,7 @@ from TTS.api import TTS
 CSV_PATH = "translations/jbb_behaviors_es_12b.csv"
 TEXT_COL = "Goal_es"
 
-OUT_DIR = "audio_xtts_es"
+OUT_DIR = "audio_xtts_code_switched"
 MANIFEST_CSV = "audio_xtts_es_manifest.csv"
 
 MODEL_NAME = "tts_models/multilingual/multi-dataset/xtts_v2"
