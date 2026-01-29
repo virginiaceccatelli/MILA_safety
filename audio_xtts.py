@@ -16,16 +16,16 @@ torch.load = _torch_load_compat
 
 from TTS.api import TTS
 
-CSV_PATH = "translations/jbb_behaviors_es_12b.csv"
-TEXT_COL = "Goal_es"
+CSV_PATH = "code_switched_pos_aware/code_switched_de_es.csv"
+TEXT_COL = "code_switched"
 
-OUT_DIR = "audio_xtts_code_switched"
-MANIFEST_CSV = "audio_xtts_es_manifest.csv"
+OUT_DIR = "audio_xtts_cs_de_es"
+MANIFEST_CSV = "audio_xtts_cs_de_es.csv"
 
 MODEL_NAME = "tts_models/multilingual/multi-dataset/xtts_v2"
 
 # Language code for XTTS (e.g., "it", "fr", "de", "es")
-LANGUAGE = "es"
+LANGUAGE = "de"
 
 # one of these two
 SPEAKER_WAV: Optional[str] = None
@@ -38,9 +38,6 @@ MAX_CHARS_PER_CHUNK = 250
 PAUSE_SILENCE_MS = 120
 
 USE_GPU = torch.cuda.is_available()
-
-# If you want to control where Coqui caches models on a cluster, set this before importing TTS:
-# os.environ["TTS_HOME"] = "/network/scratwch/<u>/<username>/coqui_tts_cache"
 
 def normalize_whitespace(s: str) -> str:
     return re.sub(r"\s+", " ", str(s)).strip()
