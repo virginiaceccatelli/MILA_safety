@@ -16,16 +16,16 @@ torch.load = _torch_load_compat
 
 from TTS.api import TTS
 
-CSV_PATH = "code_switched_pos_aware/code_switched_de_es.csv"
+CSV_PATH = "code_switched_pos_aware/code_switched_it_es.csv"
 TEXT_COL = "code_switched"
 
-OUT_DIR = "audio_xtts_cs_de_es"
-MANIFEST_CSV = "audio_xtts_cs_de_es.csv"
+OUT_DIR = "audio_xtts_cs_it_es"
+MANIFEST_CSV = "audio_xtts_cs_it_es.csv"
 
 MODEL_NAME = "tts_models/multilingual/multi-dataset/xtts_v2"
 
 # Language code for XTTS (e.g., "it", "fr", "de", "es")
-LANGUAGE = "de"
+LANGUAGE = "es"
 
 # one of these two
 SPEAKER_WAV: Optional[str] = None

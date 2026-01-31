@@ -14,7 +14,7 @@ SPACY_MODELS = {
     'es': 'es_core_news_sm'
 }
 
-class ImprovedCodeSwitcher:    
+class CodeSwitcher:    
     def __init__(self):
         self.nlp = {}
         print("Init spaCy models")
@@ -28,6 +28,7 @@ class ImprovedCodeSwitcher:
         if seed is not None:
             random.seed(seed)
         
+        # e.g. doc1 = Je/PRON, veux/VERB, acheter/VERB, ...
         doc1 = self.nlp[lang1](sent1)
         doc2 = self.nlp[lang2](sent2)
         
@@ -202,7 +203,7 @@ def process_csv_files(input_dir: str = "translations",
                      strategy: str = 'random',
                      use_seed: bool = True):
     
-    switcher = ImprovedCodeSwitcher()
+    switcher = CodeSwitcher()
     Path(output_dir).mkdir(exist_ok=True)
     
     lang_pairs = [
@@ -225,23 +226,19 @@ def process_csv_files(input_dir: str = "translations",
             print(f"✓ Loaded {csv_path}: {len(dataframes[lang])} rows")
         else:
             print(f"✗ NOT FOUND: {csv_path}")
-    
-    if len(dataframes) < 2:
-        print("\nERROR: Need at least 2 CSV files")
-        sys.exit(1)
-    
+        
     total_processed = 0
     mixing_stats = []
     
     for lang1, lang2 in lang_pairs:
         if lang1 not in dataframes or lang2 not in dataframes:
-            print(f"\n✗ Skipping {lang1}-{lang2}: Missing data files")
+            print(f"\nSkipping {lang1}-{lang2}: Missing data files")
             continue
         print(f"\nProcessing language pair: {lang1}-{lang2}")        
         df1 = dataframes[lang1]
         df2 = dataframes[lang2]
         
-        # Find Goal columns
+        # Goal columns
         goal_col1 = f"Goal_{lang1}"
         goal_col2 = f"Goal_{lang2}"
         
