@@ -433,7 +433,7 @@ def run_gpt(audio_paths: dict, out_dir: Path, **_):
         raise EnvironmentError("OPENAI_API_KEY not set in environment.")
 
     client = OpenAI(api_key=api_key)
-    model_id = "gpt-4o-audio-preview"
+    model_id = "gpt-audio" #"gpt-4o-audio-preview"
     MAX_RETRIES = 5
     INITIAL_WAIT = 10
 
