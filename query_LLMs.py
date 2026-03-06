@@ -17,9 +17,7 @@ import os
 import sys
 from pathlib import Path
 
-# Monkey-patch for torch < 2.6: Qwen's load_speakers() triggers a hard block
-# in transformers due to CVE-2025-32434. Safe to bypass on a trusted cluster.
-# Remove once torch >= 2.6 is available.
+
 try:
     import transformers.utils.import_utils as _tu
     _tu.check_torch_load_is_safe = lambda: None
@@ -33,19 +31,17 @@ SYSTEM_PROMPT = (
     "Output only your answer."
 )
 
-LANGS = ["de", "es", "fr", "it", "en"]
-AUDIO_FOLDER_TEMPLATE = "codeswitch_xtts_one-lang/audio_xtts_cs_{lang}"
-AUDIO_FOLDER_TEMPLATE_EN = "XTTS_audio/audio_xtts_{lang}"
+LANGS = ["de", "es", "fr", "it"]
+AUDIO_FOLDER_TEMPLATE = "XTTS_audio/audio_xtts_{lang}"
 N_FILES = 100
 
-
 def get_audio_paths(data_root: Path, langs: list[str]) -> dict[str, list[Path]]:
+    """
+    Returns a dict keyed by pair label (e.g., 'de-es') with a list of wav Paths.
+    """
     result = {}
     for lang in langs:
-        if lang == "en":
-            folder = data_root / AUDIO_FOLDER_TEMPLATE_EN.format(lang=lang)
-        else:
-            folder = data_root / AUDIO_FOLDER_TEMPLATE.format(lang=lang)
+        folder = data_root / AUDIO_FOLDER_TEMPLATE.format(lang=lang)
         if not folder.exists():
             print(f"[WARNING] Folder not found: {folder}", file=sys.stderr)
             continue
@@ -54,7 +50,6 @@ def get_audio_paths(data_root: Path, langs: list[str]) -> dict[str, list[Path]]:
             print(f"[WARNING] Expected {N_FILES} files in {folder}, found {len(paths)}", file=sys.stderr)
         result[lang] = paths
     return result
-
 
 def save_results(out_dir: Path, model_name: str, lang: str, results: list[dict]):
     out_dir.mkdir(parents=True, exist_ok=True)
@@ -82,18 +77,6 @@ def safe_inputs_to_device(inputs, device, dtype):
 
 
 def run_qwen25omni(audio_paths: dict, out_dir: Path, quantize: bool):
-    """
-    Qwen2.5-Omni-7B — fits on 1 GPU (16GB) without quantization.
-    HF model: Qwen/Qwen2.5-Omni-7B
-
-    Correct inference pattern (from official model card):
-    - system content must be a list-of-dicts, NOT a plain string
-    - apply_chat_template(..., tokenize=False) → text string only
-    - process_mm_info() extracts audio separately
-    - processor(text=..., audio=..., return_tensors="pt") builds final inputs
-    - model.disable_talker() disables audio output (text-only, saves ~2GB VRAM)
-    - model.generate(..., return_audio=False) for text-only output
-    """
     from transformers import Qwen2_5OmniForConditionalGeneration, Qwen2_5OmniProcessor
     from qwen_omni_utils import process_mm_info
     import torch
@@ -170,24 +153,6 @@ def run_qwen25omni(audio_paths: dict, out_dir: Path, quantize: bool):
 
 
 def run_qwen3omni(audio_paths: dict, out_dir: Path, quantize: bool):
-    """
-    Qwen3-Omni-30B-A3B-Instruct — MoE, ~55GB bf16.
-    Needs 2 GPUs (main partition) or --quantize on 1 GPU.
-    HF model: Qwen/Qwen3-Omni-30B-A3B-Instruct
-
-    CORRECT classes (from official model card):
-      Qwen3OmniMoeForConditionalGeneration  — full model (audio+text out)
-      Qwen3OmniMoeThinkerForConditionalGeneration — text-only, no talker
-      Qwen3OmniMoeProcessor                — processor for both
-
-    We use Thinker (text-only) + disable_talker() for safety.
-    Using Qwen2_5OmniForConditionalGeneration caused 'dict has no to_dict' crash
-    because Qwen3-Omni has a different config structure entirely.
-
-    system content must be list-of-dicts (same as Qwen2.5-Omni).
-    Requires transformers from GitHub:
-        pip install git+https://github.com/huggingface/transformers
-    """
     from transformers import Qwen3OmniMoeForConditionalGeneration, Qwen3OmniMoeProcessor
     from qwen_omni_utils import process_mm_info
     import torch
@@ -250,16 +215,7 @@ def run_qwen3omni(audio_paths: dict, out_dir: Path, quantize: bool):
 
 
 def run_voxtral(audio_paths: dict, out_dir: Path, quantize: bool = False, resume: bool = False):
-    """
-    Voxtral-Small-24B-2507 — loaded locally (~55GB bf16, needs 2 GPUs on main).
-    HF model: mistralai/Voxtral-Small-24B-2507
-
-    Key constraints from official model card:
-    - System prompts are NOT supported — put instruction in user turn instead.
-    - Uses VoxtralForConditionalGeneration from transformers.
-    - Audio content format: {"type": "audio", "path": str(path)}
-    - temperature=0.2, top_p=0.95 recommended for audio understanding.
-    """
+    
     from transformers import VoxtralForConditionalGeneration, AutoProcessor
     import torch
 
@@ -279,10 +235,8 @@ def run_voxtral(audio_paths: dict, out_dir: Path, quantize: bool = False, resume
     model_dtype = next(model.parameters()).dtype
     model_device = next(model.parameters()).device
 
-    # System prompts not supported — embed instruction in user turn instead
-    USER_INSTRUCTION = (
-        SYSTEM_PROMPT + " "  # prepend as text before audio
-    )
+    # System prompts not supported — instruction goes as text chunk in user turn
+    USER_INSTRUCTION = SYSTEM_PROMPT
 
     for lang, paths in audio_paths.items():
         completed = load_completed(out_dir, "voxtral", lang) if resume else set()
@@ -297,18 +251,15 @@ def run_voxtral(audio_paths: dict, out_dir: Path, quantize: bool = False, resume
                     {
                         "role": "user",
                         "content": [
-                            {"type": "text", "text": USER_INSTRUCTION},
                             {"type": "audio", "path": str(path)},
+                            {"type": "text", "text": USER_INSTRUCTION},
                         ],
                     },
                 ]
-                inputs = processor.apply_chat_template(
-                    conversation,
-                    tokenize=True,
-                    add_generation_prompt=True,
-                    return_dict=True,
-                )
-                inputs = safe_inputs_to_device(inputs, model_device, model_dtype)
+                # Voxtral processor: NO extra kwargs to apply_chat_template
+                # returns inputs directly, cast to device+dtype in one step
+                inputs = processor.apply_chat_template(conversation)
+                inputs = inputs.to(model_device, dtype=model_dtype)
                 with torch.no_grad():
                     output_ids = model.generate(
                         **inputs,
@@ -318,7 +269,7 @@ def run_voxtral(audio_paths: dict, out_dir: Path, quantize: bool = False, resume
                         do_sample=True,
                     )
                 response = processor.batch_decode(
-                    output_ids[:, inputs["input_ids"].shape[1]:],
+                    output_ids[:, inputs.input_ids.shape[1]:],
                     skip_special_tokens=True,
                 )[0]
                 results.append({"file": path.name, "lang": lang, "response": response})
@@ -330,19 +281,6 @@ def run_voxtral(audio_paths: dict, out_dir: Path, quantize: bool = False, resume
         save_results(out_dir, "voxtral", lang, results)
 
 def run_flamingo(audio_paths: dict, out_dir: Path, quantize: bool):
-    """
-    Audio Flamingo 3 — 7B (Qwen2.5 backbone), fits on 1 GPU (16GB).
-    HF model: nvidia/audio-flamingo-3-hf
-
-    Two-pass approach:
-      Pass 1 — audio → transcription via apply_transcription_request()
-               strip_prefix=True removes the canned preamble.
-      Pass 2 — transcription → conversational response via chat template.
-               Text-only second pass uses AF3's Qwen2.5 backbone normally.
-
-    This gives both a transcription and a response in the output JSON,
-    and avoids the "describing the audio" behaviour from single-pass prompting.
-    """
     from transformers import AudioFlamingo3ForConditionalGeneration, AutoProcessor
     import torch
 
@@ -388,8 +326,6 @@ def run_flamingo(audio_paths: dict, out_dir: Path, quantize: bool):
             if transcription:
                 try:
                     # ── Pass 2: transcription → conversational response ────
-                    # Text-only chat using AF3's Qwen2.5 backbone.
-                    # System prompt is safe here — no audio in this pass.
                     conversation = [
                         {"role": "system", "content": SYSTEM_PROMPT},
                         {"role": "user",   "content": transcription},
@@ -420,11 +356,6 @@ def run_flamingo(audio_paths: dict, out_dir: Path, quantize: bool):
         save_results(out_dir, "flamingo", lang, results)
 
 def run_gpt(audio_paths: dict, out_dir: Path, **_):
-    """
-    GPT-4o Audio Preview — OpenAI API.
-    Reads OPENAI_API_KEY from environment (set in your sbatch script).
-    Audio encoded as base64 WAV. Per-file error handling with retry on 429.
-    """
     import time
     from openai import OpenAI
 
@@ -505,17 +436,22 @@ if __name__ == "__main__":
                         help="Which model to run.")
     parser.add_argument("--quantize", action="store_true",
                         help="Load model in 4-bit (use when VRAM is tight).")
-    parser.add_argument("--langs", nargs="+", default=LANGS,
-                        help="Language codes to process (default: de es fr it en).")
     parser.add_argument("--data_root", type=Path, default=Path("."),
                         help="Root directory containing codeswitch_xtts_one-lang/.")
     parser.add_argument("--out_dir", type=Path, default=Path("results"),
                         help="Directory to save JSON outputs.")
     parser.add_argument("--test", action="store_true",
                         help="Run only the first file per language (sanity check before full run).")
+    parser.add_argument(
+        "--langs",
+        nargs="+",
+        default=LANGS,
+        choices=LANGS,
+        help="Subset of languages to run"
+    )
     args = parser.parse_args()
 
-    print(f"Model: {args.model} | Quantize: {args.quantize} | Langs: {args.langs} | Test: {args.test}")
+    print(f"Model: {args.model} | Quantize: {args.quantize} | Test: {args.test}")
     audio_paths = get_audio_paths(args.data_root, args.langs)
 
     if not audio_paths:
