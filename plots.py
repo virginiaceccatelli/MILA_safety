@@ -4,7 +4,7 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 
 # load multilingual results
-df = pd.read_excel("full_results.xlsx")
+df = pd.read_excel("judge_results_summaries/full_results.xlsx")
 df = df[
     ["model","language","refused_rate","jailbroken_rate","deflected_rate"]
 ].drop_duplicates()
@@ -26,14 +26,14 @@ def load_summary_json(path):
     return pd.DataFrame(rows)
 
 # load english baseline
-df_en = load_summary_json("summary_en.json")
+df_en = load_summary_json("judge_results_summaries/summary_en.json")
 
 # load single-language baselines (non-english)
-df_single = load_summary_json("summary_single-langs.json")
+df_single = load_summary_json("judge_results_summaries/summary_single-langs.json")
 
-df_gemini = load_summary_json("summary_gemini.json")
-df_gemini_single = load_summary_json("summary_gemini_single.json")
-df_salmonn = load_summary_json("summary_salmonn.json")
+df_gemini = load_summary_json("results_one/summary_gemini.json")
+df_gemini_single = load_summary_json("judge_results_summaries/summary_gemini_single.json")
+df_salmonn = load_summary_json("judge_results_summaries/summary_salmonn.json")
 def normalize_cs_tags(lang):
     if lang.startswith("cs-"):
         return lang[3:] + "-en"
