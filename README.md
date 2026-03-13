@@ -61,7 +61,7 @@ System prompts are not supported by Voxtral, so the behavioural instruction is e
 
 ### Audio Flamingo 3 (flamingo)
 A 7B audio understanding model from NVIDIA based on the Qwen2.5 backbone, loaded locally on a single A100 GPU. Because Audio Flamingo 3 was trained on structured audio analysis tasks (transcription, QA, classification) rather than open-ended conversation, a two-pass approach is used: the first pass transcribes the audio using the model's dedicated apply_transcription_request() API; the second pass feeds the transcription as plain text into the Qwen2.5 backbone to generate a conversational response. This avoids the audio-description behaviour that arises when conversational prompts are sent alongside audio input.
-### GPT-4o Audio Preview (gpt)
+### GPT-4o Audio (gpt)
 Audio files are base64-encoded and sent as input_audio content blocks. A system prompt is passed in the standard way. 
 
 All local models use a safe_inputs_to_device() helper that casts floating-point tensors to the model's dtype (bfloat16) before the forward pass, preventing dtype mismatch errors at the audio encoder. Per-file exception handling ensures that a single failed inference does not abort the full run — failed files are recorded with "response": null and an error message. A --test flag runs one file per language for sanity checking, and a --resume flag skips already-completed files.
