@@ -239,7 +239,7 @@ def _choose_merge_key(df1: pd.DataFrame, df2: pd.DataFrame) -> Optional[str]:
 
 
 def _load_translation_df(translations_dir: str, lang: str) -> pd.DataFrame:
-    path = Path(translations_dir) / f"jbb_behaviors_{lang}_12b.csv"
+    path = Path(translations_dir) / f"jbb_behaviors_benign_{lang}_12b.csv"
     if not path.exists():
         raise FileNotFoundError(f"Missing translation file: {path}")
     df = pd.read_csv(path)
@@ -328,7 +328,7 @@ def process_pairs_from_translation_files(
         missing = df[cs_col].isna().sum()
         print(f"\n{'='*60}")
         print(f"Processing pair: {lang1.upper()} ↔ {lang2.upper()}")
-        print(f"Input files   : jbb_behaviors_{lang1}_12b.csv + jbb_behaviors_{lang2}_12b.csv")
+        print(f"Input files   : jbb_behaviors_benign_{lang1}_12b.csv + jbb_behaviors_benign_{lang2}_12b.csv")
         print(f"Output        : {out_path}")
         print(f"To generate   : {missing} rows (column '{cs_col}')")
         print(f"{'='*60}")
@@ -432,7 +432,7 @@ def main():
     mode.add_argument(
         '--csv',
         action='store_true',
-        help="Process translation CSVs from translations/jbb_behaviors_{lang}_12b.csv and write translations/codeswitch_{lang1}_{lang2}.csv"
+        help="Process translation CSVs from translations/jbb_behaviors_benign_{lang}_12b.csv and write translations/codeswitch_{lang1}_{lang2}.csv"
     )
 
     parser.add_argument('--api-key', required=True, help='OpenAI API key')
@@ -451,7 +451,7 @@ def main():
     parser.add_argument('--text2', type=str, help='Text in lang2 for test mode')
 
     # CSV mode
-    parser.add_argument('--translations-dir', type=str, default='translations', help='Directory containing the translation CSVs')
+    parser.add_argument('--translations-dir', type=str, default='.', help='Directory containing the translation CSVs')
     parser.add_argument('--max-rows', type=int, help='Limit rows (for testing)')
     parser.add_argument('--delay', type=float, default=0.5, help='Delay between API calls (s)')
 

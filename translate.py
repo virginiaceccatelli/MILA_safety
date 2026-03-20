@@ -8,12 +8,12 @@ from transformers import pipeline
 
 MODEL_ID = "google/translategemma-12b-it"  
 SPLIT = "benign"                         
-LIMIT = 0         # set 0 for all
+LIMIT = 0 # set 0 for all
 BATCH_SIZE = 4
 MAX_NEW_TOKENS = 128
 SOURCE_LANG = "en"
-TARGET_LANG = "it-IT"
-OUT_CSV = "jbb_behaviors_benign_it_12b.csv"
+TARGET_LANG = "fr-FR"
+OUT_CSV = "jbb_behaviors_benign_fr_12b.csv"
 
 os.environ["TOKENIZERS_PARALLELISM"] = "false"
 
@@ -97,7 +97,7 @@ def main():
         translations.extend(extract_translation(o) for o in outs)
 
     df = ds.to_pandas()
-    df["Goal_de"] = translations
+    df["Goal_fr"] = translations
     df.to_csv(OUT_CSV, index=False)
     print(f"Wrote {OUT_CSV} with {len(df)} rows", flush=True)
 

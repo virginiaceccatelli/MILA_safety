@@ -59,6 +59,8 @@ Uses the dedicated Qwen3OmniMoeForConditionalGeneration and Qwen3OmniMoeProcesso
 ### Voxtral-Small-24B-2507 (voxtral)
 System prompts are not supported by Voxtral, so the behavioural instruction is embedded as a text chunk in the user turn, preceding the audio. Uses VoxtralForConditionalGeneration and AutoProcessor from Transformers. Generation uses temperature=0.2 and top_p=0.95 as recommended by the model card.
 
+#### -> qwen2.5 qwen3 and voxtral run with benign prompts as well for comparison
+
 ### Audio Flamingo 3 (flamingo)
 A 7B audio understanding model from NVIDIA based on the Qwen2.5 backbone, loaded locally on a single A100 GPU. Because Audio Flamingo 3 was trained on structured audio analysis tasks (transcription, QA, classification) rather than open-ended conversation, a two-pass approach is used: the first pass transcribes the audio using the model's dedicated apply_transcription_request() API; the second pass feeds the transcription as plain text into the Qwen2.5 backbone to generate a conversational response. This avoids the audio-description behaviour that arises when conversational prompts are sent alongside audio input.
 ### GPT-4o Audio (gpt)

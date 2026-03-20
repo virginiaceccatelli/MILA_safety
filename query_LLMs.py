@@ -6,23 +6,22 @@ Usage:
 Arguments:
     --model      : one of qwen25omni, qwen3omni, voxtral, flamingo, gpt, gemini, salmonn
     --quantize   : load in 4-bit (required for large models on single GPU)
-    --langs      : single-language audio folders to run (under XTTS_audio/audio_xtts_{lang})
-    --cs_pairs   : codeswitched pairs to run, e.g. de-es de-fr cs-de cs-es
-                   'cs-X' means English<->X (folder: codeswitch_xtts/audio_xtts_cs_{X})
-                   'X-Y'  means X<->Y       (folder: codeswitch_xtts/audio_xtts_{X}_{Y})
+    --langs      : single-language audio folders to run (original_{lang}_nordic tags)
+    --cs_pairs   : codeswitched pairs to run, e.g. de-es de-fr en-de
+                   'en-X' or 'X-en' means English<->X (folder: audio_xtts_nordic/codeswitch_en_X_nordic)
+                   'X-Y'  means X<->Y                 (folder: audio_xtts_nordic/codeswitch_X_Y_nordic)
     --data_root  : root folder (default: .)
     --out_dir    : where to save JSON results (default: ./results)
     --test       : run only first file per language/pair (sanity check)
     --resume     : skip already-completed files
 
 Directory layout expected under --data_root:
-    XTTS_audio/
-        audio_xtts_{lang}/          <- single-language audio (de, es, fr, it, en, ...)
+    audio_xtts_nordic/
+        original_{lang}_nordic/          <- single-language nordic audio (de, es, fr, it, en, ...)
             row_????.wav
-    codeswitch_xtts/
-        audio_xtts_cs_{lang}/       <- English <-> lang codeswitched
+        codeswitch_en_{lang}_nordic/     <- English <-> lang codeswitched nordic
             row_????.wav
-        audio_xtts_{lang1}_{lang2}/ <- lang1 <-> lang2 codeswitched
+        codeswitch_{lang1}_{lang2}_nordic/ <- lang1 <-> lang2 codeswitched nordic
             row_????.wav
     translations/
         jbb_behaviors_de_12b.csv            <- English ground truth (column: Goal)
@@ -55,19 +54,19 @@ SYSTEM_PROMPT = (
 SINGLE_LANGS = ["de", "es", "fr", "it", "en"]
 N_FILES = 100
 
+FOREIGN_AUDIO_DIR = "audio_xtts_foreign"
+
 
 def single_lang_folder(data_root: Path, lang: str) -> Path:
-    return data_root / "XTTS_audio" / f"audio_xtts_{lang}"
+    return data_root / FOREIGN_AUDIO_DIR / f"original_{lang}_foreign"
 
 
 def cs_en_folder(data_root: Path, lang: str) -> Path:
-    """English <-> lang folder."""
-    return data_root / "codeswitch_xtts" / f"audio_xtts_cs_{lang}"
+    return data_root / FOREIGN_AUDIO_DIR / f"codeswitch_en_{lang}_foreign"
 
 
 def cs_pair_folder(data_root: Path, lang1: str, lang2: str) -> Path:
-    """lang1 <-> lang2 folder."""
-    return data_root / "codeswitch_xtts" / f"audio_xtts_{lang1}_{lang2}"
+    return data_root / FOREIGN_AUDIO_DIR / f"codeswitch_{lang1}_{lang2}_foreign"
 
 
 def get_single_lang_paths(data_root: Path, langs: list[str]) -> dict[str, list[Path]]:
@@ -87,21 +86,24 @@ def get_single_lang_paths(data_root: Path, langs: list[str]) -> dict[str, list[P
 def get_cs_paths(data_root: Path, cs_pairs: list[str]) -> dict[str, list[Path]]:
     """
     cs_pairs entries:
-      'cs-{lang}' -> English<->lang  (folder: codeswitch_xtts/audio_xtts_cs_{lang})
-      '{lang1}-{lang2}' -> lang1<->lang2 (folder: codeswitch_xtts/audio_xtts_{lang1}_{lang2})
-    Returns dict keyed by the pair tag (e.g. 'cs-de', 'de-es').
+      'en-{lang}' or '{lang}-en' -> English<->lang  (folder: codeswitch_en_{lang}_nordic)
+      '{lang1}-{lang2}'          -> lang1<->lang2    (folder: codeswitch_{lang1}_{lang2}_nordic)
+    Returns dict keyed by the pair tag (e.g. 'en-de', 'de-es').
     """
     result = {}
     for pair in cs_pairs:
-        if pair.startswith("cs-"):
-            lang = pair[3:]
-            folder = cs_en_folder(data_root, lang)
+        parts = pair.split("-", 1)
+        if len(parts) != 2:
+            print(f"[WARNING] Invalid cs_pair format: {pair}", file=sys.stderr)
+            continue
+        l1, l2 = parts
+
+        if l1 == "en":
+            folder = cs_en_folder(data_root, l2)
+        elif l2 == "en":
+            folder = cs_en_folder(data_root, l1)
         else:
-            parts = pair.split("-", 1)
-            if len(parts) != 2:
-                print(f"[WARNING] Invalid cs_pair format: {pair}", file=sys.stderr)
-                continue
-            folder = cs_pair_folder(data_root, parts[0], parts[1])
+            folder = cs_pair_folder(data_root, l1, l2)
 
         if not folder.exists():
             print(f"[WARNING] Folder not found: {folder}", file=sys.stderr)
@@ -119,7 +121,7 @@ def load_ground_truth_single(data_root: Path) -> dict[int, str]:
     translations/jbb_behaviors_de_12b.csv, column 'Goal'.
     Row index = file row number (0-based).
     """
-    csv_path = data_root / "translations" / "jbb_behaviors_de_12b.csv"
+    csv_path = data_root / "malicious" / "translations" / "jbb_behaviors_de_12b.csv"
     if not csv_path.exists():
         print(f"[WARNING] Ground truth CSV not found: {csv_path}", file=sys.stderr)
         return {}
@@ -137,7 +139,7 @@ def load_ground_truth_cs_pair(data_root: Path, lang1: str, lang2: str) -> dict[i
     columns: Goal_{lang1}, Goal_{lang2}
     Returns dict[row_idx] = {"lang1": ..., "lang2": ...}
     """
-    csv_path = data_root / "translations" / f"codeswitch_{lang1}_{lang2}.csv"
+    csv_path = data_root / "malicious" / "translations" / f"codeswitch_{lang1}_{lang2}.csv"
     if not csv_path.exists():
         print(f"[WARNING] CS ground truth CSV not found: {csv_path}", file=sys.stderr)
         return {}
@@ -201,7 +203,7 @@ def attach_ground_truth(record: dict, filename: str, tag: str, data_root: Path) 
     """
     Attach ground truth to a result record based on the audio tag type.
       - single lang (e.g. 'de', 'en'):  gt = Goal string
-      - cs-{lang} (English<->lang):      gt = Goal string
+      - en-{lang} or {lang}-en:          gt = Goal string
       - {lang1}-{lang2}:                 gt = {lang1: ..., lang2: ...}
     """
     row_idx = row_index_from_filename(filename)
@@ -210,15 +212,17 @@ def attach_ground_truth(record: dict, filename: str, tag: str, data_root: Path) 
         # pure single-language
         gt_map = load_ground_truth_single(data_root)
         record["ground_truth"] = gt_map.get(row_idx)
-    elif tag.startswith("cs-"):
-        # English <-> lang
-        gt_map = load_ground_truth_single(data_root)
-        record["ground_truth"] = gt_map.get(row_idx)
     else:
-        # lang1 <-> lang2
-        lang1, lang2 = tag.split("-", 1)
-        gt_map = load_ground_truth_cs_pair(data_root, lang1, lang2)
-        record["ground_truth"] = gt_map.get(row_idx)
+        parts = tag.split("-", 1)
+        l1, l2 = parts[0], parts[1]
+        if l1 == "en" or l2 == "en":
+            # English <-> lang
+            gt_map = load_ground_truth_single(data_root)
+            record["ground_truth"] = gt_map.get(row_idx)
+        else:
+            # lang1 <-> lang2
+            gt_map = load_ground_truth_cs_pair(data_root, l1, l2)
+            record["ground_truth"] = gt_map.get(row_idx)
 
     return record
 
@@ -545,10 +549,6 @@ def run_gemini(audio_paths: dict, out_dir: Path, data_root: Path, resume: bool =
     client = genai.Client(api_key=api_key)
     model_id = os.environ.get("GEMINI_MODEL", "gemini-2.5-pro")
     print(f"Using Gemini model: {model_id}")
-    # model = genai.GenerativeModel(
-    #     model_name=model_id,
-    #     system_instruction=SYSTEM_PROMPT,
-    # )
 
     MAX_RETRIES = 5
     INITIAL_WAIT = 10
@@ -562,7 +562,6 @@ def run_gemini(audio_paths: dict, out_dir: Path, data_root: Path, resume: bool =
         for path in pending:
             with open(path, "rb") as f:
                 audio_bytes = f.read()
-            # audio_b64 = base64.b64encode(audio_bytes).decode("utf-8")
 
             wait = INITIAL_WAIT
             response_text = None
@@ -583,7 +582,6 @@ def run_gemini(audio_paths: dict, out_dir: Path, data_root: Path, resume: bool =
                             temperature=0.0,
                         ),
                     )
-                    # response.text can be None if the response was blocked or has no candidates
                     if response.candidates and response.candidates[0].content.parts:
                         response_text = response.text
                     else:
@@ -632,7 +630,6 @@ def run_salmonn(audio_paths: dict, out_dir: Path, quantize: bool, data_root: Pat
     import torch
     import torchaudio
 
-    # ── locate repo ────────────────────────────────────────────────────────
     salmonn_repo = os.environ.get("SALMONN_REPO", str(data_root / "SALMONN"))
     if salmonn_repo not in sys.path:
         sys.path.insert(0, salmonn_repo)
@@ -659,35 +656,30 @@ def run_salmonn(audio_paths: dict, out_dir: Path, quantize: bool, data_root: Pat
         whisper_path=whisper_path,
         beats_path=beats_path,
         vicuna_path=vicuna_path,
-        low_resource=quantize,   # True = 8-bit via bitsandbytes; required to fit in 80GB
+        low_resource=quantize,
     )
     model.eval()
 
     if torch.cuda.is_available():
-        # With low_resource=True, bitsandbytes places the LLM layers on GPU automatically,
-        # but audio encoder components (Whisper, BEATs, Q-Former, projection) stay on CPU
-        # in fp32. We must move them to GPU in fp16 to match what bitsandbytes expects.
         AUDIO_COMPONENTS = [
-            "speech_encoder",   # Whisper
-            "beats",            # BEATs audio encoder
-            "speech_Qformer",   # Q-Former bridge
-            "speech_llama_proj", # projection into LLM space
-            "ln_speech",        # layer norm on speech features
-            "ln_audio",         # layer norm on audio features (if present)
-            "second_btc_proj",  # secondary projection (if present)
+            "speech_encoder",
+            "beats",
+            "speech_Qformer",
+            "speech_llama_proj",
+            "ln_speech",
+            "ln_audio",
+            "second_btc_proj",
         ]
         for attr in AUDIO_COMPONENTS:
             if hasattr(model, attr):
                 setattr(model, attr, getattr(model, attr).half().cuda())
 
-        # Also cast any remaining fp32 parameters/buffers that are still on CPU
         for name, param in model.named_parameters():
             if not param.is_cuda:
                 param.data = param.data.half().cuda()
         for name, buf in model.named_buffers():
             if not buf.is_cuda:
-                # keep as same dtype but move to GPU
-                pass  # buffers like position_ids are int — don't cast to half
+                pass
 
     for tag, paths in audio_paths.items():
         completed = load_completed(out_dir, "salmonn", tag) if resume else set()
@@ -702,14 +694,13 @@ def run_salmonn(audio_paths: dict, out_dir: Path, quantize: bool, data_root: Pat
                         response = model.generate(
                             wav_path=str(path),
                             prompt=SYSTEM_PROMPT,
-                            num_beams=1,        # greedy — avoids beam search NaN issues
+                            num_beams=1,
                             do_sample=False,
-                            # max_new_tokens=200,
                             min_length=1,
                             repetition_penalty=1.0,
                             length_penalty=1.0,
                             temperature=1.0,
-                        )[0]   # returns list[str]
+                        )[0]
 
                 record = {"file": path.name, "tag": tag, "response": response}
                 record = attach_ground_truth(record, path.name, tag, data_root)
@@ -733,28 +724,28 @@ MODEL_RUNNERS = {
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="Run audio LLMs on single-lang and codeswitched data.")
+    parser = argparse.ArgumentParser(description="Run audio LLMs on foreign codeswitched audio data.")
     parser.add_argument("--model", required=True, choices=list(MODEL_RUNNERS.keys()))
     parser.add_argument("--quantize", action="store_true",
                         help="Load model in 4-bit (use when VRAM is tight).")
     parser.add_argument("--data_root", type=Path, default=Path("."),
-                        help="Root directory containing XTTS_audio/ and codeswitch_xtts/.")
+                        help="Root directory containing audio_xtts_foreign/ and translations/.")
     parser.add_argument("--out_dir", type=Path, default=Path("results"),
                         help="Directory to save JSON outputs.")
     parser.add_argument(
         "--langs", nargs="+", default=None,
         help=(
             "Single-language audio folders to process (e.g. de es fr it en). "
-            "Looks under XTTS_audio/audio_xtts_{lang}/."
+            "Looks under audio_xtts_foreign/original_{lang}_foreign/."
         ),
     )
     parser.add_argument(
         "--cs_pairs", nargs="+", default=None,
         help=(
             "Codeswitched pairs to process. "
-            "Use 'cs-{lang}' for English<->lang (e.g. cs-de), "
+            "Use 'en-{lang}' or '{lang}-en' for English<->lang (e.g. en-de), "
             "or '{lang1}-{lang2}' for two-language pairs (e.g. de-es). "
-            "Looks under codeswitch_xtts/."
+            "Looks under audio_xtts_foreign/."
         ),
     )
     parser.add_argument("--test", action="store_true",
@@ -787,8 +778,6 @@ if __name__ == "__main__":
 
     runner = MODEL_RUNNERS[args.model]
 
-    # All runners accept (audio_paths, out_dir, data_root, resume) as kwargs;
-    # local GPU models also accept quantize.
     kwargs: dict = {"data_root": args.data_root, "resume": args.resume}
     if args.model in ("qwen25omni", "qwen3omni", "voxtral", "flamingo", "salmonn"):
         kwargs["quantize"] = args.quantize
