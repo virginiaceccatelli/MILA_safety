@@ -54,19 +54,19 @@ SYSTEM_PROMPT = (
 SINGLE_LANGS = ["de", "es", "fr", "it", "en"]
 N_FILES = 100
 
-FOREIGN_AUDIO_DIR = "audio_xtts_foreign"
+FOREIGN_AUDIO_DIR = "audio_xtts_gibberish"
 
 
 def single_lang_folder(data_root: Path, lang: str) -> Path:
-    return data_root / FOREIGN_AUDIO_DIR / f"original_{lang}_foreign"
+    return data_root / FOREIGN_AUDIO_DIR / f"original_{lang}_gibberish"
 
 
 def cs_en_folder(data_root: Path, lang: str) -> Path:
-    return data_root / FOREIGN_AUDIO_DIR / f"codeswitch_en_{lang}_foreign"
+    return data_root / FOREIGN_AUDIO_DIR / f"codeswitch_en_{lang}_gibberish"
 
 
 def cs_pair_folder(data_root: Path, lang1: str, lang2: str) -> Path:
-    return data_root / FOREIGN_AUDIO_DIR / f"codeswitch_{lang1}_{lang2}_foreign"
+    return data_root / FOREIGN_AUDIO_DIR / f"codeswitch_{lang1}_{lang2}_gibberish"
 
 
 def get_single_lang_paths(data_root: Path, langs: list[str]) -> dict[str, list[Path]]:
@@ -121,7 +121,7 @@ def load_ground_truth_single(data_root: Path) -> dict[int, str]:
     translations/jbb_behaviors_de_12b.csv, column 'Goal'.
     Row index = file row number (0-based).
     """
-    csv_path = data_root / "malicious" / "translations" / "jbb_behaviors_de_12b.csv"
+    csv_path = data_root / "malicious" / "translations" / "original_en.csv"
     if not csv_path.exists():
         print(f"[WARNING] Ground truth CSV not found: {csv_path}", file=sys.stderr)
         return {}

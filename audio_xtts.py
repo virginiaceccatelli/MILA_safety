@@ -16,8 +16,9 @@ torch.load = _torch_load_compat
 
 from TTS.api import TTS
 
-FOREIGN_JSON_DIR  = "malicious/output_json"        
-BASE_OUT_DIR     = "audio_xtts_foreign"
+
+AUGMENTED_JSON_DIR  = "output_augmented"     
+BASE_OUT_DIR     = "audio_xtts_gibberish"
 
 MODEL_NAME   = "tts_models/multilingual/multi-dataset/xtts_v2"
 SPEAKER_WAV: Optional[str] = None
@@ -28,17 +29,6 @@ MAX_CHARS_PER_CHUNK = 250
 PAUSE_SILENCE_MS    = 120
 USE_GPU             = torch.cuda.is_available()
 
-# Map nordic_lang field -> XTTS language code
-# NORDIC_LANG_CODE = {
-#     "Danish":    "da",
-#     "Norwegian": "no",
-#     "Finnish":   "fi",
-#     "Icelandic": "is",
-#     "Swedish":   "sv",
-# }
-FOREIGN_LANG_CODE = {
-    "Hungarian": "hu",
-}
 
 # Map language codes used in filenames -> XTTS language code
 FILENAME_LANG_CODE = {
@@ -51,12 +41,36 @@ FILENAME_LANG_CODE = {
 
 def infer_base_language(json_filename: str) -> str:
     """
-    Always returns "fi" (Finnish).
-    Finnish is used as the single TTS rendering language across all sentences
-    because its typological distance from all base languages (German, French,
-    Spanish, Italian, English) maximises acoustic disruption and model confusion.
+    Derive the XTTS rendering language from the JSON filename.
+
+    Rules:
+      codeswitch_en_XX_gibberish.json  -> XX   (English pair: use the non-English lang)
+      codeswitch_XX_en_gibberish.json  -> XX   (English pair: use the non-English lang)
+      codeswitch_L1_L2_gibberish.json  -> L1   (non-English pair: use first lang)
+      original_XX_gibberish.json       -> XX
+      Falls back to "en" if unrecognised.
     """
-    return "hu"
+    stem = Path(json_filename).stem  # e.g. "codeswitch_de_fr_gibberish"
+
+    m = re.match(r"codeswitch_([a-z]{2})_([a-z]{2})_gibberish", stem)
+    if m:
+        l1, l2 = m.group(1), m.group(2)
+        if l1 == "en":
+            return FILENAME_LANG_CODE.get(l2, l2)
+        if l2 == "en":
+            return FILENAME_LANG_CODE.get(l1, l1)
+        if l1 == "de":
+            return "de"
+        if l2 == "de":
+            return "de"
+        return FILENAME_LANG_CODE.get(l1, l1)
+
+    m = re.match(r"original_([a-z]{2,})_gibberish", stem)
+    if m:
+        return FILENAME_LANG_CODE.get(m.group(1), m.group(1))
+
+    return "en"
+
 
 
 def build_jobs(json_dir: str) -> list[dict]:
@@ -69,8 +83,8 @@ def build_jobs(json_dir: str) -> list[dict]:
     }
     """
     jobs = []
-    for f in sorted(Path(json_dir).glob("*_foreign.json")):
-        tag       = f.stem   
+    for f in sorted(Path(json_dir).glob("*_gibberish.json")):
+        tag       = f.stem   # e.g. "codeswitch_de_fr_nordic"
         base_lang = infer_base_language(f.name)
         jobs.append({
             "json_path": f,
@@ -78,6 +92,7 @@ def build_jobs(json_dir: str) -> list[dict]:
             "base_lang": base_lang,
         })
     return jobs
+
 
 
 def normalize_whitespace(s: str) -> str:
@@ -106,6 +121,7 @@ def pack_sentences(sentences: List[str], max_chars: int) -> List[str]:
 
 def silence(sr: int, ms: int) -> np.ndarray:
     return np.zeros(int(sr * ms / 1000.0), dtype=np.float32)
+
 
 
 def run_job(job: dict, tts: TTS, sr: int):
@@ -153,9 +169,9 @@ def run_job(job: dict, tts: TTS, sr: int):
         if not text:
             continue
 
-        foreign_lang_name = entry.get("foreign_lang", "")
-        # Always render under Finnish regardless of source language.
-        language = base_lang  # always "fi" — set by infer_base_language
+        inject_lang = entry.get("inject_lang", "")
+        # Render under the base language derived from the filename (first non-English lang).
+        language = base_lang
 
         sentences   = split_into_sentences(text)
         chunks      = pack_sentences(sentences, MAX_CHARS_PER_CHUNK) if sentences else [text]
@@ -176,7 +192,7 @@ def run_job(job: dict, tts: TTS, sr: int):
         rows_out.append({
             "row_index":   i,
             "wav_path":    str(out_path),
-            "foreign_lang": foreign_lang_name,
+            "inject_lang": inject_lang,
             "base_lang":   base_lang,
             "text":        text,
         })
@@ -189,13 +205,14 @@ def run_job(job: dict, tts: TTS, sr: int):
     print(f"  [{tag}] ✓ {len(rows_out)} wav files -> {out_dir}")
 
 
+
 def main():
     Path(BASE_OUT_DIR).mkdir(parents=True, exist_ok=True)
 
-    jobs = build_jobs(FOREIGN_JSON_DIR)
+    jobs = build_jobs(AUGMENTED_JSON_DIR)
     if not jobs:
-        print(f"No *_foreign.json files found in '{FOREIGN_JSON_DIR}'. "
-              f"Run foreign_codeswitcher.py first.")
+        print(f"No *_foreign.json files found in '{AUGMENTED_JSON_DIR}'. "
+              f"Run augment_code-switch.py first.")
         return
 
     print(f"Found {len(jobs)} jobs:")
