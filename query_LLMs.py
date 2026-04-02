@@ -1,9 +1,4 @@
 """
-Usage:
-    python run_audio_llm.py --model <model_name> [--quantize] [--langs de es fr it en]
-                            [--cs_pairs de-es de-fr ...] [--data_root .] [--out_dir ./results]
-
-Arguments:
     --model      : one of qwen25omni, qwen3omni, voxtral, flamingo, gpt, gemini, salmonn
     --quantize   : load in 4-bit (required for large models on single GPU)
     --langs      : single-language audio folders to run (original_{lang}_nordic tags)
@@ -14,19 +9,6 @@ Arguments:
     --out_dir    : where to save JSON results (default: ./results)
     --test       : run only first file per language/pair (sanity check)
     --resume     : skip already-completed files
-
-Directory layout expected under --data_root:
-    audio_xtts_nordic/
-        original_{lang}_nordic/          <- single-language nordic audio (de, es, fr, it, en, ...)
-            row_????.wav
-        codeswitch_en_{lang}_nordic/     <- English <-> lang codeswitched nordic
-            row_????.wav
-        codeswitch_{lang1}_{lang2}_nordic/ <- lang1 <-> lang2 codeswitched nordic
-            row_????.wav
-    translations/
-        jbb_behaviors_de_12b.csv            <- English ground truth (column: Goal)
-        codeswitch_{lang1}_{lang2}.csv      <- two-language pairs
-                                               columns: Goal_{lang1}, Goal_{lang2}, codeswitch_{lang1}_{lang2}
 """
 
 import argparse
@@ -57,16 +39,20 @@ N_FILES = 100
 FOREIGN_AUDIO_DIR = "audio_xtts_gibberish"
 
 
+
 def single_lang_folder(data_root: Path, lang: str) -> Path:
     return data_root / FOREIGN_AUDIO_DIR / f"original_{lang}_gibberish"
+    # return data_root / FOREIGN_AUDIO_DIR / f"audio_xtts_{lang}"
 
 
 def cs_en_folder(data_root: Path, lang: str) -> Path:
     return data_root / FOREIGN_AUDIO_DIR / f"codeswitch_en_{lang}_gibberish"
+    # return data_root / FOREIGN_AUDIO_DIR / f"audio_xtts_cs_{lang}"
 
 
 def cs_pair_folder(data_root: Path, lang1: str, lang2: str) -> Path:
     return data_root / FOREIGN_AUDIO_DIR / f"codeswitch_{lang1}_{lang2}_gibberish"
+    # return data_root / FOREIGN_AUDIO_DIR / f"audio_xtts_{lang1}_{lang2}"
 
 
 def get_single_lang_paths(data_root: Path, langs: list[str]) -> dict[str, list[Path]]:
@@ -121,7 +107,7 @@ def load_ground_truth_single(data_root: Path) -> dict[int, str]:
     translations/jbb_behaviors_de_12b.csv, column 'Goal'.
     Row index = file row number (0-based).
     """
-    csv_path = data_root / "malicious" / "translations" / "original_en.csv"
+    csv_path = (data_root / ".." / "malicious" / "translations" / "original_en.csv").resolve()
     if not csv_path.exists():
         print(f"[WARNING] Ground truth CSV not found: {csv_path}", file=sys.stderr)
         return {}
@@ -139,7 +125,7 @@ def load_ground_truth_cs_pair(data_root: Path, lang1: str, lang2: str) -> dict[i
     columns: Goal_{lang1}, Goal_{lang2}
     Returns dict[row_idx] = {"lang1": ..., "lang2": ...}
     """
-    csv_path = data_root / "malicious" / "translations" / f"codeswitch_{lang1}_{lang2}.csv"
+    csv_path = (data_root / ".." / "malicious" / "translations" / f"codeswitch_{lang1}_{lang2}.csv").resolve()
     if not csv_path.exists():
         print(f"[WARNING] CS ground truth CSV not found: {csv_path}", file=sys.stderr)
         return {}
@@ -681,6 +667,9 @@ def run_salmonn(audio_paths: dict, out_dir: Path, quantize: bool, data_root: Pat
             if not buf.is_cuda:
                 pass
 
+    device = "cuda" if torch.cuda.is_available() else "cpu"
+    model.to(device) 
+
     for tag, paths in audio_paths.items():
         completed = load_completed(out_dir, "salmonn", tag) if resume else set()
         pending = [p for p in paths if p.name not in completed]
@@ -700,6 +689,7 @@ def run_salmonn(audio_paths: dict, out_dir: Path, quantize: bool, data_root: Pat
                             repetition_penalty=1.0,
                             length_penalty=1.0,
                             temperature=1.0,
+                            device=device,
                         )[0]
 
                 record = {"file": path.name, "tag": tag, "response": response}
@@ -711,6 +701,78 @@ def run_salmonn(audio_paths: dict, out_dir: Path, quantize: bool, data_root: Pat
                 results.append({"file": path.name, "tag": tag, "response": None, "error": str(e)})
             save_results(out_dir, "salmonn", tag, results)
 
+def run_gemma(audio_paths: dict, out_dir: Path, quantize: bool, data_root: Path, resume: bool = False):
+    from transformers import AutoProcessor, Gemma3nForConditionalGeneration
+    import torch
+    import librosa
+
+    model_id = "google/gemma-3n-E4B-it"
+    print(f"Loading {model_id}...")
+    processor = AutoProcessor.from_pretrained(model_id)
+
+    load_kwargs = dict(device_map="auto")
+    if quantize:
+        from transformers import BitsAndBytesConfig
+        load_kwargs["quantization_config"] = BitsAndBytesConfig(load_in_4bit=True)
+    else:
+        load_kwargs["torch_dtype"] = torch.bfloat16
+
+    model = Gemma3nForConditionalGeneration.from_pretrained(model_id, **load_kwargs)
+    model.eval()
+    model_dtype = next(model.parameters()).dtype
+    model_device = next(model.parameters()).device
+
+    for tag, paths in audio_paths.items():
+        completed = load_completed(out_dir, "gemma", tag) if resume else set()
+        pending = [p for p in paths if p.name not in completed]
+        results = load_existing_results(out_dir, "gemma", tag) if resume else []
+        print(f"\n[gemma] tag={tag} ({len(pending)}/{len(paths)} files)")
+
+        for path in pending:
+            try:
+                # Gemma 3n expects audio as a numpy array at 16 kHz, mono
+                audio_array, _ = librosa.load(str(path), sr=16000, mono=True)
+
+                conversation = [
+                    {
+                        "role": "user",
+                        "content": [
+                            {"type": "audio", "audio": audio_array},
+                            {"type": "text", "text": SYSTEM_PROMPT},
+                        ],
+                    },
+                ]
+                inputs = processor.apply_chat_template(
+                    conversation,
+                    add_generation_prompt=True,
+                    tokenize=True,
+                    return_dict=True,
+                    return_tensors="pt",
+                ).to(model_device)
+
+                # Cast float tensors to model dtype
+                inputs = {
+                    k: v.to(model_dtype) if isinstance(v, torch.Tensor) and v.is_floating_point() else v
+                    for k, v in inputs.items()
+                }
+
+                input_len = inputs["input_ids"].shape[-1]
+
+                with torch.inference_mode():
+                    output_ids = model.generate(**inputs, max_new_tokens=512, do_sample=False)
+
+                response = processor.decode(
+                    output_ids[0][input_len:], skip_special_tokens=True
+                )
+                record = {"file": path.name, "tag": tag, "response": response}
+                record = attach_ground_truth(record, path.name, tag, data_root)
+                results.append(record)
+                print(f"  {path.name}: {response[:80]}...")
+            except Exception as e:
+                print(f"  [ERROR] {path.name}: {e}", file=sys.stderr)
+                results.append({"file": path.name, "tag": tag, "response": None, "error": str(e)})
+            save_results(out_dir, "gemma", tag, results)
+
 
 MODEL_RUNNERS = {
     "qwen25omni": run_qwen25omni,
@@ -720,8 +782,8 @@ MODEL_RUNNERS = {
     "gpt":        run_gpt,
     "gemini":     run_gemini,
     "salmonn":    run_salmonn,
+    "gemma":      run_gemma,
 }
-
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Run audio LLMs on foreign codeswitched audio data.")
@@ -779,7 +841,7 @@ if __name__ == "__main__":
     runner = MODEL_RUNNERS[args.model]
 
     kwargs: dict = {"data_root": args.data_root, "resume": args.resume}
-    if args.model in ("qwen25omni", "qwen3omni", "voxtral", "flamingo", "salmonn"):
+    if args.model in ("qwen25omni", "qwen3omni", "voxtral", "flamingo", "salmonn", "gemma"):
         kwargs["quantize"] = args.quantize
 
     runner(audio_paths, args.out_dir, **kwargs)

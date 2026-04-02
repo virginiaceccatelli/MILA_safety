@@ -1,18 +1,15 @@
 import json
 import pandas as pd
 
-# ---------- FILE PATHS ----------
 json_file = "judge_results/summary.json"
 csv_file = "results.csv"
 excel_file = "results.xlsx"
 
-# ---------- LOAD JSON ----------
 with open(json_file, "r") as f:
     data = json.load(f)
 
 rows = []
 
-# ---------- FLATTEN JSON ----------
 for model, model_data in data.items():
     for lang, lang_data in model_data.items():
 
@@ -43,10 +40,8 @@ for model, model_data in data.items():
             })
             rows.append(row)
 
-# ---------- CREATE DATAFRAME ----------
 df = pd.DataFrame(rows)
 
-# ---------- SAVE FILES ----------
 df.to_csv(csv_file, index=False)
 df.to_excel(excel_file, index=False)
 
