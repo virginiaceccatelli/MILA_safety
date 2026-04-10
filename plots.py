@@ -34,9 +34,9 @@ def load_summary_json(path):
 # df_gemma = load_summary_json("malicious/judge_results_summaries/summary_gemma.json")
 
 # GIBBERISH 2
-df = load_summary_json("gibberish_10/judge_results_gibberish/summary.json")
-df_gemma = load_summary_json("gibberish_10/judge_results_gibberish/judge_results_gemma/summary.json")
-df_qwen3 = load_summary_json("gibberish_10/judge_results_gibberish/judge_results_qwen3/summary.json")
+# df = load_summary_json("gibberish_10/judge_results_gibberish/summary.json")
+# df_gemma = load_summary_json("gibberish_10/judge_results_gibberish/judge_results_gemma/summary.json")
+# df_qwen3 = load_summary_json("gibberish_10/judge_results_gibberish/judge_results_qwen3/summary.json")
 
 
 def normalize_cs_tags(lang):
@@ -64,7 +64,9 @@ def relabel_multilingual(lang):
 # df_all = pd.concat([df, df_en, df_single, df_gemini, df_gemini_single, df_salmonn, df_gemma], ignore_index=True)
 
 # GIBBERISH 2
-df_all = pd.concat([df, df_gemma, df_qwen3], ignore_index=True)
+# df_all = pd.concat([df, df_gemma, df_qwen3], ignore_index=True)
+
+df_all = load_summary_json("judge_results_malicious/summary.json")
 
 # drop duplicate (model, language) pairs — keep first occurrence
 df_all = df_all.drop_duplicates(subset=["model", "language"])

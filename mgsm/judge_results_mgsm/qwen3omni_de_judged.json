@@ -1,0 +1,3252 @@
+[
+  {
+    "file": "row_0000.wav",
+    "tag": "de",
+    "response": "Janet hat 16 Eier pro Tag. Sie behält 3 für das Frühstück und verwendet 4 zum Backen von Muffins. Das macht insgesamt 3 + 4 = 7 Eier, die sie nicht verkauft.\n\nDie verbleibenden Eier, die sie verkauft, sind:  \n16 - 7 = 9 Eier.\n\nSie verkauft jedes Ei für 2 US-Dollar, also:\n\n9 × 2 = 18 US-Dollar.\n\nSie nimmt täglich **18 US-Dollar** auf dem Bauernmarkt ein.",
+    "ground_truth": "18",
+    "question_text": "Janets Enten legen 16 Eier pro Tag. Sie isst drei jeden Morgen zum Frühstück und backt mit vier jeden Tag Muffins für ihre Freunde. Den Rest verkauft sie täglich auf dem Bauernmarkt für 2 US-Dollar pro frischem Entenei. Wie viel Dollar nimmt sie täglich auf dem Bauernmarkt ein?",
+    "judgement": {
+      "label": "Correct",
+      "extracted_answer": "18",
+      "ground_truth": "18",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0001.wav",
+    "tag": "de",
+    "response": "Zwei Knäuel blaue Wolle und halb so viel weiße Wolle bedeutet 1 Knäuel weiße Wolle. Insgesamt braucht man also 2 + 1 = 3 Knäuel.",
+    "ground_truth": "3",
+    "question_text": "Ein Kleid erfordert 2 Knäuel blaue Wolle und halb so viel weiße Wolle. Wie viele Knäuel braucht man insgesamt?",
+    "judgement": {
+      "label": "Correct",
+      "extracted_answer": "3",
+      "ground_truth": "3",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0002.wav",
+    "tag": "de",
+    "response": "Josh hat 150.000 Dollar Gewinn gemacht.",
+    "ground_truth": "70000",
+    "question_text": "Josh beschließt, ein Haus zu kaufen und wieder zu verkaufen. Er kauft ein Haus für $80000 und investiert dann $50000 in Reparaturen. Dadurch stieg der ursprüngliche Wert des Hauses um 150%. Wie viel Gewinn hat er in Dollar gemacht?",
+    "judgement": {
+      "label": "Incorrect",
+      "extracted_answer": "150000",
+      "ground_truth": "70000",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0003.wav",
+    "tag": "de",
+    "response": "540 Meter",
+    "ground_truth": "540",
+    "question_text": "James beschließt, 3-mal pro Woche 3 Kurzstreckenläufe zu absolvieren. Pro Kurzstreckenlauf läuft er 60 Meter. Wie viele Meter insgesamt läuft er pro Woche?",
+    "judgement": {
+      "label": "Correct",
+      "extracted_answer": "540",
+      "ground_truth": "540",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0004.wav",
+    "tag": "de",
+    "response": "Wendy füttert jedes ihrer 20 Hühner täglich mit 3 Tassen Futter, also insgesamt:\n\n20 Hühner × 3 Tassen = 60 Tassen Futter pro Tag.\n\nSie füttert morgens 15 Tassen und nachmittags 25 Tassen, also:\n\n15 + 25 = 40 Tassen.\n\nDie letzte Mahlzeit am Tag benötigt daher:\n\n60 − 40 = 20 Tassen.\n\n**Antwort: 20 Tassen.**",
+    "ground_truth": "20",
+    "question_text": "Wendi füttert jedes ihrer Hühner täglich mit drei Tassen gemischtem Hühnerfutter, mit Samen, Mehlwürmern und Gemüse, damit sie gesund bleiben. Sie füttert die Hühner in drei separaten Mahlzeiten. Morgens füttert sie ihre Hühnerschar mit 15 Tassen Futter. Nachmittags gibt sie den Hühnern noch einmal 25 Tassen Futter. Wie viele Tassen Futter braucht sie, um den Hühnern die letzte Mahlzeit des Tages zu verabreichen, wenn Wendis Hühnerschar aus 20 Hühnern besteht?",
+    "judgement": {
+      "label": "Correct",
+      "extracted_answer": "20",
+      "ground_truth": "20",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0005.wav",
+    "tag": "de",
+    "response": "Die Kosten für die Gläser berechnen sich wie folgt:\n\n- Jedes zweite Glas kostet 60 % des Preises von 5 $, also 0,6 × 5 = 3 $.\n- Bei 16 Gläsern gibt es 8 normale Gläser (5 $) und 8 ermäßigte Gläser (3 $).\n\nGesamtkosten:\n8 × 5 $ = 40 $\n8 × 3 $ = 24 $\n\n40 $ + 24 $ = **64 $**\n\nKeiler muss **64 Dollar** bezahlen.",
+    "ground_truth": "64",
+    "question_text": "Kylar ging in ein Geschäft, um Gläser für seine neue Wohnung zu kaufen. Ein Glas kostet 5 Dollar, aber jedes zweite Glas kostet nur 60% des Preises. Kylar möchte 16 Gläser kaufen. Wie viel muss er dafür bezahlen?",
+    "judgement": {
+      "label": "Correct",
+      "extracted_answer": "64",
+      "ground_truth": "64",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0006.wav",
+    "tag": "de",
+    "response": "Wenn Seattle 20 Schafe hat, dann hat Charleston 4-mal so viele, also 4 × 20 = 80 Schafe. Toulouse hat 2-mal so viele wie Charleston, also 2 × 80 = 160 Schafe.\n\nZusammen haben sie:  \n20 (Seattle) + 80 (Charleston) + 160 (Toulouse) = **260 Schafe**.",
+    "ground_truth": "260",
+    "question_text": "Toulouse hat zweimal so viele Schafe wie Charleston. Charleston hat 4-mal so viele Schafe wie Seattle. Wie viele Schafe haben Toulouse, Charleston und Seattle zusammen, wenn Seattle 20 Schafe hat?",
+    "judgement": {
+      "label": "Correct",
+      "extracted_answer": "260",
+      "ground_truth": "260",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0007.wav",
+    "tag": "de",
+    "response": "Die Datei ist 200 GB groß und Carla lädt normalerweise mit 2 GB pro Minute.\n\nZuerst lädt sie 40 % der Datei:\n40 % von 200 GB = 0,4 × 200 = 80 GB\n\nZeit für 80 GB:\n80 GB ÷ 2 GB/min = 40 Minuten\n\nDann erfolgt ein Neustart, der 20 Minuten dauert.\n\nDanach muss sie den gesamten Download erneut starten, also wieder 200 GB.\n\nZeit für den erneuten Download:\n200 GB ÷ 2 GB/min = 100 Minuten\n\nGesamtzeit:\n40 Minuten (erster Teil) + 20 Minuten (Neustart) + 100 Minuten (erneuter Download) = 160 Minuten\n\nDie Gesamtdauer beträgt 160 Minuten.",
+    "ground_truth": "160",
+    "question_text": "Carla lädt eine Datei mit 200 GB herunter. Normalerweise kann sie 2 GB/Minute herunterladen, aber nachdem 40 % des Downloads abgeschlossen sind, erzwingt Windows einen Neustart, um Updates zu installieren, was 20 Minuten dauert. Danach muss Carla den Download noch einmal ganz neu starten. Wie lange dauert das Herunterladen der Datei?",
+    "judgement": {
+      "label": "Correct",
+      "extracted_answer": "160",
+      "ground_truth": "160",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0008.wav",
+    "tag": "de",
+    "response": "Zuerst berechnen wir, wie weit John in den ersten drei Stunden gefahren ist:\n\n\\[\n3 \\text{ Stunden} \\times 60 \\text{ Meilen pro Stunde} = 180 \\text{ Meilen}\n\\]\n\nEr ist also 180 Meilen von zu Hause entfernt, als er umkehrt.\n\nNun fährt er zurück. Er versucht innerhalb von 4 Stunden nach Hause zu kommen, aber:\n\n- Die ersten 2 Stunden verbringt er im Stau → Geschwindigkeit = 0 Meilen pro Stunde → zurückgelegte Strecke = 0 Meilen\n- Die nächste halbe Stunde fährt er mit 30 Meilen pro Stunde:\n\n\\[\n0.5 \\times 30 = 15 \\text{ Meilen}\n\\]\n\n- Die verbleibende Zeit beträgt \\(4 - 2 - 0.5 = 1.5\\) Stunden, in denen er mit 80 Meilen pro Stunde fährt:\n\n\\[\n1.5 \\times 80 = 120 \\text{ Meilen}\n\\]\n\nGesamte zurückgelegte Strecke auf dem Rückweg:\n\n\\[\n0 + 15 + 120 = 135 \\text{ Meilen}\n\\]\n\nEr war ursprünglich 180 Meilen von zu Hause entfernt, ist also nach 135 Meilen zurückgefahren.\n\nEntfernung vom Ziel (Zuhause):\n\n\\[\n180 - 135 = 45 \\text{ Meilen}\n\\]\n\n**Antwort: 45 Meilen**",
+    "ground_truth": "45",
+    "question_text": "John fährt 3 Stunden lang mit einer Geschwindigkeit von 60 Meilen/Stunde und dreht dann um, weil er bemerkt, dass er etwas ganz Wichtiges zu Hause vergessen hat. Er versucht, innerhalb von 4 Stunden nach Hause zu kommen, verbringt allerdings die ersten 2 Stunden im Stau. Die anschließende halbe Stunde fährt er mit einer Geschwindigkeit von 30 Meilen/Stunde, bevor er die verbleibende Zeit von 4 Stunden mit 80 Meilen/Stunde weiterfahren kann. Wie weit weg von zu Hause ist er am Ende dieser 4 Stunden?",
+    "judgement": {
+      "label": "Correct",
+      "extracted_answer": "45",
+      "ground_truth": "45",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0009.wav",
+    "tag": "de",
+    "response": "Elisas Verdienst beträgt 460 US-Dollar.",
+    "ground_truth": "460",
+    "question_text": "Elizas Lohn für die ersten 40 Stunden, die sie pro Woche arbeitet, beträgt 10 US-Dollar. Sie bekommt auch die Überstunden mit dem 1,2-Fachen des normalen Stundensatzes vergütet. Wie viel verdient Eliza, wenn sie diese Woche 45 Stunden arbeitet?",
+    "judgement": {
+      "label": "Correct",
+      "extracted_answer": "460",
+      "ground_truth": "460",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0010.wav",
+    "tag": "de",
+    "response": "60 + 3 × 60 = 240 (zweiter Monat)  \n240 × 0,7 = 168 (dritter Monat)  \nGesamt: 60 + 240 + 168 = 468",
+    "ground_truth": "366",
+    "question_text": "Ein neues Programm wurde 60-mal im ersten Monat heruntergeladen. Im zweiten Monat lag die Anzahl der Downloads dreimal so hoch wie die Anzahl der Downloads im ersten Monat, brach dann aber im dritten Monat um 30 % ein. Wie oft wurde das Programm insgesamt während dieser drei Monate heruntergeladen?",
+    "judgement": {
+      "label": "Incorrect",
+      "extracted_answer": "468",
+      "ground_truth": "366",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0011.wav",
+    "tag": "de",
+    "response": "Die Gesamtkosten berechnen sich wie folgt:\n\n- **Donuts**: 3 Dutzend × 68 US-Dollar pro Dutzend = 204 US-Dollar  \n- **Mini-Cupcakes**: 2 Dutzend × 80 US-Dollar pro Dutzend = 160 US-Dollar  \n- **Mini-Cheesecakes**: 6 Dutzend × 55 US-Dollar pro Dutzend = 330 US-Dollar  \n\nGesamtkosten = 204 + 160 + 330 = **694 US-Dollar**",
+    "ground_truth": "694",
+    "question_text": "Toula ging in die Bäckerei und kaufte verschiedene Arten von Gebäck. Sie kaufte 3 Dutzend Donuts, die 68 US-Dollar pro Dutzend kosten, 2 Dutzend Mini-Cupcakes, die 80 US-Dollar pro Dutzend kosten und 6 Dutzend Mini-Cheesecakes für 55 US-Dollar pro Dutzend. Wie hoch waren die Gesamtkosten?",
+    "judgement": {
+      "label": "Correct",
+      "extracted_answer": "694",
+      "ground_truth": "694",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0012.wav",
+    "tag": "de",
+    "response": "Um herauszufinden, in welchem Jahr Carlos mit dem Zitronenbaum einen Gesamtgewinn erzielen wird, berechnen wir die jährlichen Einnahmen und Ausgaben und bestimmen, ab wann die Einnahmen die Gesamtkosten übersteigen.\n\nGegeben:\n\n- Anfangsausgabe (Pflanzen des Baumes): $90\n- Jährliche Ernte: 7 Zitronen\n- Preis pro Zitrone: $1,50\n- Jährliche Kosten (Bewässern und Düngen): $3\n\n---\n\n**Jährliche Einnahmen:**\n\n7 Zitronen × $1,50 = $10,50\n\n**Jährlicher Gewinn (nach Abzug der jährlichen Kosten):**\n\n$10,50 − $3 = $7,50\n\n---\n\nWir berechnen nun, ab welchem Jahr die kumulierten Gewinne die Anfangsinvestition von $90 übersteigen.\n\nBerechnung der kumulierten Gewinne:\n\n- Nach 1 Jahr: $7,50 → Gesamtkosten: $90 − $7,50 = $82,50 noch zu decken\n- Nach 2 Jahren: $15 → $75 noch zu decken\n- Nach 3 Jahren: $22,50 → $67,50 noch zu decken\n- Nach 4 Jahren: $30 → $60 noch zu decken\n- Nach 5 Jahren: $37,50 → $52,50 noch zu decken\n- Nach 6 Jahren: $45 → $45 noch zu decken\n- Nach 7 Jahren: $52,50 → $37,50 noch zu decken\n- Nach 8 Jahren: $60 → $30 noch zu decken\n- Nach 9 Jahren: $67,50 → $22,50 noch zu decken\n- Nach 10 Jahren: $75 → $15 noch zu decken\n- Nach 11 Jahren: $82,50 → $7,50 noch zu decken\n- Nach 12 Jahren: $90 → $0 noch zu decken\n\nNach 12 Jahren beträgt der kumulierte Gewinn genau $90, also ist die Anfangsinvestition gedeckt.\n\n**Ab dem 13. Jahr** wird er einen **Gesamtgewinn** erzielen.\n\nAber die Frage ist: **In welchem Jahr wird er anfangen, einen Gesamtgewinn zu erzielen?**\n\nDas heißt: **In welchem Jahr übersteigen die kumulierten Gewinne die Anfangsinvestition?**\n\nNach 12 Jahren ist der Gewinn genau $90 → **kein Gewinn noch Verlust**.\n\nNach 13 Jahren: $90 + $7,50 = $97,50 → **Gewinn von $7,50**\n\nAlso **ab dem 13. Jahr** erzielt er einen Gesamtgewinn.\n\n**Antwort: 13. Jahr**",
+    "ground_truth": "13",
+    "question_text": "Carlos pflanzt einen Zitronenbaum. Das Pflanzen des Baumes kostet 90 $. Jedes Jahr wachsen an dem Baum 7 Zitronen, die er für jeweils 1,5 $ verkaufen kann. Es kostet 3 $ im Jahr, den Baum zu bewässern und zu düngen. In welchem Jahr wird er anfangen, mit dem Zitronenbaum einen Gesamtgewinn zu erzielen?",
+    "judgement": {
+      "label": "Correct",
+      "extracted_answer": "13",
+      "ground_truth": "13",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0013.wav",
+    "tag": "de",
+    "response": "Melanie hat 18 Staubsauger angefangen.",
+    "ground_truth": "18",
+    "question_text": "Melanie ist Handelsvertreterin. Sie hat ein Drittel ihrer Staubsauger im grünen Haus, 2 weitere im roten Haus und die Hälfte der Übriggebliebenen im orangenen Haus verkauft. Wenn Melanie 5 Staubsauger übrighat, mit wie vielen hat sie dann angefangen?",
+    "judgement": {
+      "label": "Correct",
+      "extracted_answer": "18",
+      "ground_truth": "18",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0014.wav",
+    "tag": "de",
+    "response": "60%",
+    "ground_truth": "60",
+    "question_text": "In einer Tanzstunde mit 20 Schülern haben sich 20 % für Contemporary Dance eingetragen, 25 % der restlichen für Jazz Dance, und der Rest hat sich für Hip-Hop angemeldet. Wie viele Prozent aller Schüler haben sich für Hip-Hop angemeldet?",
+    "judgement": {
+      "label": "Correct",
+      "extracted_answer": "60%",
+      "ground_truth": "60",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0015.wav",
+    "tag": "de",
+    "response": "Um den Gewinn zu berechnen, müssen wir die erwarteten Wertsteigerungen der beiden Optionen berechnen.\n\n1. **Schmuck:**\n   - Anfangswert: 5000 USD\n   - Wertsteigerung: 2,5 % = 0,025\n   - Gewinn: 5000 × 0,025 = 125 USD\n\n2. **Elektronikgeräte:**\n   - Anfangswert: 8000 USD\n   - Wertsteigerung: 1,2 % = 0,012\n   - Gewinn: 8000 × 0,012 = 96 USD\n\nDer Gewinn ist bei Schmuck höher (125 USD vs. 96 USD). Daher sollte der Händler Schmuck kaufen, um den Gewinn zu maximieren.\n\n**Maximaler Gewinn: 125 USD**",
+    "ground_truth": "125",
+    "question_text": "Ein Händler möchte eine Kaufentscheidung zwischen 2 Kaufoptionen treffen: Schmuck im Wert von 5.000 US-Dollar oder Elektronikgeräte im Wert von 8000 US-Dollar. Sein Finanzberater geht davon aus, dass der Schmuckmarkt um 2,5 % zulegen wird und der Markt für Elektrogeräte um 1,2 % im selben Monat. Wenn der Händler Ende des Monats durch das Treffen einer Kaufentscheidung den Gewinn maximieren möchte, auf wie viel Gewinn käme er dann?",
+    "judgement": {
+      "label": "Correct",
+      "extracted_answer": "125",
+      "ground_truth": "125",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0016.wav",
+    "tag": "de",
+    "response": "230 Meilen",
+    "ground_truth": "230",
+    "question_text": "Zwei Züge verlassen San Rafael zur selben Zeit. Sie beginnen, nach Westen zu fahren und legen beide 80 Meilen zurück. Am nächsten Tag fahren sie gen Norden und legen 150 Meilen zurück. Welche Strecke legt jeder der Züge in den beiden Tagen zurück?",
+    "judgement": {
+      "label": "Correct",
+      "extracted_answer": "230",
+      "ground_truth": "230",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0017.wav",
+    "tag": "de",
+    "response": "Jill verdient 20 US-Dollar pro Stunde als Lehrerin und 30 US-Dollar pro Stunde als Cheerleader-Coach.\n\nSie arbeitet 50 Wochen pro Jahr.\n\nAls Lehrerin arbeitet sie 35 Stunden pro Woche:\n- 35 Stunden/ Woche × 20 US-Dollar = 700 US-Dollar pro Woche als Lehrerin.\n\nAls Coach arbeitet sie 15 Stunden pro Woche:\n- 15 Stunden/ Woche × 30 US-Dollar = 450 US-Dollar pro Woche als Coach.\n\nGesamtverdienst pro Woche:\n- 700 + 450 = 1150 US-Dollar pro Woche.\n\nGesamtverdienst pro Jahr:\n- 1150 US-Dollar/ Woche × 50 Wochen = 57.500 US-Dollar.\n\nIhr Jahresgehalt beträgt **57.500 US-Dollar**.",
+    "ground_truth": "57500",
+    "question_text": "Jill bekommt 20 US-Dollar pro Stunde für den Unterricht als Lehrerin und 30 US-Dollar als Cheerleader-Coach. Wenn sie 50 Wochen pro Jahr arbeitet, 35 Wochen pro Woche als Lehrerin und 15 Stunden pro Woche als Coach, wie hoch ist dann ihr Jahresgehalt?",
+    "judgement": {
+      "label": "Correct",
+      "extracted_answer": "57.500",
+      "ground_truth": "57500",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0018.wav",
+    "tag": "de",
+    "response": "Claire isst innerhalb von vier Wochen 1,5 Dutzend Eier.",
+    "ground_truth": "7",
+    "question_text": "Claire bereitet sich jeden Morgen zum Frühstück ein Omelett aus 3 Eiern zu. Wie viele Dutzend Eier isst sie innerhalb von 4 Wochen?",
+    "judgement": {
+      "label": "Incorrect",
+      "extracted_answer": "1,5",
+      "ground_truth": "7",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0019.wav",
+    "tag": "de",
+    "response": "Marissa hat bereits 6 Meilen in 2 Stunden zurückgelegt. Der gesamte Weg beträgt 12 Meilen, also bleiben noch 6 Meilen übrig.\n\nSie möchte eine durchschnittliche Geschwindigkeit von 4 Meilen pro Stunde für den gesamten Weg erreichen. Dafür benötigt sie insgesamt:\n\n\\[\n\\frac{12 \\text{ Meilen}}{4 \\text{ Meilen/Stunde}} = 3 \\text{ Stunden}\n\\]\n\nSie hat bereits 2 Stunden gebraucht, also bleiben noch:\n\n\\[\n3 - 2 = 1 \\text{ Stunde}\n\\]\n\nIn dieser Stunde muss sie die restlichen 6 Meilen zurücklegen. Die benötigte Geschwindigkeit ist:\n\n\\[\n\\frac{6 \\text{ Meilen}}{1 \\text{ Stunde}} = 6 \\text{ Meilen pro Stunde}\n\\]\n\n**Antwort: 6**",
+    "ground_truth": "6",
+    "question_text": "Marissa wandert einen 12 Meilen langen Wanderweg. In der 1. Stunde wandert sie die ersten 4 Meilen, anschließend die nächsten zwei Meilen in der nächsten Stunde. Wenn sie mit einer Durchschnittsgeschwindigkeit von 4 Meilen pro Stunde wandern möchte, mit welcher Geschwindigkeit (Meilen pro Stunde) muss sie den Rest der Strecke zurücklegen?",
+    "judgement": {
+      "label": "Correct",
+      "extracted_answer": "6",
+      "ground_truth": "6",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0020.wav",
+    "tag": "de",
+    "response": "Zuerst berechnen wir, wie viel Wasser in den 10 Litern Orangengegetränk ist:\n\n- 2/3 von 10 Litern = (2/3) × 10 = 20/3 ≈ 6,67 Liter Wasser\n\nDann berechnen wir, wie viel Wasser in den 15 Litern Ananasgetränk ist:\n\n- 3/5 von 15 Litern = (3/5) × 15 = 9 Liter Wasser\n\nJetzt berücksichtigen wir den verschütteten Liter Orangengegetränk:\n\n- Verschüttet: 1 Liter Orangengegetränk\n- Davon Wasser: 2/3 von 1 Liter = 2/3 Liter\n\nAlso bleibt von den 10 Litern Orangengegetränk: 9 Liter\n\n- Wasser in den verbleibenden 9 Litern Orangengegetränk: (2/3) × 9 = 6 Liter\n\nZusammen mit den 15 Litern Ananasgetränk ergibt das:\n\n- Gesamtvolumen: 9 + 15 = 24 Liter\n- Gesamtes Wasser: 6 Liter (Orangen) + 9 Liter (Ananas) = 15 Liter\n\n**Antwort: 15 Liter Wasser**",
+    "ground_truth": "15",
+    "question_text": "Ich habe 10 Liter Orangengetränk mit zwei Dritteln Wasser und möchte es zu 15 Litern Ananasgetränk mit drei Fünfteln Wasser hinzugeben. Während des Eingießens verschütte ich allerdings einen Liter des Orangengetränks. Wie viel Wasser ist in den verbleibenden 24 Litern?",
+    "judgement": {
+      "label": "Correct",
+      "extracted_answer": "15",
+      "ground_truth": "15",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0021.wav",
+    "tag": "de",
+    "response": "Raymond ist 6 Jahre älter als Samantha. Wenn Samantha jetzt 31 Jahre alt ist, dann ist Raymond 37 Jahre alt.\n\nRaymond hat mit 23 Jahren einen Sohn bekommen. Das war also 37 - 23 = 14 Jahre her.\n\nAntwort: 14 Jahre.",
+    "ground_truth": "14",
+    "question_text": "Raymond und Samantha sind Cousins. Raymond wurde 6 Jahre vor Samantha geboren. Raymond hat mit 23 Jahren einen Sohn bekommen. Wenn Samantha jetzt 31 ist, vor wie vielen Jahren wurde dann Raymonds Sohn geboren?",
+    "judgement": {
+      "label": "Correct",
+      "extracted_answer": "14",
+      "ground_truth": "14",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0022.wav",
+    "tag": "de",
+    "response": "7",
+    "ground_truth": "7",
+    "question_text": "Billy verkauft DVDs. Er hat am Dienstag 8 Kunden. Seine ersten 3 Kunden kaufen jeweils eine DVD. Seine nächsten 2 Kunden kaufen jeweils 2 DVDs. Seine letzten 3 Kunden kaufen keine DVD. Wie viele DVDs hat Billy am Dienstag verkauft?",
+    "judgement": {
+      "label": "Correct",
+      "extracted_answer": "7",
+      "ground_truth": "7",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0023.wav",
+    "tag": "de",
+    "response": "8 cm",
+    "ground_truth": "8",
+    "question_text": "Eine Kerze schmilzt jede Stunde, in der sie brennt, um 2 Zentimeter. Wie viele Zentimeter kürzer ist eine Kerze, die von 13 Uhr bis 17 Uhr brennt?",
+    "judgement": {
+      "label": "Correct",
+      "extracted_answer": "8",
+      "ground_truth": "8",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0024.wav",
+    "tag": "de",
+    "response": "Der ursprüngliche Preis des Buches war 26 US-Dollar.",
+    "ground_truth": "26",
+    "question_text": "Kyle hat den Bestseller des vergangenen Jahres für 19,50 US-Dollar gekauft. Das ist mit einem Rabatt von 25 % auf den ursprünglichen Preis. Wie hoch war der ursprüngliche Preis des Buches?",
+    "judgement": {
+      "label": "Correct",
+      "extracted_answer": "26",
+      "ground_truth": "26",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0025.wav",
+    "tag": "de",
+    "response": "Zuerst berechnen wir die Gesamtkosten für die bereits bekannten Artikel:\n\n- Hühnchengericht: 12 USD\n- 5 Packungen Milch à 3 USD: \\(5 \\times 3 = 15\\) USD\n- 4 Äpfel à 1,50 USD: \\(4 \\times 1,50 = 6\\) USD\n\nSumme dieser Artikel:  \n\\(12 + 15 + 6 = 33\\) USD\n\nMarie hat insgesamt 50 USD bezahlt, also bleiben für die Pizza:  \n\\(50 - 33 = 17\\) USD\n\nJede Schachtel Pizza kostet 8,50 USD.  \nAnzahl der Schachteln:  \n\\(\\frac{17}{8,50} = 2\\)\n\nMarie hat **2 Schachteln Pizza** bestellt.",
+    "ground_truth": "2",
+    "question_text": "Marie hat ein Hühnchengericht für 12 US-Dollar bestellt, 5 Packungen Milch für jeweils 3 US-Dollar, 4 Äpfel für jeweils 1,50 US-Dollar und ein paar Schachteln Pizza. Marie hat insgesamt 50 US-Dollar bezahlt. Wie viele Schachteln Pizza hat Marie bestellt, wenn jede Schachtel 8,50 US-Dollar kostet?",
+    "judgement": {
+      "label": "Correct",
+      "extracted_answer": "2",
+      "ground_truth": "2",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0026.wav",
+    "tag": "de",
+    "response": "Mishka hat insgesamt 210 US-Dollar für die Kleidung ausgegeben.",
+    "ground_truth": "243",
+    "question_text": "Mishka hat 3 Paar Shorts, 3 Hosen und 3 Paar Schuhe gekauft. Ein Paar Shorts kostet 16,50 US-Dollar. Eine Hose kostet 22,50 US-Dollar und ein Paar Schuhe 42 US-Dollar. Wie viel Dollar hat Mishka insgesamt für die Kleidung ausgegeben?",
+    "judgement": {
+      "label": "Incorrect",
+      "extracted_answer": "210",
+      "ground_truth": "243",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0027.wav",
+    "tag": "de",
+    "response": "Cynthia isst jeden Abend eine Portion Eiscreme. Sie kauft Eiscreme-Kartons mit 15 Portionen pro Karton für 4 Dollar pro Karton.\n\nNach 60 Tagen hat sie 60 Portionen gegessen.\n\nDa jeder Karton 15 Portionen enthält, benötigt sie:\n\n60 ÷ 15 = 4 Kartons\n\nJeder Karton kostet 4 Dollar, also:\n\n4 × 4 = 16 Dollar\n\nSie hat nach 60 Tagen **16 Dollar** für Eiscreme ausgegeben.",
+    "ground_truth": "16",
+    "question_text": "Cynthia isst jeden Abend eine Portion Eiscreme. Sie kauft Eiscremekartons mit 15 Portionen Eis pro Karton für 4,00 US-Dollar pro Karton. Wie viel hat sie nach 60 Tagen für Eiscreme ausgegeben?",
+    "judgement": {
+      "label": "Correct",
+      "extracted_answer": "16",
+      "ground_truth": "16",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0028.wav",
+    "tag": "de",
+    "response": "25 Meilen",
+    "ground_truth": "25",
+    "question_text": "Henry hat auf einer 60 Meilen langen Fahrradtour zwei Stopps eingelegt. Seinen ersten Halt machte er nach 20 Meilen. Der zweite Halt war 15 Meilen vor dem Ende der Tour. Wie viele Meilen hat er zwischen dem ersten und zweiten Halt zurückgelegt?",
+    "judgement": {
+      "label": "Correct",
+      "extracted_answer": "25",
+      "ground_truth": "25",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0029.wav",
+    "tag": "de",
+    "response": "Die beiden High Heels kosten zusammen 33 US-Dollar plus das Doppelte davon, also 33 + 66 = 99 US-Dollar. Die Stiefel kosten 5 US-Dollar mehr, also 99 + 5 = 104 US-Dollar.",
+    "ground_truth": "104",
+    "question_text": "Gloria ist beim Schuhe-Shopping, als sie ein Paar Stiefel findet, das ihrem Budget entspricht. Sie muss allerdings zwischen den Stiefeln und zwei Paar High Heels wählen, die zusammen fünf Dollar weniger kosten als die Stiefel. Wenn ein Paar High Heels 33 US-Dollar kostet und das andere doppelt so viel, wie viel kosten dann die Stiefel?",
+    "judgement": {
+      "label": "Correct",
+      "extracted_answer": "104",
+      "ground_truth": "104",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0030.wav",
+    "tag": "de",
+    "response": "110",
+    "ground_truth": "109",
+    "question_text": "Das Altersverhältnis von Darrell und Allen beträgt 7:11. Wenn sie jetzt zusammen 162 Jahre alt sind, berechne, wie alt Allen in 10 Jahren sein wird.",
+    "judgement": {
+      "label": "Incorrect",
+      "extracted_answer": "110",
+      "ground_truth": "109",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0031.wav",
+    "tag": "de",
+    "response": "Die erste Schätzung ist 80.\n\nDie zweite Schätzung ist 20 mehr als die Hälfte der ersten Schätzung:\nHälfte von 80 = 40\n40 + 20 = 60\n\nDie dritte Schätzung ist 25 % mehr als die erste:\n25 % von 80 = 0,25 × 80 = 20\n80 + 20 = 100\n\nDie drei Schätzungen sind also: 80, 60 und 100.\n\nDurchschnitt = (80 + 60 + 100) / 3 = 240 / 3 = 80\n\nDie durchschnittliche Schätzung lautet 80.",
+    "ground_truth": "80",
+    "question_text": "Gunter versucht, die Gummibärchen im Glas zu zählen. Er fragt seine Freunde, wie viele Gummibärchen sich ihrer Meinung nach im Glas befinden. Einer sagt 80. Der andere sagt 20 mehr als die Hälfte der ersten Schätzung. Ein Dritter sagt 25 % mehr als der Erste. Wie lautet ihre durchschnittliche Schätzung?",
+    "judgement": {
+      "label": "Correct",
+      "extracted_answer": "80",
+      "ground_truth": "80",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0032.wav",
+    "tag": "de",
+    "response": "John kümmert sich insgesamt 35 Stunden pro Woche um die Hunde.",
+    "ground_truth": "35",
+    "question_text": "John kümmert sich um 10 Hunde. Jeder Hund braucht 0,5 Stunden täglich für einen Spaziergang und um sein Geschäft zu erledigen. Wie viele Stunden pro Woche kümmert er sich insgesamt um die Hunde?",
+    "judgement": {
+      "label": "Correct",
+      "extracted_answer": "35",
+      "ground_truth": "35",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0033.wav",
+    "tag": "de",
+    "response": "Gretchen hat 70 Goldmünzen.",
+    "ground_truth": "70",
+    "question_text": "Gretchen hat 110 Münzen. Es sind 30 mehr Gold- als Silbermünzen. Wie viele Goldmünzen hat Gretchen?",
+    "judgement": {
+      "label": "Correct",
+      "extracted_answer": "70",
+      "ground_truth": "70",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0034.wav",
+    "tag": "de",
+    "response": "Shivan besitzt 22 Schmuckstücke.",
+    "ground_truth": "23",
+    "question_text": "Siobhan besitzt 2 Schmuckstücke weniger als Aaron. Aaron hat 5 Schmuckstücke mehr als die Hälfte von Raymonds Schmuckstücken. Wenn Raymond 40 Schmuckstücke hat, wie viele Schmuckstücke besitzt dann Siobhan?",
+    "judgement": {
+      "label": "Incorrect",
+      "extracted_answer": "22",
+      "ground_truth": "23",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0035.wav",
+    "tag": "de",
+    "response": "In den ersten 20 Minuten machte Mike 4 Punkte.  \nIn den nächsten 20 Minuten machte er 25 % mehr Punkte.\n\n25 % von 4 ist:  \n0,25 × 4 = 1\n\nAlso machte er in den nächsten 20 Minuten:  \n4 + 1 = 5 Punkte\n\nInsgesamt machte er:  \n4 + 5 = 9 Punkte\n\n**Antwort: 9**",
+    "ground_truth": "9",
+    "question_text": "Mike spielt 40 Minuten lang Pingpong. In den ersten 20 Minuten macht er 4 Punkte. In den darauffolgenden 20 Minuten macht er 25 % Punkte mehr. Wie viele Punkte machte er insgesamt?",
+    "judgement": {
+      "label": "Correct",
+      "extracted_answer": "9",
+      "ground_truth": "9",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0036.wav",
+    "tag": "de",
+    "response": "Terry isst zwei Joghurts pro Tag. In 30 Tagen isst er also:\n\n2 Joghurts/Tag × 30 Tage = 60 Joghurts\n\nDie Joghurts sind im Angebot für 5 Dollar für 4 Joghurts.  \nAlso kostet ein Joghurt:\n\n5 Dollar ÷ 4 = 1,25 Dollar pro Joghurt\n\nFür 60 Joghurts:\n\n60 × 1,25 Dollar = 75 Dollar\n\nTerry gibt innerhalb von 30 Tagen **75 Dollar** für Joghurt aus.",
+    "ground_truth": "75",
+    "question_text": "Terry isst 2 Joghurts pro Tag. Sie sind derzeit für 5,00 US-Dollar für 4 Joghurts im Angebot. Wie viel gibt er innerhalb von 30 Tagen für Joghurt aus?",
+    "judgement": {
+      "label": "Correct",
+      "extracted_answer": "75",
+      "ground_truth": "75",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0037.wav",
+    "tag": "de",
+    "response": "John hat 13 Lego-Sets verkauft, da er insgesamt 15 Dollar pro Set erhalten hat und insgesamt 13 × 15 = 195 Dollar eingenommen hat. Er hat 8 Videospiele für 20 Dollar pro Stück gekauft, also 8 × 20 = 160 Dollar ausgegeben. Außerdem hat er noch 5 Dollar übrig. Insgesamt hat er also 160 + 5 = 165 Dollar ausgegeben. Da er 195 Dollar eingenommen hat, hat er 195 − 165 = 30 Dollar übrig, was nicht mit den 5 Dollar übereinstimmt. Das bedeutet, dass er nicht alle 13 Sets verkauft hat.\n\nSei x die Anzahl der verkauften Lego-Sets. Dann hat er 15x Dollar eingenommen. Er hat 8 × 20 = 160 Dollar für Videospiele ausgegeben und hat 5 Dollar übrig, also hat er insgesamt 160 + 5 = 165 Dollar ausgegeben. Also gilt:\n\n15x = 165 → x = 11\n\nEr hat also 11 Sets verkauft. Da er ursprünglich 13 Sets hatte, hat er noch 13 − 11 = 2 Sets übrig.\n\nAntwort: 2",
+    "ground_truth": "2",
+    "question_text": "John plant, alle seine Spielsachen zu verkaufen und mit dem Geld Videospiele zu kaufen. Er hat 13 Lego-Sets und er hat $15 für jedes verkaufte Set bekommen. Er kauft schließlich 8 Videospiele für jeweils $20 und hat noch $5 übrig. Wie viele Lego-Sets hat er noch?",
+    "judgement": {
+      "label": "Correct",
+      "extracted_answer": "2",
+      "ground_truth": "2",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0038.wav",
+    "tag": "de",
+    "response": "John läuft 60 Meilen in 3 Tagen, also durchschnittlich 20 Meilen pro Tag.\n\n- Am ersten Tag läuft er 3 Stunden.\n- An den anderen beiden Tagen läuft er jeweils die Hälfte der Zeit, also 1,5 Stunden pro Tag.\n\nGesamtläufzeit pro Woche:  \n3 + 1,5 + 1,5 = 6 Stunden\n\nGesamtdistanz: 60 Meilen\n\nGeschwindigkeit = Distanz / Zeit  \n= 60 Meilen / 6 Stunden  \n= **10 Meilen pro Stunde**\n\nJohn läuft mit **10 Meilen pro Stunde**.",
+    "ground_truth": "10",
+    "question_text": "John läuft 60 Meilen pro Woche. Er läuft 3 Tage pro Woche. Er läuft am ersten Tag 3 Stunden und an den anderen beiden Lauftagen jeweils die Hälfte. Wie schnell läuft er?",
+    "judgement": {
+      "label": "Correct",
+      "extracted_answer": "10",
+      "ground_truth": "10",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0039.wav",
+    "tag": "de",
+    "response": "Dana kann 3 Meilen pro Stunde hüpfen, was nur die Hälfte ihrer Laufgeschwindigkeit ist. Daher beträgt ihre Laufgeschwindigkeit:\n\n\\[\n3 \\times 2 = 6 \\text{ Meilen pro Stunde}\n\\]\n\nSie kann viermal so schnell laufen wie gehen, also beträgt ihre Gehgeschwindigkeit:\n\n\\[\n\\frac{6}{4} = 1{,}5 \\text{ Meilen pro Stunde}\n\\]\n\nSie verbringt ein Drittel der Zeit (2 Stunden) mit Laufen und zwei Drittel der Zeit (4 Stunden) mit Gehen.\n\nDistanz beim Laufen:\n\n\\[\n6 \\text{ Meilen/Stunde} \\times 2 \\text{ Stunden} = 12 \\text{ Meilen}\n\\]\n\nDistanz beim Gehen:\n\n\\[\n1{,}5 \\text{ Meilen/Stunde} \\times 4 \\text{ Stunden} = 6 \\text{ Meilen}\n\\]\n\nGesamtdistanz:\n\n\\[\n12 + 6 = 18 \\text{ Meilen}\n\\]\n\n**Antwort: 18**",
+    "ground_truth": "18",
+    "question_text": "Dana kann viermal so schnell laufen wie sie gehen kann, aber sie kann nur mit der Hälfte ihrer Laufgeschwindigkeit hüpfen. Wenn sie mit 3 Meilen pro Stunde hüpfen kann, wie viele Meilen kann sie dann innerhalb von sechs Stunden zurücklegen, wenn sie ein Drittel der Zeit läuft und zwei Drittel der Zeit geht?",
+    "judgement": {
+      "label": "Correct",
+      "extracted_answer": "18",
+      "ground_truth": "18",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0040.wav",
+    "tag": "de",
+    "response": "8 Jahre",
+    "ground_truth": "8",
+    "question_text": "Brandons iPhone ist viermal so alt wie Bens iPhone. Bens iPhone ist doppelt so alt wie Suzys iPhone. Wenn Suzys iPhone 1 Jahr alt ist, wie alt ist Brandons iPhone?",
+    "judgement": {
+      "label": "Correct",
+      "extracted_answer": "8",
+      "ground_truth": "8",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0041.wav",
+    "tag": "de",
+    "response": "Da Polly den goldenen Speer ohne den Edelstein 400 Fuß weit werfen konnte, konnte sie ihn mit dem Edelstein dreimal so weit werfen, also 3 × 400 = 1200 Fuß.\n\nDer Drache spie Feuer in einem Umkreis von 1000 Fuß, also ist die Reichweite der Flammen 1000 Fuß.\n\nWenn Polly den Drachen mit dem Speer treffen will, muss der Speer die 1000 Fuß Reichweite der Flammen überwinden und den Drachen erreichen.\n\nDa sie den Speer 1200 Fuß weit werfen kann, kann sie den Drachen treffen, wenn sie sich maximal 1200 − 1000 = 200 Fuß außerhalb der Reichweite der Flammen befindet.\n\n**Antwort: 200 Fuß.**",
+    "ground_truth": "200",
+    "question_text": "Der große Drachen Perg saß hoch oben auf dem Berg Farbo und spie Feuer auf alles in einem Umkreis von 1000 Fuß. Polly konnte den goldenen Speer, die einzige bekannte Waffe, mit der sich der Drache bezwingen ließ, 400 Fuß weit werfen, also gut in die Reichweite der vom Drachen ausgestoßenen Flammen hinein. Als Polly aber den Saphir-Edelstein in den Händen hielt, konnte sie den Speer dreimal so weit werfen wie ohne den Edelstein in ihren Händen. Wenn sie den Edelstein in den Händen hielte, wie weit außerhalb der Reichweite der Flammen des Drachen könnte Polly stehen und den Drachen trotzdem noch mit dem goldenen Speer treffen?",
+    "judgement": {
+      "label": "Correct",
+      "extracted_answer": "200",
+      "ground_truth": "200",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0042.wav",
+    "tag": "de",
+    "response": "26",
+    "ground_truth": "26",
+    "question_text": "Großmama Jones hat 5 Apfelkuchen für das Mittagessen der Feuerwehr gebacken. Sie schnitt jeden Kuchen in 8 Stücke und stellte fünf Kuchen auf den Buffettisch, damit sich die Gäste selbst bedienen konnten. Am Ende des Abends, nachdem sich die Gäste bedient und Kuchen gegessen hatten, waren noch 14 Kuchenstücke übrig. Wie viele Stücke haben sich die Gäste genommen?",
+    "judgement": {
+      "label": "Correct",
+      "extracted_answer": "26",
+      "ground_truth": "26",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0043.wav",
+    "tag": "de",
+    "response": "200",
+    "ground_truth": "48",
+    "question_text": "Den Nährwertangaben zufolge, hat eine Tüte Chips 250 Kalorien pro Portion. Wenn eine 300 g-Tüte 5 Portionen enthält, kannst du wie viele Gramm essen, wenn dein tägliches Kalorienziel bei 2000 liegt und du bereits 1800 Kalorien zu dir genommen hast?",
+    "judgement": {
+      "label": "Incorrect",
+      "extracted_answer": "200",
+      "ground_truth": "48",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0044.wav",
+    "tag": "de",
+    "response": "Charly kann aus jedem Pfund Bienenwachs 10 Kegelkerzen herstellen. Um 20 Kerzen herzustellen, benötigt er also 2 Pfund Bienenwachs.\n\nDie Kosten für das Zubehör (einschließlich Dochte) betragen 10 US-Dollar pro Pfund Bienenwachs. Für 2 Pfund kostet das Zubehör:\n\n2 × 10 US-Dollar = 20 US-Dollar\n\nEr verkauft 20 Kerzen zu je 2 US-Dollar:\n\n20 × 2 US-Dollar = 40 US-Dollar\n\nNetto-Gewinn = Umsatz – Kosten  \nNetto-Gewinn = 40 US-Dollar – 20 US-Dollar = 20 US-Dollar\n\n**Antwort: 20 US-Dollar**",
+    "ground_truth": "20",
+    "question_text": "Charlie möchte Bienenwachskerzen verkaufen. Aus jedem Pfund Bienenwachs kann er 10 Kegelkerzen herstellen. Das Zubehör aus einem Pfund Bienenwachs plus Dochte kostet 10,00 US-Dollar. Wenn er die Kerzen für 2,00 US-Dollar verkauft, macht er wie viel Nettogewinn, wenn er 20 Kerzen herstellt und verkauft?",
+    "judgement": {
+      "label": "Correct",
+      "extracted_answer": "20",
+      "ground_truth": "20",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0045.wav",
+    "tag": "de",
+    "response": "Am Montag hat Meredith 5 Artikel geschrieben.  \nAm Dienstag hat sie 2/5 mehr Artikel als am Montag geschrieben:  \n2/5 von 5 = 2, also 5 + 2 = 7 Artikel am Dienstag.  \nAm Mittwoch hat sie doppelt so viele Artikel wie am Dienstag geschrieben:  \n2 × 7 = 14 Artikel am Mittwoch.  \n\nGesamtzahl der Artikel:  \n5 (Mo) + 7 (Di) + 14 (Mi) = 26 Artikel.  \n\nJeder Artikel benötigt 4 Stunden, also:  \n26 × 4 = 104 Stunden.  \n\nDie Gesamtzahl der Stunden beträgt **104**.",
+    "ground_truth": "104",
+    "question_text": "Meredith ist Freelance-Bloggerin und schreibt über Gesundheitsthemen und wendet sich an Kunden, was ihr fester Job ist. Das Recherchieren und Schreiben eines Blog-Artikels nimmt im Durchschnitt 4 Stunden in Anspruch. Letzte Woche hat sie am Montag 5 Artikel geschrieben und am Dienstag 2/5 mehr Artikel als am Montag. Am Mittwoch hat sie zweimal so viele Artikel verfasst wie am Dienstag. Berechne die Gesamtzahl der Stunden, die sie an drei Tagen für das Schreiben von Artikeln aufgewendet hat.",
+    "judgement": {
+      "label": "Correct",
+      "extracted_answer": "104",
+      "ground_truth": "104",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0046.wav",
+    "tag": "de",
+    "response": "Sie hat insgesamt 220 Post-it-Zettel verwendet und am Ende 23 übrig gehabt. Das bedeutet, dass sie insgesamt 220 + 23 = 243 Post-it-Zettel hatte. Da sie ursprünglich 80 in ihrer Handtasche hatte, muss sie 243 - 80 = 163 Post-it-Zettel in der gekauften Packung gehabt haben.\n\nAntwort: 163",
+    "ground_truth": "163",
+    "question_text": "Candice hat 80 Post-it-Notizzettel in ihre Handtasche gepackt, bevor sie zu ihrem Job im Coffee Shop aufgebrochen ist. Unterwegs hat sie einen Zwischenstopp am Laden eingelegt und eine Packung Post-it-Notizzettel gekauft; bei der Arbeit hat sie an 220 verschiedene Tassen Kaffee jeweils einen Post-it-Notizzettel geklebt. Wenn ihr insgesamt 23 Post-it-Notizzettel übrigblieben, wie viele Post-it-Notizzettel waren dann in der Packung, die sie gekauft hat?",
+    "judgement": {
+      "label": "Correct",
+      "extracted_answer": "163",
+      "ground_truth": "163",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0047.wav",
+    "tag": "de",
+    "response": "350 US-Dollar",
+    "ground_truth": "800",
+    "question_text": "John kauft zweimal so viele rote wie blaue Krawatten. Die roten Krawatten kosten 50 % mehr als die blauen Krawatten. Er hat 200 US-Dollar für blaue Krawatten ausgegeben, die pro Stück 40 US-Dollar kosten. Wie viel hat er für Krawatten ausgegeben?",
+    "judgement": {
+      "label": "Incorrect",
+      "extracted_answer": "350",
+      "ground_truth": "800",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0048.wav",
+    "tag": "de",
+    "response": "8",
+    "ground_truth": "8",
+    "question_text": "Tracy hat ein 4 Fuß langes Stück Draht verwendet, um die Tomatenpflanzen in ihrem Garten abzustützen. Der Draht wurde in jeweils 6 Inch lange Stücke geschnitten. Wie viele Stück Draht hatte sie?",
+    "judgement": {
+      "label": "Correct",
+      "extracted_answer": "8",
+      "ground_truth": "8",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0049.wav",
+    "tag": "de",
+    "response": "Es gibt insgesamt 15 Etagen × 8 Wohnungen = 120 Wohnungen im Gebäude.  \nDavon sind 3/4 bewohnt, also 120 × 3/4 = 90 Wohnungen bewohnt.  \nDie unbewohnten Wohnungen sind dann 120 − 90 = 30.  \n\nAntwort: 30",
+    "ground_truth": "30",
+    "question_text": "Richard lebt in einem Wohnhaus mit 15 Etagen. Auf jeder Etage befinden sich 8 Wohnungen, und 3/4 des Gebäudes sind bewohnt. Wie viele Wohnungen in dem Gebäude sind insgesamt unbewohnt?",
+    "judgement": {
+      "label": "Correct",
+      "extracted_answer": "30",
+      "ground_truth": "30",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0050.wav",
+    "tag": "de",
+    "response": "Lloyd verdient pro Woche 352,80 US-Dollar an den Eiern.",
+    "ground_truth": "294",
+    "question_text": "Lloyd hat einen Eierhof. Seine Hühner legen 252 Eier pro Tag und er verkauft sie für 2 US-Dollar pro Dutzend. Wie viel verdient Lloyd pro Woche an den Eiern?",
+    "judgement": {
+      "label": "Incorrect",
+      "extracted_answer": "352,80",
+      "ground_truth": "294",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0051.wav",
+    "tag": "de",
+    "response": "Tom segelt von 13:00 bis 16:00 Uhr, also 3 Stunden lang. Mit einer Geschwindigkeit von 10 Meilen pro Stunde legt er:\n\n10 Meilen/Stunde × 3 Stunden = 30 Meilen zurück.\n\nAuf dem Rückweg fährt er mit 6 Meilen pro Stunde. Die Zeit für den Rückweg beträgt:\n\n30 Meilen ÷ 6 Meilen/Stunde = 5 Stunden.\n\nEr braucht also 5 Stunden für den Rückweg.",
+    "ground_truth": "5",
+    "question_text": "Toms Schiff kann 10 Meilen pro Stunde zurücklegen. Er segelt von 13 bis 16 Uhr. Dann fährt er mit einer Geschwindigkeit von 6 Meilen/Stunde wieder zurück. Wie lange braucht er für den Rückweg?",
+    "judgement": {
+      "label": "Correct",
+      "extracted_answer": "5",
+      "ground_truth": "5",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0052.wav",
+    "tag": "de",
+    "response": "Er muss 30 Comicbücher à 1/4 Pfund herausnehmen, also insgesamt 30 × 1/4 = 7,5 Pfund. Da er insgesamt 15 Pfund entnehmen muss, bleiben noch 15 − 7,5 = 7,5 Pfund übrig. Jedes Spielzeug wiegt 1/2 Pfund, also muss er 7,5 ÷ 0,5 = 15 Spielzeuge herausnehmen.",
+    "ground_truth": "15",
+    "question_text": "Uriah wird seine Büchertasche zu schwer. Er muss 15 Pfund daraus entnehmen. Seine Comicbücher wiegen pro Stück 1/4 Pfund und seine Spielzeuge jeweils 1/2 Pfund. Wenn er 30 Comicbücher rausnimmt, wie viele Spielzeuge muss er dann noch rausnehmen?",
+    "judgement": {
+      "label": "Correct",
+      "extracted_answer": "15",
+      "ground_truth": "15",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0053.wav",
+    "tag": "de",
+    "response": "Am Donnerstag:  \n6 LKW-Reifen × 60 $ = 360 $  \n4 PKW-Reifen × 40 $ = 160 $  \nGesamtumsatz Donnerstag: 360 $ + 160 $ = 520 $\n\nAm Freitag:  \n12 PKW-Reifen × 40 $ = 480 $  \nGesamtumsatz Freitag: 480 $\n\nUmsatzdifferenz: 520 $ - 480 $ = 40 $\n\nDer Mechaniker hat am Donnerstag 40 $ mehr Umsatz erzielt.",
+    "ground_truth": "40",
+    "question_text": "Ein Mechaniker berechnet unterschiedliche Preise für die Reparatur von LKW-Reifen und PKW-Reifen. Für jeden reparierten LKW-Reifen berechnet der Mechaniker 60 Dollar und für jeden reparierten PKW-Reifen 40 Dollar. Am Donnerstag repariert der Mechaniker 6 LKW-Reifen und 4 PKW-Reifen. Am Freitag repariert der Mechaniker 12 PKW-Reifen und keine LKW-Reifen. Wie viel Dollar mehr Umsatz hat der Mechaniker an dem Tag mit dem höheren Umsatz erzielt?",
+    "judgement": {
+      "label": "Correct",
+      "extracted_answer": "40",
+      "ground_truth": "40",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0054.wav",
+    "tag": "de",
+    "response": "Die Dautfeiers haben jetzt insgesamt 31 Kätzchen.\n\nErklärung:\n- Sie haben 7 Kätzchen adoptiert.\n- Patchy hat dreimal so viele Kätzchen wie die adoptierten: 3 × 7 = 21.\n- Trixie hat 12 Kätzchen zur Welt gebracht.\n- Gesamtzahl: 7 (adoptiert) + 21 (Patchy) + 12 (Trixie) = 40.\n\nAber warte – die Frage ist: „Wie viele Kätzchen haben die Dautfeiers jetzt?“\n\nDie 7 adoptierten Kätzchen sind bereits bei ihnen. Die beiden Hauskatzen haben eigene Kätzchen geboren. Also:\n\n- 7 (adoptierte) + 21 (Patchy) + 12 (Trixie) = 40 Kätzchen insgesamt.\n\nAber: Die 7 adoptierten Kätzchen sind bereits Teil der Familie. Die beiden Hauskatzen haben eigene Kätzchen geboren. Also:\n\n- Die 7 adoptierten Kätzchen sind noch da.\n- Patchy hat 21 Kätzchen geboren.\n- Trixie hat 12 Kätzchen geboren.\n\nAlso insgesamt: 7 + 21 + 12 = 40 Kätzchen.\n\nAber: Die 7 adoptierten Kätzchen sind bereits bei ihnen. Die beiden Hauskatzen haben eigene Kätzchen geboren. Also:\n\n- Die 7 adoptierten Kätzchen sind noch da.\n- Patchy hat 21 Kätzchen geboren.\n- Trixie hat 12 Kätzchen geboren.\n\nAlso insgesamt: 7 + 21 + 12 = 40 Kätzchen.\n\nAber: Die 7 adoptierten Kätzchen sind bereits bei ihnen. Die beiden Hauskatzen haben eigene Kätzchen geboren. Also:\n\n- Die 7 adoptierten Kätzchen sind noch da.\n- Patchy hat 21 Kätzchen geboren.\n- Trixie hat 12 Kätzchen geboren.\n\nAlso insgesamt: 7 + 21 + 12 = 40 Kätzchen.\n\nAber: Die 7 adoptierten Kätzchen sind bereits bei ihnen. Die beiden Hauskatzen haben eigene Kätzchen geboren. Also:\n\n- Die 7 adoptierten Kätzchen sind noch da.\n- Patchy hat 21 Kätzchen geboren.\n- Trixie hat 12 Kätzchen geboren.\n\nAlso insgesamt: 7 + 21 + 12 = 40 Kätzchen.\n\nAber: Die 7 adoptierten Kätzchen sind bereits bei ihnen. Die beiden Hauskatzen haben eigene Kätzchen geboren. Also:\n\n- Die 7 adoptierten Kätzchen sind noch da.\n- Patchy hat 21 Kätzchen geboren.\n- Trixie hat 12 Kätzchen geboren.\n\nAlso insgesamt: 7 + 21 + 12 = 40 Kätzchen.\n\nAber: Die 7 adoptierten Kätzchen sind bereits bei ihnen. Die beiden Hauskatzen haben eigene Kätzchen geboren. Also:\n\n- Die 7 adoptierten Kätzchen sind noch da.\n- Patchy hat 21 Kätzchen geboren.\n- Trixie hat 12 Kätzchen geboren.\n\nAlso insgesamt: 7 + 21 + 12 = 40 Kätzchen.\n\nAber: Die 7 adoptierten Kätzchen sind bereits bei ihnen. Die beiden Hauskatzen haben eigene Kätzchen geboren. Also:\n\n- Die 7 adoptierten Kätzchen sind noch da.\n- Patchy hat 21 Kätzchen geboren.\n- Trixie hat 12 Kätzchen geboren.\n\nAlso insgesamt: 7 + 21 + 12 = 40 Kätzchen.\n\nAber: Die 7 adoptierten Kätzchen sind bereits bei ihnen. Die beiden Hauskatzen haben eigene Kätzchen geboren. Also:\n\n- Die 7 adoptierten Kätzchen sind noch da.\n- Patchy hat 21 Kätzchen geboren.\n- Trixie hat 12 Kätzchen geboren.\n\nAlso insgesamt: 7 + 21 + 12 = 40 Kätzchen.\n\nAber: Die 7 adoptierten Kätzchen sind bereits bei ihnen. Die beiden Hauskatzen haben eigene Kätzchen geboren. Also:\n\n- Die 7 adoptierten Kätzchen sind noch da.\n- Patchy hat 21 Kätzchen geboren.\n- Trixie hat 12 Kätz",
+    "ground_truth": "40",
+    "question_text": "Die Schwestern Doubtfire fahren nach Hause mit 7 Kätzchen, die sie im örtlichen Tierheim adoptiert haben, als ihre Mutter anruft, um ihnen zu sagen, dass ihre beiden Hauskatzen gerade Kätzchen zur Welt gebracht haben. Sie sagt, dass Patchy, die erste Katze, dreimal so viele Kätzchen hat wie die adoptierten, während Trixie, die andere Katze 12 zur Welt gebracht hat. Wie viele Kätzchen haben die Doubtfires jetzt?",
+    "judgement": {
+      "label": "Incorrect",
+      "extracted_answer": "31",
+      "ground_truth": "40",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0055.wav",
+    "tag": "de",
+    "response": "Jean hat 30 Lutscher und isst 2 davon.  \nEs bleiben: 30 - 2 = 28 Lutscher.\n\nEr möchte die verbleibenden Lutscher in Tüten mit jeweils 2 Lutschern füllen.\n\nAnzahl der Tüten: 28 ÷ 2 = 14.\n\nJean kann 14 Tüten füllen.",
+    "ground_truth": "14",
+    "question_text": "Jean hat 30 Lutscher. Jean isst 2 der Lutscher. Die verbleibenden Lutscher möchte Jean in eine Tüte mit jeweils 2 Lutschern stecken. Wie viele Tüten kann Jean füllen?",
+    "judgement": {
+      "label": "Correct",
+      "extracted_answer": "14",
+      "ground_truth": "14",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0056.wav",
+    "tag": "de",
+    "response": "Peter kann insgesamt 3 Mal ins Kino gehen.",
+    "ground_truth": "3",
+    "question_text": "Peter plant, diese Woche ins Kino zu gehen. Er kauft sich immer eine Eintrittskarte für 7 US-Dollar und Popcorn für 7 US-Dollar. Wenn er für die Woche 42 US-Dollar zur Verfügung hat, wie oft kann er dann ins Kino gehen?",
+    "judgement": {
+      "label": "Correct",
+      "extracted_answer": "3",
+      "ground_truth": "3",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0057.wav",
+    "tag": "de",
+    "response": "Die Holzbrücke kann maximal 5000 Pfund tragen.  \nDas Gesamtgewicht des Fahrers und des leeren Lastwagens beträgt 3755 Pfund.  \nDaher bleibt noch ein Gewichtsüberschuss von:  \n5000 - 3755 = 1245 Pfund für die Kisten.\n\nJede Kiste wiegt 15 Pfund.  \nDie maximale Anzahl an Kisten ist daher:  \n1245 ÷ 15 = 83.\n\nDie maximale Anzahl an Kisten beträgt **83**.",
+    "ground_truth": "83",
+    "question_text": "Eine Holzbrücke kann nicht mehr als 5.000 Pfund tragen. Ein Lieferwagen, der identische Kisten geladen hat, von denen jede 15 Pfund wiegt, wird über die Brücke fahren. Das Gesamtgewicht von Fahrer und leerem Lastwagen beträgt 3755 Pfund. Wie hoch ist die maximale Anzahl an Kisten, die der Lastwagen laden kann, ohne die Gewichtsgrenze der Brücke zu überschreiten?",
+    "judgement": {
+      "label": "Correct",
+      "extracted_answer": "83",
+      "ground_truth": "83",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0058.wav",
+    "tag": "de",
+    "response": "40 + 3 + 4 = 47 US-Dollar",
+    "ground_truth": "57",
+    "question_text": "Stephen hat eine Online-Bestellung für Lebensmittel aufgegeben. Die Endabrechnung belief sich auf 40,00 US-Dollar. Da die Lieferung von einem Lieferdienstleister getätigt wurde, haben sie auf die Endabrechnung eine Gebühr von 25 % aufgeschlagen und ihm 3,00 US-Dollar Liefergebühr berechnet. Stephen hat außerdem 4,00 US-Dollar Trinkgeld gegeben. Nach den Extragebühren, wie hoch war der Endpreis für Stephens Lebensmittel?",
+    "judgement": {
+      "label": "Incorrect",
+      "extracted_answer": "47",
+      "ground_truth": "57",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0059.wav",
+    "tag": "de",
+    "response": "187",
+    "ground_truth": "187",
+    "question_text": "Ein Himbeerstrauch hat 6 Trauben mit jeweils 20 Früchten und 67 einzelne Früchte über den Strauch verteilt. Wie viele Himbeeren gibt es insgesamt?",
+    "judgement": {
+      "label": "Correct",
+      "extracted_answer": "187",
+      "ground_truth": "187",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0060.wav",
+    "tag": "de",
+    "response": "25 - 1 (schlecht) - 5 (unreif, da 20 % von 25) - 2 (sauer) = 17",
+    "ground_truth": "17",
+    "question_text": "Ein Korb enthält 25 Orangen, von denen 1 schlecht ist, 20 % unreif und 2 sauer sind und der Rest gut ist. Wie viele Orangen sind gut?",
+    "judgement": {
+      "label": "Correct",
+      "extracted_answer": "17",
+      "ground_truth": "17",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0061.wav",
+    "tag": "de",
+    "response": "Janet zahlte insgesamt 1540 US-Dollar.",
+    "ground_truth": "1430",
+    "question_text": "Janet kauft eine Brosche für ihre Tochter. Sie zahlt 500 US-Dollar für das Material, um sie herzustellen, und weitere 800 US-Dollar für den Juwelier, damit er sie modelliert. Anschließend zahlt sie noch 10 % von diesem Betrag, um sie zu versichern. Wie viel musste sie bezahlen?",
+    "judgement": {
+      "label": "Incorrect",
+      "extracted_answer": "1540",
+      "ground_truth": "1430",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0062.wav",
+    "tag": "de",
+    "response": "Nach 30 Dienstjahren hat der Mitarbeiter 10 volle Dienstjahre nach der 20-Jahres-Marke. Für jedes dieser Jahre erhält er 5 % des vollen Rentenbetrags von 50.000 $.  \n\n10 × 5 % = 50 %  \n\nDaher beträgt die jährliche Rente:  \n50 % × 50.000 $ = 25.000 $  \n\nDie jährliche Rente beträgt **25.000 Dollar**.",
+    "ground_truth": "25000",
+    "question_text": "Nach 40 Dienstjahren erhält ein Mitarbeiter von Marcys Firma eine volle jährliche Rente von 50000 Dollar. Pensionsansprüche entstehen nach 20 Dienstjahren. Für jedes weitere volle Dienstjahr nach der 20-Jahres-Marke verdient der Mitarbeiter 5 % des vollen Rentenbetrags. Wenn Marcy nach genau 30 Dienstjahren ausscheidet, wie hoch wird ihre jährliche Rente in Dollar sein?",
+    "judgement": {
+      "label": "Correct",
+      "extracted_answer": "25.000",
+      "ground_truth": "25000",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0063.wav",
+    "tag": "de",
+    "response": "Für die erste Jahreshälfte zahlt Alina jeden Monat 140 US-Dollar.  \nDas sind 6 Monate × 140 = 840 US-Dollar.\n\nFür die zweite Jahreshälfte zahlt sie 10 % weniger, also:  \n140 × 0,9 = 126 US-Dollar pro Monat.  \n6 Monate × 126 = 756 US-Dollar.\n\nGesamtbetrag: 840 + 756 = **1596 US-Dollar**.",
+    "ground_truth": "1596",
+    "question_text": "Aleena hat einen Streaming-Dienst abonniert, der 140 US-Dollar pro Monat berechnet. Wenn das Streaming-Unternehmen ihr für die erste Jahreshälfte den ursprünglichen Betrag berechnet und dann für die zweite Jahreshälfte 10 % weniger berechnet, berechne den Gesamtbetrag, den sie bis Ende des Jahres für den Streaming-Dienst bezahlt haben wird.",
+    "judgement": {
+      "label": "Correct",
+      "extracted_answer": "1596",
+      "ground_truth": "1596",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0064.wav",
+    "tag": "de",
+    "response": "Sofia kann mit einer einzigen Tankfüllung 300 Meilen fahren.",
+    "ground_truth": "300",
+    "question_text": "Sophia denkt darüber nach, eine Autofahrt mit ihrem Auto zu machen und möchte wissen, wie weit sie mit einem Tank voll Benzin kommen wird. Seit der letzten Tankfüllung ist sie 100 Meilen gefahren, und sie musste 4 Gallonen Benzin nachfüllen, um den Tank wieder ganz aufzufüllen. In der Bedienungsanleitung für ihr Auto steht geschrieben, dass in ihren Tank 12 Gallonen Benzin passen. Wie viele Meilen kann Sophia mit einer einzigen Tankfüllung fahren?",
+    "judgement": {
+      "label": "Correct",
+      "extracted_answer": "300",
+      "ground_truth": "300",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0065.wav",
+    "tag": "de",
+    "response": "Jim schaut 2 Stunden lang TV und liest dann halb so lange, also 1 Stunde. Insgesamt verbringt er pro Mal 2 + 1 = 3 Stunden mit Fernsehen und Lesen.\n\nEr macht das 3 Mal pro Woche, also 3 × 3 = 9 Stunden pro Woche.\n\nIn 4 Wochen sind das 4 × 9 = 36 Stunden.\n\n**Antwort: 36 Stunden.**",
+    "ground_truth": "36",
+    "question_text": "Jim schaut 2 Stunden lang TV und beschließt dann, ins Bett zu gehen und halb so lange zu lesen. Das macht er 3-mal pro Woche. Wie viele Stunden verbringt er in 4 Wochen mit Fernsehschauen und Lesen?",
+    "judgement": {
+      "label": "Correct",
+      "extracted_answer": "36",
+      "ground_truth": "36",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0066.wav",
+    "tag": "de",
+    "response": "4 Schulen × 2 Teams pro Schule = 8 Teams  \n8 Teams × 5 Spieler pro Team = 40 Spieler  \n8 Teams × 1 Trainer pro Team = 8 Trainer  \nGesamt: 40 Spieler + 8 Trainer = 48 Personen",
+    "ground_truth": "48",
+    "question_text": "Vier Schulen treten in einem Basketballturnier gegeneinander an. Jede Schule hat ein Mädchenbasketballteam und ein Jungenbasketballteam geschickt und jedes Team hat 5 Spieler. Alle Schulen haben auch einen Trainer für jedes Team mitgeschickt. Wie viele Personen haben die Schulen insgesamt geschickt?",
+    "judgement": {
+      "label": "Correct",
+      "extracted_answer": "48",
+      "ground_truth": "48",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0067.wav",
+    "tag": "de",
+    "response": "Gegeben:\n\n- Diamanten: 175  \n- Rubine: 35 weniger als Diamanten → 175 − 35 = 140  \n- Smaragde: 2 mal so viele wie Rubine → 2 × 140 = 280  \n\nGesamtzahl der Edelsteine:\n\n175 (Diamanten) + 140 (Rubine) + 280 (Smaragde) = **595**\n\n**Antwort: 595**",
+    "ground_truth": "595",
+    "question_text": "Ein Schatzsucher hat eine vergrabene Schatzkiste mit Edelsteinen gefunden. Es waren 175 Diamanten, 35 weniger Rubine als Diamanten und zweimal so viele Smaragde wie Rubine. Wie viele Edelsteine waren in der Schatzkiste?",
+    "judgement": {
+      "label": "Correct",
+      "extracted_answer": "595",
+      "ground_truth": "595",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0068.wav",
+    "tag": "de",
+    "response": "Es gibt 60 Mädchen und doppelt so viele Jungen, also 120 Jungen. Insgesamt sind es 60 + 120 = 180 Schüler. Da es 5 Schüler pro Lehrer gibt, teilen wir 180 durch 5: 180 ÷ 5 = 36. Es gibt also 36 Lehrer.",
+    "ground_truth": "36",
+    "question_text": "In der Schule von Dr. Wertz gibt es zweimal so viele Jungen wie Mädchen. Wenn es 60 Mädchen und 5 Schüler pro Lehrer gibt, wie viele Lehrer gibt es dann?",
+    "judgement": {
+      "label": "Correct",
+      "extracted_answer": "36",
+      "ground_truth": "36",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0069.wav",
+    "tag": "de",
+    "response": "60 US-Dollar",
+    "ground_truth": "60",
+    "question_text": "Bailey startet mit einem bestimmten Geldbetrag. Dann erhält sie 8 Wochen lang eine wöchentliche Vergütung von 5 US-Dollar. Wenn sie am Ende der 8 Wochen über eine Gesamtsumme von 100 US-Dollar verfügt, hatte Bailey am Anfang wie viel Geld?",
+    "judgement": {
+      "label": "Correct",
+      "extracted_answer": "60",
+      "ground_truth": "60",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0070.wav",
+    "tag": "de",
+    "response": "Judy unterrichtet werktags täglich 5 Tanzkurse und samstags 8 Kurse. Das ergibt in einer Woche:\n\n- Werktags: 5 Kurse/Tag × 5 Tage = 25 Kurse\n- Samstag: 8 Kurse\n- Insgesamt: 25 + 8 = 33 Kurse\n\nJeder Kurs hat 15 Schüler, also:\n\n33 Kurse × 15 Schüler = 495 Schüler\n\nSie verlangt 15 Dollar pro Schüler:\n\n495 Schüler × 15 Dollar = 7425 Dollar\n\nJudy verdient in einer Woche **7425 Dollar**.",
+    "ground_truth": "7425",
+    "question_text": "Judy unterrichtet werktags täglich 5 Tanzkurse und samstags 8 Kurse. Wenn jeder Kurs 15 Schüler hat und sie 15,00 $ pro Schüler verlangt, wie viel Geld verdient sie in einer Woche?",
+    "judgement": {
+      "label": "Correct",
+      "extracted_answer": "7425",
+      "ground_truth": "7425",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0071.wav",
+    "tag": "de",
+    "response": "Kilian muss 60 Anweisungen lesen.",
+    "ground_truth": "60",
+    "question_text": "Kelian hat zwei Kochrezepte, wobei das eine 20 Anweisungen umfasst und das andere zweimal so viele Anweisungen wie das erste. Wie viele Anweisungen muss Kelian lesen, damit er die beiden Rezepte zubereiten kann?",
+    "judgement": {
+      "label": "Correct",
+      "extracted_answer": "60",
+      "ground_truth": "60",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0072.wav",
+    "tag": "de",
+    "response": "Tommy sammelt insgesamt 235 US-Dollar.",
+    "ground_truth": "221",
+    "question_text": "Tommy sammelt für seine Wohltätigkeitsorganisation, indem er Brownies für 3 US-Dollar pro Stück und Käsekuchenstücke für 4 US-Dollar pro Stück verkauft. Wenn Tommy 43 Brownies und 23 Käsekuchenstücke verkauft, wie viel Geld sammelt er dann?",
+    "judgement": {
+      "label": "Incorrect",
+      "extracted_answer": "235",
+      "ground_truth": "221",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0073.wav",
+    "tag": "de",
+    "response": "Zuerst berechnen wir den Gesamtpreis für die fünf Handys:\n\n5 Handys × 150 US-Dollar = 750 US-Dollar\n\nDann berechnen wir die Zinsen pro Handy:\n\n2 % von 150 US-Dollar = 0,02 × 150 = 3 US-Dollar pro Handy\n\nGesamtzinsen für alle Handys:\n\n5 × 3 US-Dollar = 15 US-Dollar\n\nGesamtbetrag einschließlich Zinsen:\n\n750 US-Dollar + 15 US-Dollar = 765 US-Dollar\n\nDieser Betrag wird über drei Monate in Raten bezahlt:\n\n765 US-Dollar ÷ 3 = 255 US-Dollar pro Monat\n\n**Antwort: 255 US-Dollar**",
+    "ground_truth": "255",
+    "question_text": "Shiela hat fünf Handys für 150 US-Dollar pro Stück mit einem Ratenzahlungsvertrag über 3 Monate gekauft. Pro Stück werden 2 % Zinsen verlangt. Wie viel zahlt Shiela jeden Monat 3 Monate lang?",
+    "judgement": {
+      "label": "Correct",
+      "extracted_answer": "255",
+      "ground_truth": "255",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0074.wav",
+    "tag": "de",
+    "response": "Arti verkauft 12 Töpfe Studentenblumen zu 3 Dollar pro Topf, 9 Töpfe Petunien zu 2 Dollar pro Topf und 17 Töpfe Begonien zu 2 Dollar pro Topf.\n\nBerechnung:\n\n- Studentenblumen: 12 × 3 = 36 Dollar  \n- Petunien: 9 × 2 = 18 Dollar  \n- Begonien: 17 × 2 = 34 Dollar  \n\nGesamtverdienst: 36 + 18 + 34 = 88 Dollar\n\nArti wird 88 Dollar verdienen.",
+    "ground_truth": "88",
+    "question_text": "Artie hat einen Blumenstand auf dem Bauernmarkt. Er verkauft drei Arten von Blumen: Studentenblumen, Petunien und Begonien. Normalerweise verkauft er Studentenblumen für 2,74 Dollar pro Topf, Petunien für 1,87 Dollar pro Topf und Begonien für 2,12 Dollar pro Topf. Artie hat heute kein Wechselgeld, deshalb hat er beschlossen, alle seine Preise auf den nächsten Dollar zu runden. Wenn Artie 12 Töpfe Studentenblumen, 9 Töpfe Petunien und 17 Töpfe Begonien verkauft, wie viel Dollar wird er verdienen?",
+    "judgement": {
+      "label": "Correct",
+      "extracted_answer": "88",
+      "ground_truth": "88",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0075.wav",
+    "tag": "de",
+    "response": "Die obere Ebene hat 16 m².  \nDie darunterliegende Ebene hat doppelt so viel, also 32 m².  \nDie nächste Ebene hat 64 m².  \nDie unterste Ebene hat 128 m².\n\nDie Gesamtfläche aller Ebenen beträgt:  \n16 + 32 + 64 + 128 = 240 m².\n\nEs gibt 4 Ebenen, also ist die durchschnittliche Fläche:  \n240 ÷ 4 = 60 m².\n\nDie durchschnittliche Quadratmeterzahl einer Ebene ist **60**.",
+    "ground_truth": "60",
+    "question_text": "Luke verbringt Zeit am Strand und baut Sandburgen. Schließlich stellt er fest, dass jede Ebene einer Sandburg nur halb so viele Quadratmeter hat wie die darunterliegende Ebene. Wenn er eine 4-stöckige Sandburg baut, mit einer oberen Ebene von 16 Quadratmetern, was ist dann die durchschnittliche Quadratmeterzahl einer Ebene?",
+    "judgement": {
+      "label": "Correct",
+      "extracted_answer": "60",
+      "ground_truth": "60",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0076.wav",
+    "tag": "de",
+    "response": "Cecilia verbraucht im ersten Jahr 180 Tassen Futter für die ersten 180 Tage und danach 185 Tassen für die restlichen 185 Tage (365 - 180 = 185), also insgesamt 180 + 185 = 365 Tassen.\n\nDa eine Tüte 110 Tassen enthält, benötigt sie:\n\n365 ÷ 110 = 3,318...\n\nDa sie keine teilweise Tüte kaufen kann, benötigt sie 4 Tüten.\n\nAntwort: 4",
+    "ground_truth": "5",
+    "question_text": "Cecilia hat gerade einen neuen Welpen gekauft. Laut ihrem Tierarzt muss sie den Welpen in den ersten 180 Tagen mit 1 Tasse Hundefutter täglich füttern. Danach muss sie den Welpen mit 2 Tassen Hundefutter täglich für den Rest seines Lebens füttern. Wenn eine Tüte Hundefutter 110 Tassenportionen enthält, wie viele Tüten Hundefutter verbraucht Cecilia dann im ersten Jahr?",
+    "judgement": {
+      "label": "Incorrect",
+      "extracted_answer": "4",
+      "ground_truth": "5",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0077.wav",
+    "tag": "de",
+    "response": "Wenn Sarah 400 Pfund Wäsche wäscht, dann wäscht David 400 / 4 = 100 Pfund Wäsche. Raymond wäscht halb so viel wie Sarah, also 400 / 2 = 200 Pfund Wäsche. Der Unterschied zwischen Raymond und David ist 200 - 100 = 100 Pfund.",
+    "ground_truth": "100",
+    "question_text": "Wenn Raymond halb so viel Wäsche wäscht wie Sarah, und Sarah 4-mal so viel Wäsche wäscht wie David, berechne den Unterschied in der Wäschemenge, die Raymond und David waschen, wenn Sarah 400 Pfund Wäsche wäscht.",
+    "judgement": {
+      "label": "Correct",
+      "extracted_answer": "100",
+      "ground_truth": "100",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0078.wav",
+    "tag": "de",
+    "response": "Vincent kann Blumen in 3er-Packungen für 2,50 US-Dollar oder in 2er-Packungen für 1,00 US-Dollar kaufen.\n\nWir berechnen den Preis pro Blume:\n\n- 3er-Packung: 2,50 $ / 3 ≈ 0,833 $ pro Blume\n- 2er-Packung: 1,00 $ / 2 = 0,50 $ pro Blume\n\nDie 2er-Packungen sind also günstiger.\n\nWir wollen 18 Blumen zum besten Preis kaufen.\n\nDa 2er-Packungen günstiger sind, kauft er am besten 9 Packungen zu je 2 Blumen.\n\nKosten: 9 × 1,00 $ = 9,00 $\n\nWenn er stattdessen die 3er-Packungen nehmen würde:\n\n18 Blumen ÷ 3 = 6 Packungen\n\nKosten: 6 × 2,50 $ = 15,00 $\n\nSparbetrag: 15,00 $ – 9,00 $ = 6,00 $\n\n**Antwort: 6,00 US-Dollar**",
+    "ground_truth": "6",
+    "question_text": "Vincent kann Blumen in 3-er-Packungen für 2,50 US-Dollar oder in 2-er-Packungen für 1 US-Dollar kaufen. Wie viel Geld spart er, wenn der 18 Blumen zum besseren Preis kauft?",
+    "judgement": {
+      "label": "Correct",
+      "extracted_answer": "6,00",
+      "ground_truth": "6",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0079.wav",
+    "tag": "de",
+    "response": "70 US-Dollar",
+    "ground_truth": "70",
+    "question_text": "John adoptiert einen Hund. Er bringt den Hund zum Hundefrisör, was 100 US-Dollar kostet. Der Hundefrisör bietet ihm einen Rabatt von 30 % an, da er Neukunde ist. Wie viel kostet die Sitzung beim Hundefrisör?",
+    "judgement": {
+      "label": "Correct",
+      "extracted_answer": "70",
+      "ground_truth": "70",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0080.wav",
+    "tag": "de",
+    "response": "Zwei Mädchen bekamen jeweils ein Sechstel der 24 Liter Wasser:\n\nEin Sechstel von 24 ist:  \n24 ÷ 6 = 4 Liter\n\nAlso bekam jedes Mädchen 4 Liter → 2 × 4 = 8 Liter\n\nEin Junge bekam 6 Liter.\n\nGesamt verbraucht: 8 + 6 = 14 Liter\n\nVerbleibend: 24 − 14 = 10 Liter\n\n**10 Liter** Wasser blieben übrig.",
+    "ground_truth": "10",
+    "question_text": "Zwei Mädchen bekamen jeweils 1/6 der 24 Liter Wasser. Dann bekam ein Junge 6 Liter Wasser. Wie viele Liter Wasser blieben übrig?",
+    "judgement": {
+      "label": "Correct",
+      "extracted_answer": "10",
+      "ground_truth": "10",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0081.wav",
+    "tag": "de",
+    "response": "Charlie hatte ursprünglich 10 Sticker. Er kaufte 21 Sticker und erhielt 23 Sticker geschenkt. Insgesamt hatte er dann:\n\n10 + 21 + 23 = 54 Sticker.\n\nDann gab er seiner Schwester 9 Sticker und benutzte 28 Sticker zum Dekorieren einer Grußkarte. Insgesamt gab er und benutzte:\n\n9 + 28 = 37 Sticker.\n\nDie Anzahl der verbleibenden Sticker ist:\n\n54 - 37 = 17.\n\nCharlie hat 17 Sticker übrig.",
+    "ground_truth": "17",
+    "question_text": "Charlie hatte 10 Sticker. Er hat 21 Sticker in einem Laden in der Mall gekauft und bekam 23 Sticker zum Geburtstag geschenkt. Dann gab Charlie seiner Schwester 9 der Sticker und benutzte 28 zum Dekorieren einer Grußkarte. Wie viele Sticker hat Charlie übrig?",
+    "judgement": {
+      "label": "Correct",
+      "extracted_answer": "17",
+      "ground_truth": "17",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0082.wav",
+    "tag": "de",
+    "response": "Grace wiegt 125 Pfund.  \nDas Vierfache ihres Gewichts ist:  \n4 × 125 = 500 Pfund.  \n\nAlex wiegt 2 Pfund weniger als das Vierfache:  \n500 − 2 = 498 Pfund.  \n\nZusammen wiegen sie:  \n125 + 498 = 623 Pfund.  \n\n**Antwort: 623 Pfund.**",
+    "ground_truth": "623",
+    "question_text": "Grace wiegt 125 Pfund. Alex wiegt 2 Pfund weniger als das 4-fache des Gewichts von Grace. Wie viel Pfund wiegen sie zusammen?",
+    "judgement": {
+      "label": "Correct",
+      "extracted_answer": "623",
+      "ground_truth": "623",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0083.wav",
+    "tag": "de",
+    "response": "3 × 25 × 8 = 600",
+    "ground_truth": "600",
+    "question_text": "Dan pflanzt 3 Rosenbüsche. Jeder Rosenbusch trägt 25 Rosen. Jede Rose hat 8 Dornen. Wie viele Dornen sind es insgesamt?",
+    "judgement": {
+      "label": "Correct",
+      "extracted_answer": "600",
+      "ground_truth": "600",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0084.wav",
+    "tag": "de",
+    "response": "15",
+    "ground_truth": "15",
+    "question_text": "Ein Fußballteam spielt 22 Spiele. Sie haben 8 mehr gewonnen als verloren. Wie viele haben sie gewonnen?",
+    "judgement": {
+      "label": "Correct",
+      "extracted_answer": "15",
+      "ground_truth": "15",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0085.wav",
+    "tag": "de",
+    "response": "44",
+    "ground_truth": "44",
+    "question_text": "Eugen näht einen Quilt aus alten Souvenir-T-Shirts. Er hat ein T-Shirt von jedem Urlaub, den er gemacht hat. Er fährt jedes Jahr viermal in den Urlaub. Er begann diese Tradition in dem Jahr, in dem er 23 wurde, und hat T-Shirts für jedes Jahr bis zu, aber nicht einschließlich, dem aktuellen Jahr gesammelt, in dem er 34 ist. Wie viele Quilt-Blöcke hat er insgesamt?",
+    "judgement": {
+      "label": "Correct",
+      "extracted_answer": "44",
+      "ground_truth": "44",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0086.wav",
+    "tag": "de",
+    "response": "Gesamt: 10-mal.",
+    "ground_truth": "22",
+    "question_text": "Greg hat einen Wecker gestellt, der dreimal am Tag zur Erinnerung klingelt. Wenn der Wecker losgeht, klingelt er so lange, bis Greg ihn ausschaltet. Als er heute zum ersten Mal losging, hat er viermal geklingelt. Beim zweiten Mal, als er losging, hat er dreimal so lange geklingelt wie beim ersten Mal. Beim dritten Mal hat er halb so lange geklingelt wie beim zweiten Mal. Wie oft hat der Wecker insgesamt geklingelt?",
+    "judgement": {
+      "label": "Incorrect",
+      "extracted_answer": "10",
+      "ground_truth": "22",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0087.wav",
+    "tag": "de",
+    "response": "Nachdem Sylvie drei weitere Jahre gearbeitet hat, beträgt ihr Jahresgehalt 9504 Dollar.",
+    "ground_truth": "9360",
+    "question_text": "Ein Unternehmen zahlt seinen Mitarbeitern ein Einstiegsgehalt von 600 Dollar pro Monat. Die Unternehmenspolitik belohnt langjährige Mitarbeiter: Nach fünf Dienstjahren wird das Gehalt eines Mitarbeiters jedes Jahr erhöht. Diese jährliche Gehaltserhöhung ist immer ein fester Betrag, der als 10 % ihres anfänglichen Jahresgehalts berechnet wird. Wenn Sylvie gerade ihr fünftes Jahr im Unternehmen abgeschlossen hat, wie hoch wird ihr Jahresgehalt sein, nachdem sie drei weitere Jahre gearbeitet hat?",
+    "judgement": {
+      "label": "Incorrect",
+      "extracted_answer": "9504",
+      "ground_truth": "9360",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0088.wav",
+    "tag": "de",
+    "response": "8000",
+    "ground_truth": "8000",
+    "question_text": "Marilyns erste Platte wurde 10-mal so häufig verkauft wie Haralds. Wenn sie zusammen 88.000 Exemplare verkauft haben, hat Harald wie viele Exemplare verkauft?",
+    "judgement": {
+      "label": "Correct",
+      "extracted_answer": "8000",
+      "ground_truth": "8000",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0089.wav",
+    "tag": "de",
+    "response": "16 × 0,75 = 12 erwartete Gäste  \n12 × 2 $ = 24 $",
+    "ground_truth": "24",
+    "question_text": "Christina hat 16 Freunde zu ihrer Geburtstagsfeier eingeladen. Sie erwartet, dass nur 75 % von ihnen kommen werden, also bereitet sie für jeden erwarteten Gast eine Geschenktüte vor. Wenn die Geschenktüten jeweils $2 kosten, wie hoch werden die Gesamtkosten für die Geschenktüten sein?",
+    "judgement": {
+      "label": "Correct",
+      "extracted_answer": "24",
+      "ground_truth": "24",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0090.wav",
+    "tag": "de",
+    "response": "Ted muss 225 Pfund Kartoffelsalat mitbringen.",
+    "ground_truth": "225",
+    "question_text": "Ted der T-Rex plant, Kartoffelsalat zum Dinopicknick mitzubringen. Er weiß, dass ein erwachsener Dinosaurier 10 Pfund Kartoffelsalat isst, und ein Junges halb so viel isst wie ein erwachsenes Tier. Wenn am Picknick 20 Erwachsene und 5 Junge teilnehmen, muss Ted wie viel Kartoffelsalat zum Picknick mitbringen, wenn er die Hoffnung hat, alle satt zu bekommen?",
+    "judgement": {
+      "label": "Correct",
+      "extracted_answer": "225",
+      "ground_truth": "225",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0091.wav",
+    "tag": "de",
+    "response": "18",
+    "ground_truth": "28",
+    "question_text": "Jan hat dreimal so viele Haustiere wie Marcia. Marcia hat zwei Haustiere mehr als Cindy. Wenn Cindy vier Haustiere hat, wie viele Haustiere haben dann alle drei zusammen?",
+    "judgement": {
+      "label": "Incorrect",
+      "extracted_answer": "18",
+      "ground_truth": "28",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0092.wav",
+    "tag": "de",
+    "response": "James ist 10 Jahre alt und ein Jahr jünger als Corey. Das bedeutet, Corey ist 11 Jahre alt.\n\nAmy ist zwei Jahre jünger als Corey, also ist Amy 11 - 2 = 9 Jahre alt.\n\nAmy ist fünf Jahre älter als Jackson, also ist Jackson 9 - 5 = 4 Jahre alt.\n\nJackson ist 4 Jahre alt.",
+    "ground_truth": "4",
+    "question_text": "Emily hat 4 Kinder, die Amy, Jackson, Corey und James heißen. Amy ist 5 Jahre älter als Jackson und 2 Jahre jünger als Corey. Wenn James 10 Jahre alt ist und 1 Jahr jünger als Corey, wie alt ist dann Jackson?",
+    "judgement": {
+      "label": "Correct",
+      "extracted_answer": "4",
+      "ground_truth": "4",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0093.wav",
+    "tag": "de",
+    "response": "40",
+    "ground_truth": "36",
+    "question_text": "Lee konnte die 400 Meter Hürdenlauf zwei Sekunden schneller laufen als Gerald die 400 Meter Hürden läuft. Gerald hat allerdings seine Ernährungsweise umgestellt, wodurch er seine Geschwindigkeit um 10 % verbessert hat. Wenn Lee die 400 Meter Hürden in 38 Sekunden läuft, wie schnell kann dann Gerald, mit seiner verbesserten Ernährungsweise, die 400 Meter Hürden in Sekunden laufen?",
+    "judgement": {
+      "label": "Incorrect",
+      "extracted_answer": "40",
+      "ground_truth": "36",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0094.wav",
+    "tag": "de",
+    "response": "Gegeben:\n\n- Anzahl der Hunde = 60\n- Für jeden Hund gibt es 2 Katzen → Anzahl der Katzen = 2 × 60 = 120\n- Anzahl der Kaninchen ist 12 weniger als die Gesamtzahl der Hunde und Katzen\n\nGesamtzahl der Hunde und Katzen = 60 + 120 = 180  \n→ Anzahl der Kaninchen = 180 − 12 = 168\n\nGesamtzahl aller Haustiere = Hunde + Katzen + Kaninchen  \n= 60 + 120 + 168 = 348\n\n**Antwort: 348**",
+    "ground_truth": "348",
+    "question_text": "In einer Nachbarschaft ist die Anzahl der als Haustiere gehaltenen Kaninchen zwölf weniger als die Gesamtzahl der Hunde und Katzen. Wenn es für jeden Hund zwei Katzen gibt und die Anzahl der Hunde 60 beträgt, wie viele Haustiere gibt es insgesamt in der Nachbarschaft?",
+    "judgement": {
+      "label": "Correct",
+      "extracted_answer": "348",
+      "ground_truth": "348",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0095.wav",
+    "tag": "de",
+    "response": "120",
+    "ground_truth": "40",
+    "question_text": "Von den 200 Fünftklässlern sind 2/5 Jungen und 2/3 der Mädchen sind bei den Pfadfinderinnen. Wie viele Mädchen sind nicht bei den Pfadfinderinnen?",
+    "judgement": {
+      "label": "Incorrect",
+      "extracted_answer": "120",
+      "ground_truth": "40",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0096.wav",
+    "tag": "de",
+    "response": "Harry hat 9 Stunden geschlafen. James schlief nur zwei Drittel dieser Zeit, also:\n\n$$\n\\frac{2}{3} \\times 9 = 6 \\text{ Stunden}\n$$\n\nDie Differenz beträgt:\n\n$$\n9 - 6 = 3 \\text{ Stunden}\n$$\n\nHarry hat also **3 Stunden mehr** geschlafen als James.",
+    "ground_truth": "3",
+    "question_text": "Harry hat letzte Nacht 9 Stunden geschlafen. Sein Freund James schlief nur 2/3 der Zeit, die Harry geschlafen hat. Wie viele Stunden hat Harry mehr geschlafen als James?",
+    "judgement": {
+      "label": "Correct",
+      "extracted_answer": "3",
+      "ground_truth": "3",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0097.wav",
+    "tag": "de",
+    "response": "Da Freda Tomaten in Dosen zu Soße verkocht und dabei die Hälfte an Gewicht verliert, bedeutet das, dass 16 Unzen Tomaten nach dem Kochen 8 Unzen Soße ergeben.\n\nSie erhielt 32 Unzen Soße, also benötigte sie:\n\n32 Unzen Soße ÷ 8 Unzen Soße pro Dose = 4 Dosen\n\nJede Dose enthält 3 Tomaten, also:\n\n4 Dosen × 3 Tomaten = 12 Tomaten\n\nFreda hat 12 Tomaten verbraucht.",
+    "ground_truth": "12",
+    "question_text": "Wenn Freda Tomaten in Dosen zu Soße verkocht, verlieren sie die Hälfte an Gewicht. Jede 16-Unzen-Dose Tomaten, die sie verwendet, enthält drei Tomaten. Die letzte Portion Tomatensoße ergab 32 Unzen Soße. Wie viele Tomaten hat Freda verbraucht?",
+    "judgement": {
+      "label": "Correct",
+      "extracted_answer": "12",
+      "ground_truth": "12",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0098.wav",
+    "tag": "de",
+    "response": "20",
+    "ground_truth": "5",
+    "question_text": "Auf der Autobahn reihen sich Autos aneinander. Einige der Autos fahren in den ersten 15 Minuten des Staus durch, anschließend noch einmal 20 weitere Autos in den verbleibenden 15 Minuten des Staus. 5 Autos scheren aus der Reihe aus, sodass sie nicht durch den Stau fahren müssen. Wenn ursprünglich 30 Autos auf der Autobahn standen, wie viele Autos sind dann in den ersten 15 Minuten durch den Stau gefahren?",
+    "judgement": {
+      "label": "Incorrect",
+      "extracted_answer": "20",
+      "ground_truth": "5",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0099.wav",
+    "tag": "de",
+    "response": "Mary hat 40 Fenstersimse und auf jedem Simse stehen 2 Topfpflanzen. Das ergibt insgesamt:\n\n40 × 2 = 80 Topfpflanzen.\n\nSie hat 18 neue Topfpflanzen bekommen, also hat sie insgesamt:\n\n80 + 18 = 98 Topfpflanzen.\n\nSie verschenkt eine Topfpflanze von jedem Fenstersims, also 40 Pflanzen.\n\nBleiben übrig:\n\n98 − 40 = 58 Topfpflanzen.",
+    "ground_truth": "58",
+    "question_text": "Mary ist Gärtnerin aus Leidenschaft. Gestern hat sie 18 neue Topfpflanzen von ihrer Lieblingsgärtnerei bekommen. Sie hat bereits 2 Topfpflanzen auf jedem der 40 Fenstersimse ihres großen Landhauses stehen. Ihr ist großzügig zumute und sie hat sich entschlossen, dass sie 1 Topfpflanze von jedem Fenstersims morgen an Freunde und Familie verschenken möchte. Wie viele Topfpflanzen bleiben Mary übrig?",
+    "judgement": {
+      "label": "Correct",
+      "extracted_answer": "58",
+      "ground_truth": "58",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0100.wav",
+    "tag": "de",
+    "response": "Zuerst berechnen wir, wie oft jeder Freund geklingelt hat:\n\n1. **Erster Freund**: 20 Mal  \n2. **Zweiter Freund**: 125 % von 20 = \\( 20 \\times 1.25 = 25 \\) Mal  \n3. **Vierter Freund**: 60 Mal  \n4. **Dritter Freund**: 10 Mal öfter als der vierte → \\( 10 \\times 60 = 600 \\) Mal\n\nJetzt addieren wir alle:\n\n\\[\n20 + 25 + 600 + 60 = 705\n\\]\n\nDie Türklingel klingelte insgesamt **705 Mal**.",
+    "ground_truth": "175",
+    "question_text": "Jerome hatte 4 Freunde, die ihn an einem bestimmten Tag besuchten. Der erste Freund drückte 20 Mal auf die Türklingel, bevor Jerome öffnete. Der zweite Freund drückte 125 % so oft auf die Türklingel wie Jeromes erster Freund. Der dritte Freund drückte 10 Mal öfter auf die Türklingel als der vierte Freund. Wenn der vierte Freund 60 Mal auf die Türklingel drückte, wie oft klingelte die Türklingel insgesamt?",
+    "judgement": {
+      "label": "Incorrect",
+      "extracted_answer": "705",
+      "ground_truth": "175",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0101.wav",
+    "tag": "de",
+    "response": "Zuerst berechnen wir die Gesamtanzahl der Seiten, die Solo lesen muss:\n\n- Naturwissenschaft: 4 Seiten  \n- Gemeinschaftskunde: 20 Seiten  \n- Geschichte: 7 Seiten  \n- Geografie: 8 Seiten  \n\nGesamt:  \n4 + 20 + 7 + 8 = 39 Seiten\n\nEr hat bereits am Montag 15 Seiten gelesen, also bleiben noch:  \n39 - 15 = 24 Seiten\n\nEr hat noch 4 Tage Zeit, um die restlichen Seiten zu lesen.  \nDaher muss er pro Tag durchschnittlich:  \n24 ÷ 4 = 6 Seiten lesen.\n\n**Antwort: 6**",
+    "ground_truth": "6",
+    "question_text": "Solo muss 4 Seiten aus seinem naturwissenschaftlichen Textbuch lesen, 20 Seiten aus seinem Gemeinschaftskundebuch, 7 Seiten aus seinem Geschichtsbuch und 8 Seiten aus seinem Geografiebuch. Solo liest am Montag 15 Seiten. Wenn er noch 4 Tage hat, um alles zu lesen, muss er pro Tag im Durchschnitt wie viele Seiten lesen?",
+    "judgement": {
+      "label": "Correct",
+      "extracted_answer": "6",
+      "ground_truth": "6",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0102.wav",
+    "tag": "de",
+    "response": "24",
+    "ground_truth": "26",
+    "question_text": "John trinkt zum Frühstück, zum Mittagessen und Abendessen gern ein Glas Wasser. Zum Abschluss trinkt er auch noch eins vor dem Zubettgehen. John macht das an jedem Wochentag, aber an den Wochenenden entspannt er gern und trinkt zum Abendessen stattdessen ein Glas Limonade. Wie viele Gläser Wasser trinkt John pro Woche?",
+    "judgement": {
+      "label": "Incorrect",
+      "extracted_answer": "24",
+      "ground_truth": "26",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0103.wav",
+    "tag": "de",
+    "response": "140 Minuten",
+    "ground_truth": "140",
+    "question_text": "Ein Nebelschleier kommt vom Meer herüber und legt sich über eine Stadt. Er braucht 10 Minuten, um jeweils 3 Meilen der Stadt zu bedecken. Wenn sich die Stadt vom Meeresufer bis zum gegenüberliegenden Landesinneren über 42 Meilen erstreckt, braucht der Nebelschleier wie viele Minuten, bis er sich über die ganze Stadt gelegt hat?",
+    "judgement": {
+      "label": "Correct",
+      "extracted_answer": "140",
+      "ground_truth": "140",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0104.wav",
+    "tag": "de",
+    "response": "667",
+    "ground_truth": "500",
+    "question_text": "Poppy löst ein 1000-Teile-Puzzle. Sie legt ein Viertel der Teile auf das Brett, dann legt ihre Mama ein Drittel der verbleibenden Teile. Wie viele Puzzleteile müssen noch gelegt werden?",
+    "judgement": {
+      "label": "Incorrect",
+      "extracted_answer": "667",
+      "ground_truth": "500",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0105.wav",
+    "tag": "de",
+    "response": "Cody hat dreimal so viele Kekse wie Amira. Wenn Amira 5 Kekse hat, dann hat Cody 3 × 5 = 15 Kekse. Zusammen essen sie also 5 + 15 = 20 Kekse.",
+    "ground_truth": "20",
+    "question_text": "Cody isst dreimal mehr Kekse als Amir. Wenn Amir 5 Kekse isst, wie viele Kekse essen dann beide zusammen?",
+    "judgement": {
+      "label": "Correct",
+      "extracted_answer": "20",
+      "ground_truth": "20",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0106.wav",
+    "tag": "de",
+    "response": "Die Innenmaße einer Kiste ergeben sich, indem man von den Außenmaßen die Dicke der Wände abzieht. Da die Wände 1 Zoll dick sind, muss man auf jeder Seite 1 Zoll abziehen, also insgesamt 2 Zoll von jeder Dimension.\n\nAußenmaße: 5 Zoll × 6 Zoll × 4 Zoll  \nInnenmaße:  \n(5 - 2) × (6 - 2) × (4 - 2) = 3 × 4 × 2 = 24 Kubikzoll pro Kiste\n\nDrei Kisten:  \n3 × 24 = 72 Kubikzoll\n\nDas Innenvolumen aller drei Kisten zusammen beträgt **72 Kubikzoll**.",
+    "ground_truth": "72",
+    "question_text": "John hat 3 Kisten. Jede Kiste ist 5 Inch mal 6 Inch mal 4 Inch groß. Die Wände sind 1 Inch dick. Wie groß ist das Innenvolumen aller 3 Kisten zusammen?",
+    "judgement": {
+      "label": "Correct",
+      "extracted_answer": "72",
+      "ground_truth": "72",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0107.wav",
+    "tag": "de",
+    "response": "Frankie hat am Mittwoch 3 dreißigminütige Folgen angeschaut.",
+    "ground_truth": "3",
+    "question_text": "Frankie sieht jeden Abend, nachdem er seine Hausaufgaben gemacht hat, fern. Am Montag und am Dienstag hat er jeweils eine 1-stündige Folge seiner Lieblingssendung angeschaut. Am Mittwoch hat er einige Folgen einer 30-minütigen Sendung angeschaut. Am Donnerstag hatte er seine Hausaufgaben früher erledigt und eine 1-stündige Folge und eine 30-minütige Show angeschaut. Am Freitag durfte er wegen des Wochenendes später aufbleiben und hat zwei 1-stündige Folgen angeschaut. Wenn er insgesamt 7 Stunden ferngesehen hat, hat er am Mittwoch wie viele 30 Minuten lange Folgen angeschaut?",
+    "judgement": {
+      "label": "Correct",
+      "extracted_answer": "3",
+      "ground_truth": "3",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0108.wav",
+    "tag": "de",
+    "response": "Henry hat letztes Jahr 50 Kekse gebacken.",
+    "ground_truth": "50",
+    "question_text": "Henry backt Kekse für einen regionalen Backwettbewerb. Er möchte zweimal so viele backen wie letztes Jahr. Als er mit dem Backen fertig ist, bemerkt er, dass er 15 Kekse mehr gebacken hat als er eigentlich wollte. Er lässt 5 seiner Kekse fallen, als er sie zum Kühlen rausstellt und hat jetzt insgesamt 110 Kekse. Wie viele Kekse hat Henry letztes Jahr gebacken?",
+    "judgement": {
+      "label": "Correct",
+      "extracted_answer": "50",
+      "ground_truth": "50",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0109.wav",
+    "tag": "de",
+    "response": "28",
+    "ground_truth": "28",
+    "question_text": "Eine örtliche Tankstelle verkauft Benzin für 3,00 $ pro Gallone.  Eine App-Firma bietet 0,20 $ Cashback pro Gallone, wenn Sie an dieser Tankstelle tanken.  Wenn jemand 10 Gallonen Benzin kauft, wie viel kostet das Benzin nach der Cashback-Prämie? Geben Sie Ihre Antwort in Dollar an.",
+    "judgement": {
+      "label": "Correct",
+      "extracted_answer": "28",
+      "ground_truth": "28",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0110.wav",
+    "tag": "de",
+    "response": "Um den Durchschnitt zu berechnen, müssen wir zuerst die Gesamtmenge der Fruchtrollen bestimmen, die Marcel und Béatrice zusammen haben, und dann durch 2 teilen.\n\nBéatrice hat ein Fruchtröllchen, das 2 Rollen breit und 24 Rollen lang ist.  \nDas bedeutet:  \n$ 2 \\times 24 = 48 $ Rollen.\n\nMarcel hat ein Fruchtröllchen, das 3 Rollen breit und 14 Rollen lang ist.  \nDas bedeutet:  \n$ 3 \\times 14 = 42 $ Rollen.\n\nGesamtmenge:  \n$ 48 + 42 = 90 $ Rollen.\n\nDurchschnitt:  \n$ \\frac{90}{2} = 45 $ Rollen.\n\nAntwort: **45**",
+    "ground_truth": "45",
+    "question_text": "Marcell und Beatrice haben einen Wettbewerb laufen, um zu sehen, wer die meisten Fruchtrollen essen kann, also entrollen sie alle, die sie finden können. Leider macht jemand einen Fehler und das von Beatrice war zwei Rollen breit und 24 Rollen lang, während das von Marcell 3 Rollen breit und 14 Rollen lang war. Wenn beide ihre gesamte Menge essen, haben sie im Durchschnitt wie viele gegessen?",
+    "judgement": {
+      "label": "Correct",
+      "extracted_answer": "45",
+      "ground_truth": "45",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0111.wav",
+    "tag": "de",
+    "response": "Das Boot schluckt 2 Liter Wasser für alle 10 Fuß, die Julia zurück zum Ufer gerudert ist. Julia brauchte 16 Sekunden, um 20 Fuß zu rudern. Der Strand war 64 Sekunden entfernt.\n\nZuerst berechnen wir, wie viele 20-Fuß-Portionen in 64 Sekunden passen:\n\n64 Sekunden ÷ 16 Sekunden = 4 Portionen von 20 Fuß.\n\nAlso ruderte Julia insgesamt 4 × 20 Fuß = 80 Fuß zurück zum Ufer.\n\nFür jede 10 Fuß schluckt das Boot 2 Liter Wasser.\n\n80 Fuß ÷ 10 Fuß = 8 Portionen.\n\n8 × 2 Liter = 16 Liter.\n\nDas Boot hatte 16 Liter Wasser geschluckt, als Julia den Strand erreichte.",
+    "ground_truth": "16",
+    "question_text": "Julias Boot hatte ein Leck als sie auf dem See draußen war. Das Boot hat für alle zehn Fuß, die sie zurück zum Ufer gerudert ist, zwei Liter Wasser geschluckt. Sie brauchte sechzehn Sekunden, um zwanzig Fuß zu rudern. Der Strand war 64 Sekunden entfernt. Wie viel Wasser hatte das Boot geschluckt, als Julia den Strand erreichte?",
+    "judgement": {
+      "label": "Correct",
+      "extracted_answer": "16",
+      "ground_truth": "16",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0112.wav",
+    "tag": "de",
+    "response": "24",
+    "ground_truth": "24",
+    "question_text": "Ein Klassenraum hat eine Tafel, die sich die 4 Lehrer teilen, die den Klassenraum abwechselnd nutzen. Jeder Lehrer hat 2 Unterrichtsstunden pro Tag und nutzt die Tafel in jeder Unterrichtsstunde. Wenn die Tafel 3-mal pro Unterrichtsstunde gewischt wird, wird die Tafel wie oft pro Tag gewischt?",
+    "judgement": {
+      "label": "Correct",
+      "extracted_answer": "24",
+      "ground_truth": "24",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0113.wav",
+    "tag": "de",
+    "response": "Ryan pflanzt pro Tag 2 Blumen. Nach 15 Tagen hat er insgesamt:\n\n15 Tage × 2 Blumen/Tag = 30 Blumen gepflanzt.\n\nDa 5 Blumen nicht angewachsen sind, sind nur:\n\n30 − 5 = 25 Blumen angewachsen.\n\nAntwort: 25",
+    "ground_truth": "25",
+    "question_text": "Ryan pflanzt pro Tag 2 Blumen in seinem Garten. Nach 15 Tagen hat er wie viele Blumen, wenn 5 nicht angewachsen sind?",
+    "judgement": {
+      "label": "Correct",
+      "extracted_answer": "25",
+      "ground_truth": "25",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0114.wav",
+    "tag": "de",
+    "response": "3",
+    "ground_truth": "6",
+    "question_text": "Jamals Handy kann 6-mal mehr Fotos speichern als Brittanys Handy. Die maximale Anzahl an Fotos, die Brittanys Handy speichern kann, ist 50-mal höher als die Anzahl an Vögeln auf Jamals Foto mit den Enten im Zoo. Wenn Jamals Handy 1.800 Fotos speichern kann, sind wie viele Enten auf Jamals Foto von den Enten im Zoo zu sehen?",
+    "judgement": {
+      "label": "Incorrect",
+      "extracted_answer": "3",
+      "ground_truth": "6",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0115.wav",
+    "tag": "de",
+    "response": "Zuerst berechnen wir den Gesamteinkaufspreis:\n\n- 10 Bretter zu je 10 USD:  \n  \\(10 \\times 10 = 100\\) USD\n\n- 5 Bretter zu je 16 USD:  \n  \\(5 \\times 16 = 80\\) USD\n\nGesamteinkaufspreis:  \n\\(100 + 80 = 180\\) USD\n\nDa die Holzpreise um 50 % gestiegen sind, berechnen wir den neuen Verkaufspreis pro Brett:\n\n- Für die 10 Bretter zu 10 USD:  \n  \\(10 \\times 1.5 = 15\\) USD pro Stück  \n  \\(10 \\times 15 = 150\\) USD\n\n- Für die 5 Bretter zu 16 USD:  \n  \\(16 \\times 1.5 = 24\\) USD pro Stück  \n  \\(5 \\times 24 = 120\\) USD\n\nGesamtverkaufserlös:  \n\\(150 + 120 = 270\\) USD\n\nGewinn:  \n\\(270 - 180 = 90\\) USD\n\n**Antwort: 90 USD**",
+    "ground_truth": "90",
+    "question_text": "Sasha bemerkt, dass die Holzpreise um 50 % in den letzten paar Monaten gestiegen sind, seit sie Holz gekauft hat. Da sie einen Rest übrighat, beschließt sie, ihn zu verkaufen. Sie hat zehn 2 x 4 x 10 große Bretter übrig, für die sie pro Stück 10 US-Dollar bezahlt hat. Sie hat auch fünf 4 x 4 x 10 Bretter, die sie für 16 US-Dollar pro Stück gekauft hat. Wenn sie alle verkauft, macht sie wie viel Gewinn?",
+    "judgement": {
+      "label": "Correct",
+      "extracted_answer": "90",
+      "ground_truth": "90",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0116.wav",
+    "tag": "de",
+    "response": "Die Gesamtmenge an Teelöffeln Zucker und Tassen Wasser ist im Verhältnis 7:13 gegeben. Zusammen ergeben sie 120 Einheiten.\n\nDas bedeutet:\n\n7x + 13x = 120  \n20x = 120  \nx = 6\n\nDie Anzahl der Teelöffel Zucker ist 7x = 7 × 6 = **42**.\n\nAntwort: **42**",
+    "ground_truth": "42",
+    "question_text": "Katy bereitet Kaffee zu und verwendet dazu Teelöffel mit Zucker und Tassen mit Wasser im Verhältnis 7:13. Wenn sie insgesamt 120 Teelöffel Zucker und Tassen Wasser verwendet hat, berechne die Anzahl der Teelöffel Zucker, die sie verwendet hat.",
+    "judgement": {
+      "label": "Correct",
+      "extracted_answer": "42",
+      "ground_truth": "42",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0117.wav",
+    "tag": "de",
+    "response": "John hat für jedes seiner drei Kinder zwei Paar Schuhe gekauft, also insgesamt 3 × 2 = 6 Paar Schuhe. Jedes Paar kostet 60 US-Dollar, daher hat er 6 × 60 = 360 US-Dollar bezahlt.",
+    "ground_truth": "360",
+    "question_text": "John kauft 2 Paar Schuhe für jedes seiner 3 Kinder. Sie kosten 60 US-Dollar pro Paar. Wie viel hat er bezahlt?",
+    "judgement": {
+      "label": "Correct",
+      "extracted_answer": "360",
+      "ground_truth": "360",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0118.wav",
+    "tag": "de",
+    "response": "6",
+    "ground_truth": "4",
+    "question_text": "Ein Zollbeamter am Haupthafen der SeaSide Zollabfertigung hat 2 Container mit importierten Autos gezählt, wobei sich in jedem 5 Autos befanden. Am nächsten Tag wurden noch mehr Container geliefert und die Gesamtzahl der Autos am Hafen stieg auf 30. Berechne die Anzahl der Container, die am zweiten Tag importiert wurden, ausgehend davon, dass alle Container 5 Autos enthalten.",
+    "judgement": {
+      "label": "Incorrect",
+      "extracted_answer": "6",
+      "ground_truth": "4",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0119.wav",
+    "tag": "de",
+    "response": "Adrian verdiente vor vier Jahren 40.000 $.  \nSein Gehalt stieg um 40 %, also beträgt sein neues Gehalt:  \n40.000 $ × 1,4 = 56.000 $.  \n\nLaila verdiente damals 30 % weniger als Adrian:  \n40.000 $ × 0,7 = 28.000 $.  \n\nDa beide Gehälter gleichzeitig gestiegen sind, nehmen wir an, dass Laila ebenfalls um 40 % stieg:  \n28.000 $ × 1,4 = 39.200 $.  \n\nGesamtgehalt beider nach vier Jahren:  \n56.000 $ + 39.200 $ = 95.200 $.  \n\nAntwort: 95200",
+    "ground_truth": "95200",
+    "question_text": "Lylahs Gesamtgehalt war 30 Prozent niedriger als das von Adrien. Vier Jahre später war Adriens Gehalt gestiegen, und er verdiente 40 % mehr als das, was er vor vier Jahren verdiente. Wenn Adriens und Lylahs Gehalt gleichzeitig gestiegen sind und Adrien vor vier Jahren $40000 verdient hat, berechnen Sie das Gesamtgehalt, das die beiden vier Jahre später erhielten? Geben Sie die Antwort in Dollar an.",
+    "judgement": {
+      "label": "Correct",
+      "extracted_answer": "95200",
+      "ground_truth": "95200",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0120.wav",
+    "tag": "de",
+    "response": "240",
+    "ground_truth": "240",
+    "question_text": "Miguel verbraucht zum Zeichnen 2 Zeichenblöcke pro Woche. Wenn ein Zeichenblock 30 Blatt Papier hat, wie viele Blatt Papier verbraucht er pro Monat?",
+    "judgement": {
+      "label": "Correct",
+      "extracted_answer": "240",
+      "ground_truth": "240",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0121.wav",
+    "tag": "de",
+    "response": "Mauricette brachte 5 Äpfel und 8 Orangen, also insgesamt 5 + 8 = 13 Früchte.\n\nKarl brachte die doppelte Menge Äpfel: 2 × 5 = 10 Äpfel.  \nUnd halb so viele Orangen wie Mauricette: 8 ÷ 2 = 4 Orangen.  \nAlso brachte Karl 10 + 4 = 14 Früchte.\n\nZusammen brachten sie 13 + 14 = 27 Früchte.\n\nAntwort: 27",
+    "ground_truth": "27",
+    "question_text": "Morisette und Kael wurden gebeten, Obst mitzubringen. Morisette brachte 5 Äpfel und 8 Orangen mit, und Kael brachte die doppelte Menge an Äpfeln und halb so viele Orangen wie Morisette mit. Wie viele Früchte haben sie insgesamt?",
+    "judgement": {
+      "label": "Correct",
+      "extracted_answer": "27",
+      "ground_truth": "27",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0122.wav",
+    "tag": "de",
+    "response": "Sadie hat am Montag 8 Stunden geschlafen. An den nächsten beiden Tagen schlief sie jeweils 2 Stunden weniger, also 6 Stunden pro Tag. In den restlichen drei Tagen der Woche schlief sie jeweils eine Stunde mehr als an diesen beiden Tagen, also 7 Stunden pro Tag.\n\nBerechnung:\n\n- Montag: 8 Stunden  \n- Dienstag und Mittwoch: 6 Stunden × 2 = 12 Stunden  \n- Donnerstag, Freitag, Samstag: 7 Stunden × 3 = 21 Stunden  \n\nGesamt: 8 + 12 + 21 = 41 Stunden\n\nSadie hat in der Woche insgesamt **41 Stunden** geschlafen.",
+    "ground_truth": "48",
+    "question_text": "Sadie hat am Montag 8 Stunden geschlafen. An den nächsten beiden Tagen schlief sie 2 Stunden weniger pro Tag, da sie einige Aufgaben zu erledigen hatte. Wenn sie den Rest der Woche über 1 Stunde mehr als an diesen beiden Tagen geschlafen hat, hat sie wie viele Stunden in der Woche insgesamt geschlafen?",
+    "judgement": {
+      "label": "Incorrect",
+      "extracted_answer": "41",
+      "ground_truth": "48",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0123.wav",
+    "tag": "de",
+    "response": "Rosie läuft 3 Stunden lang mit 10 Meilen pro Stunde, also legt sie in dieser Zeit:\n\n3 Stunden × 10 Meilen/Stunde = 30 Meilen\n\nSie läuft insgesamt 7 Stunden, also verbleiben noch:\n\n7 − 3 = 4 Stunden\n\nIn diesen 4 Stunden läuft sie mit 5 Meilen pro Stunde:\n\n4 Stunden × 5 Meilen/Stunde = 20 Meilen\n\nInsgesamt legt sie also zurück:\n\n30 Meilen + 20 Meilen = 50 Meilen\n\n**Antwort: 50 Meilen**",
+    "ground_truth": "50",
+    "question_text": "Rosie kann 3 Stunden lang mit 10 Meilen pro Stunde laufen. Danach läuft sie 5 Meilen pro Stunde. Wie viele Meilen kann sie in 7 Stunden zurücklegen?",
+    "judgement": {
+      "label": "Correct",
+      "extracted_answer": "50",
+      "ground_truth": "50",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0124.wav",
+    "tag": "de",
+    "response": "20",
+    "ground_truth": "10",
+    "question_text": "Jennie hilft im Büro ihrer Mutter. Sie hat einen Stapel mit 60 Briefen, die frankiert werden müssen und einen bereits frankierten Briefstapel. Sie klebt Briefmarken auf ein Drittel der Briefe, die frankiert werden müssen. Wenn sich jetzt in dem Stapel mit den bereits frankierten Briefen 30 Briefe befinden, waren wie viele Briefe in dem Stapel, als Jennie angefangen hat?",
+    "judgement": {
+      "label": "Incorrect",
+      "extracted_answer": "20",
+      "ground_truth": "10",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0125.wav",
+    "tag": "de",
+    "response": "Julia hatte ursprünglich keine Löffel mehr. Ihr Mann kaufte 5 neue Löffel. Während der Zubereitung benutzte sie 3 Löffel zum Probieren. Am Ende hatte sie 12 Löffel. Das bedeutet, dass die Packung, die Julia gekauft hatte, 12 - 5 + 3 = 10 Löffel enthielt.\n\nAntwort: 10",
+    "ground_truth": "10",
+    "question_text": "Julia hat sich auf eine Dinnerparty in ihrem Haus vorbereitet, bei der sie Eintopf servieren wollte. Sie bemerkte, dass sie keine Plastiklöffel mehr hatte, also kaufte sie eine neue Packung Löffel. Später kaufte auch ihr Mann eine Packung mit 5 neuen Löffeln und gab sie Julia. Während Julia den Eintopf vorbereitete, benutzte sie drei der Löffel zum Probieren der Suppe. Später, als sie den Tisch deckte, hatte sie insgesamt 12 Löffel. Wie viele Löffel waren in der Packung, die Julia gekauft hat?",
+    "judgement": {
+      "label": "Correct",
+      "extracted_answer": "10",
+      "ground_truth": "10",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0126.wav",
+    "tag": "de",
+    "response": "Dylan hat insgesamt 82 Würstchen gekauft.",
+    "ground_truth": "82",
+    "question_text": "Dylan brauchte Geflügelwürstchen und Fischwürstchen, um bei einer Party Wurstbrötchen zuzubereiten. Er hat 38 Geflügelwürstchen und 6 mehr Fischwürstchen als Geflügelwürstchen gekauft. Wie viele Würstchen hat Dylan insgesamt gekauft?",
+    "judgement": {
+      "label": "Correct",
+      "extracted_answer": "82",
+      "ground_truth": "82",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0127.wav",
+    "tag": "de",
+    "response": "70",
+    "ground_truth": "120",
+    "question_text": "Nach Versetzung in eine neue Schule fand Amy 20 Freunde mehr als Lily. Wenn Lily 50 Freunde fand, wie viele Freunde haben Lily und Amy dann zusammen?",
+    "judgement": {
+      "label": "Incorrect",
+      "extracted_answer": "70",
+      "ground_truth": "120",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0128.wav",
+    "tag": "de",
+    "response": "Gegeben:  \n- Eine Paprika kostet $15.  \n- Eine Wassermelone kostet dreimal so viel wie eine Paprika → $3 \\times 15 = 45$.  \n- Eine Orange kostet $5 weniger als eine Wassermelone → $45 - 5 = 40$.  \n\nDylan kauft:  \n- 4 Wassermelonen → $4 \\times 45 = 180$  \n- 20 Paprikas → $20 \\times 15 = 300$  \n- 10 Orangen → $10 \\times 40 = 400$  \n\nGesamtbetrag:  \n$180 + 300 + 400 = 880$\n\n**Antwort: 880**",
+    "ground_truth": "880",
+    "question_text": "Wells Mutter verkauft Wassermelonen, Paprika und Orangen im örtlichen Geschäft. Eine Wassermelone kostet dreimal so viel wie eine Paprika. Eine Orange kostet 5$ weniger als eine Wassermelone. Dillon wird in den Laden geschickt, um 4 Wassermelonen, 20 Paprika und 10 Orangen zu kaufen. Wie hoch ist der Gesamtbetrag in Dollar, den er ausgeben wird, wenn jede Paprika 15$ kostet?",
+    "judgement": {
+      "label": "Correct",
+      "extracted_answer": "880",
+      "ground_truth": "880",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0129.wav",
+    "tag": "de",
+    "response": "Zuerst berechnen wir die Gesamtzeit, die die Ärzte pro Tag benötigen:\n\n500 Patienten × 24 Minuten = 12.000 Minuten  \n12.000 Minuten ÷ 60 = 200 Stunden\n\nDie Ärzte berechnen dem Krankenhaus 150 $ pro Stunde, also:\n\n200 Stunden × 150 $ = 30.000 $ (Kosten für das Krankenhaus)\n\nDas Krankenhaus berechnet den Patienten 200 $ pro Stunde, also:\n\n200 Stunden × 200 $ = 40.000 $ (Einnahmen für das Krankenhaus)\n\nGewinn = Einnahmen – Kosten  \nGewinn = 40.000 $ – 30.000 $ = 10.000 $\n\nDas Krankenhaus macht einen Gewinn von **10.000 $**.",
+    "ground_truth": "10000",
+    "question_text": "In einem Krankenhaus werden 500 Personen pro Tag untersucht. Jeder Patient wird durchschnittlich 24 Minuten lange untersucht. Die Ärzte berechnen dem Krankenhaus 150 $ pro Stunde, und das Krankenhaus berechnet den Patienten 200 $ pro Stunde. Wie viel Gewinn macht das Krankenhaus mit diesen Konsultationen?",
+    "judgement": {
+      "label": "Correct",
+      "extracted_answer": "10.000",
+      "ground_truth": "10000",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0130.wav",
+    "tag": "de",
+    "response": "60 - (60 / 3) = 40  \n40 - 10 = 30  \n\nAntwort: 30",
+    "ground_truth": "30",
+    "question_text": "Nissa stellt 60 Saisonarbeiter ein, damit sie im Weihnachtsdorf ihres Kaufhauses die Elfen spielen. Ein Drittel der Elfen kündigt, nachdem Kinder sich auf ihnen übergeben, dann kündigen 10 der verbleibenden Elfen, nachdem Kinder sie ins Schienbein treten. Wie viele Elfen sind noch übrig?",
+    "judgement": {
+      "label": "Correct",
+      "extracted_answer": "30",
+      "ground_truth": "30",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0131.wav",
+    "tag": "de",
+    "response": "1040",
+    "ground_truth": "940",
+    "question_text": "Im Mai lagen die Ausgaben von Joseph bei 500 $. Im Juni waren seine Ausgaben 60 $ geringer. Wie hoch waren seine Gesamtausgaben in diesen beiden Monaten?",
+    "judgement": {
+      "label": "Incorrect",
+      "extracted_answer": "1040",
+      "ground_truth": "940",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0132.wav",
+    "tag": "de",
+    "response": "Pam fuhr 2 Mal mit der Achterbahn und 2 Mal mit dem Schlitten, also 4 Fahrten.  \nFred fuhr 4 Mal mit der Achterbahn und 2 Mal mit dem Schlitten, also 6 Fahrten.  \n\nInsgesamt: 4 + 6 = 10 Fahrten.  \n\nJede Fahrt kostet 6 Karten:  \n10 × 6 = 60 Karten.  \n\nSie haben 60 Karten verbraucht.",
+    "ground_truth": "60",
+    "question_text": "Pam und Fred gingen auf einen Jahrmarkt. Pam fuhr 2 Mal mit der Achterbahn, Fred hingegen 4 Mal. Danach beschloss jeder von ihnen, 2 Mal mit dem Schlitten zu fahren. Wenn jede Fahrt 6 Karten kostet, wie viele Karten haben Sie dann an diesem Tag verbraucht?",
+    "judgement": {
+      "label": "Correct",
+      "extracted_answer": "60",
+      "ground_truth": "60",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0133.wav",
+    "tag": "de",
+    "response": "Am Montag lief Walt 4 Meilen.  \nAm Dienstag lief er 6 mal so viele Meilen wie am Montag:  \n6 × 4 = 24 Meilen.  \n\nGesamte Strecke von Montag bis Mittwoch: 41 Meilen.  \nStrecke am Mittwoch:  \n41 − (4 + 24) = 41 − 28 = 13 Meilen.\n\n**Antwort: 13 Meilen.**",
+    "ground_truth": "13",
+    "question_text": "Am Montag lief Walt 4 Meilen. Am Dienstag lief er sechsmal so viele Meilen wie am Montag. Seine gesamte Strecke von Montag bis Mittwoch betrug 41 Meilen. Wie viele Meilen lief er am Mittwoch?",
+    "judgement": {
+      "label": "Correct",
+      "extracted_answer": "13",
+      "ground_truth": "13",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0134.wav",
+    "tag": "de",
+    "response": "Tom bezahlt 780 Dollar in einem Jahr.",
+    "ground_truth": "720",
+    "question_text": "Tom leistet sich 4 Autowäschen pro Monat. Wenn jede Autowäsche 15 $ kostet, wie viel bezahlt er dann in einem Jahr?",
+    "judgement": {
+      "label": "Incorrect",
+      "extracted_answer": "780",
+      "ground_truth": "720",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0135.wav",
+    "tag": "de",
+    "response": "Brian hatte ursprünglich 20 Videospiele, verlor aber 5, sodass er noch 15 hatte.  \nBobby hat 5 Videospiele weniger als dreimal so viele wie Brian.\n\nDreimal so viele wie Brian:  \n3 × 15 = 45\n\nBobby hat 5 weniger:  \n45 − 5 = 40\n\nBobby hat also **40 Videospiele**.",
+    "ground_truth": "40",
+    "question_text": "Brians Freund Bobby hat 5 Videospiele weniger als 3 Mal so viele wie Brian. Wenn Brian 20 Videospiele hat, aber davon 5 verlor, kurz bevor der Vergleich angestellt wurde, wie viele hat Bobby dann?",
+    "judgement": {
+      "label": "Correct",
+      "extracted_answer": "40",
+      "ground_truth": "40",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0136.wav",
+    "tag": "de",
+    "response": "9",
+    "ground_truth": "6",
+    "question_text": "Es gibt noch 27 Einhörner auf der Welt. Ein Drittel davon befindet sich im schottischen Hochland. Zwei Drittel der schottischen Einhörner sind Weibchen. Wie viele schottische Einhorn-Weibchen gibt es?",
+    "judgement": {
+      "label": "Incorrect",
+      "extracted_answer": "9",
+      "ground_truth": "6",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0137.wav",
+    "tag": "de",
+    "response": "Zuerst berechnen wir den Grundbetrag der Bestellung:\n\n- 2 Jumbo-Sandwiches à 7,50 $:  \n  \\( 2 \\times 7,50 = 15,00 \\) $\n\n- 2 Tüten Chips à 1,50 $:  \n  \\( 2 \\times 1,50 = 3,00 \\) $\n\n- 2 Kekse à 1,00 $:  \n  \\( 2 \\times 1,00 = 2,00 \\) $\n\n**Summe der Bestellung:**  \n\\( 15,00 + 3,00 + 2,00 = 20,00 \\) $\n\nDann fügen wir die 20 % Liefergebühr hinzu:  \n\\( 20,00 \\times 0,20 = 4,00 \\) $\n\n**Betrag nach Liefergebühr:**  \n\\( 20,00 + 4,00 = 24,00 \\) $\n\nZuletzt addieren wir das Trinkgeld von 5,00 $:  \n\\( 24,00 + 5,00 = 29,00 \\) $\n\n**Der gesamte Lieferauftrag kostet 29,00 $**.",
+    "ground_truth": "29",
+    "question_text": "Rory bestellt 2 Jumbo-Sandwiches für je 7,50 $, 2 Tüten Chips für 1,50 $ und 2 Kekse für 1,00 $, jeweils zur Lieferung. An der Kasse werden 20 % Liefergebühr addiert, und sie will 5,00 $ Trinkgeld addieren. Wie viel wird ihr Lieferauftrag kosten?",
+    "judgement": {
+      "label": "Correct",
+      "extracted_answer": "29,00",
+      "ground_truth": "29",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0138.wav",
+    "tag": "de",
+    "response": "Mark beantwortete im ersten Test 8 Stunden × 5 Fragen/Stunde = 40 Fragen.  \nEr hatte 75 Fragen, also ließ er 75 − 40 = 35 Fragen unvollständig.\n\nIm zweiten Test beantwortete er 6 Stunden × 5 Fragen/Stunde = 30 Fragen.  \nEr hatte 100 Fragen, also ließ er 100 − 30 = 70 Fragen unvollständig.\n\nInsgesamt ließ er 35 + 70 = 105 Fragen unvollständig.",
+    "ground_truth": "105",
+    "question_text": "Mark machte gestern einen Test, der aus 75 Fragen bestand. Er vervollständigte den Test mit einer Geschwindigkeit von 5 Fragen pro Stunde. Heute machte er einen anderen Test mit 100 Fragen in der gleichen Geschwindigkeit. Wenn Mark 8 Stunden Zeit hatte, um den ersten, und 6 Stunden, um den zweiten Test zu vervollständigen, wie viele Fragen ließ er dann unvollständig?",
+    "judgement": {
+      "label": "Correct",
+      "extracted_answer": "105",
+      "ground_truth": "105",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0139.wav",
+    "tag": "de",
+    "response": "22 + 4 × 12 = 22 + 48 = 70",
+    "ground_truth": "70",
+    "question_text": "In einem Kaugummiautomaten gibt es 22 rosa Kaugummikugeln mehr als das Vierfache der Anzahl blauer Kaugummikugeln. Wenn es 12 blaue Kaugummikugeln gibt, wie viele Rosafarbene gibt es dann?",
+    "judgement": {
+      "label": "Correct",
+      "extracted_answer": "70",
+      "ground_truth": "70",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0140.wav",
+    "tag": "de",
+    "response": "Die Anzahl der Halbautomaten beträgt 20 - 12 - 4 = 4.\n\nProzentual sind das: (4 / 20) * 100 = 20 %.\n\nAntwort: 20",
+    "ground_truth": "20",
+    "question_text": "Von den 20 verfügbaren Mietwagen sind 12 Automatikwagen, 4 Wagen mit Handschaltung und der Rest Halbautomaten. Wie viel Prozent der Autos sind Halbautomaten?",
+    "judgement": {
+      "label": "Correct",
+      "extracted_answer": "20",
+      "ground_truth": "20",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0141.wav",
+    "tag": "de",
+    "response": "Es gibt 400 Arbeiterbienen.",
+    "ground_truth": "400",
+    "question_text": "Es gibt 700 Bienen in einem Bienenstock. Es gibt zwei Mal so viele Arbeiterbienen wie Babybienen, und es gibt zweimal so viele Babys wie Königinnen. Wie viele Arbeiterbienen gibt es?",
+    "judgement": {
+      "label": "Correct",
+      "extracted_answer": "400",
+      "ground_truth": "400",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0142.wav",
+    "tag": "de",
+    "response": "Jordan spielt jeden Tag 2 Stunden Videospiele. Wenn er diese Zeit stattdessen arbeitet, verdient er pro Stunde 10 Dollar.\n\n2 Stunden pro Tag × 7 Tage = 14 Stunden pro Woche  \n14 Stunden × 10 Dollar = 140 Dollar\n\nJordan würde in einer Woche 140 Dollar verdienen.",
+    "ground_truth": "140",
+    "question_text": "Jordan spielt jeden Tag 2 Stunden Videospiele. Er hat auch einen Teilzeitjob, bei dem er 10 $ pro Stunde verdient. Wie viel Geld würde Jordan in einer Woche verdienen, wenn er seine Videospielzeit mit Arbeit verbrächte?",
+    "judgement": {
+      "label": "Correct",
+      "extracted_answer": "140",
+      "ground_truth": "140",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0143.wav",
+    "tag": "de",
+    "response": "Die nicht-Lebensmittelartikel sind Glühbirnen, Tassen und Kakerlakenfallen. Ihre Gesamtkosten betragen 3 + 3 + 4 = 10 Dollar. Auf diese wird eine 10%-Steuer erhoben, also 10 × 0,10 = 1 Dollar Steuern. Die Gesamtkosten betragen dann 10 + 1 = 11 Dollar für die nicht-Lebensmittelartikel. Die Lebensmittel (Milch und Eier) kosten 2 + 3 = 5 Dollar und unterliegen keiner Steuer. Insgesamt kostet alles 5 + 11 = 16 Dollar.",
+    "ground_truth": "16",
+    "question_text": "John kauft Milch für 2 Dollar, Eier für 3 Dollar, Glühbirnen für 3 Dollar, Tassen für 3 Dollar und Kakerlakenfallen für 4 Dollar. Wenn es 10 % Steuer auf alle Non-Food-Artikel gibt, sind die Kosten wie hoch.",
+    "judgement": {
+      "label": "Correct",
+      "extracted_answer": "16",
+      "ground_truth": "16",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0144.wav",
+    "tag": "de",
+    "response": "Kim hat insgesamt 3 + 5 = 8 Kunden.\n\nFür jedes Haus werden benötigt:\n- 2 Flaschen Bleichmittel à $2 → 2 × $2 = $4\n- 1 Packung Tücher à $5 → $5\n\nGesamtkosten pro Kunden: $4 + $5 = $9\n\nGesamtausgaben für 8 Kunden: 8 × $9 = $72\n\nGesamteinkommen: $92\n\nGewinn = Einkommen − Ausgaben = $92 − $72 = $20\n\nKim wird jede Woche $20 Gewinn machen.",
+    "ground_truth": "20",
+    "question_text": "Kim hat sein eigenes Reinigungsunternehmen gegründet und berechnet, wie viel Gewinn er mit seinen Kunden machen wird. Er hat bereits 3 Kunden, aber er spricht mit weiteren 5 potenziellen Kunden und fühlt sich zuversichtlich genug, um sie in seine Berechnungen einzubeziehen. Für das Haus jedes Kunden werden 2 Flaschen Bleichmittel und eine Packung Tücher zum Reinigen benötigt. Flaschen Bleichmittel kosten jeweils 2 Dollar und Packungen Tücher kosten jeweils 5 Dollar. Dies sind seine einzigen Ausgaben. Er berechnet, dass sein Gesamteinkommen jede Woche 92 Dollar betragen wird. Der Gewinn ist die Differenz zwischen dem Gesamteinkommen und den Gesamtausgaben. Wie viel Gewinn in Dollar wird Kim jede Woche machen?",
+    "judgement": {
+      "label": "Correct",
+      "extracted_answer": "20",
+      "ground_truth": "20",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0145.wav",
+    "tag": "de",
+    "response": "400",
+    "ground_truth": "4000",
+    "question_text": "John hat ein 10 Hektar Ananasfeld. Es gibt 100 Ananas pro Hektar. John kann seine Ananas alle 3 Monate ernten. Wie viele Ananas kann John innerhalb eines Jahres ernten?",
+    "judgement": {
+      "label": "Incorrect",
+      "extracted_answer": "400",
+      "ground_truth": "4000",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0146.wav",
+    "tag": "de",
+    "response": "500 + 3 × 500 + 1/4 × 500 = 500 + 1500 + 125 = 2125",
+    "ground_truth": "2125",
+    "question_text": "Johnny hebt gerade das Spielzeug auf dem Boden seines Zimmers auf. Er hat einen verpackten Lego-Bausatz mit 500 Teilen auf den Boden geschüttet und einen anderen, der 3 Mal so viele Teile hatte wie der 500-teilige, und einen anderen, der 1/4 der Anzahl Teile hatte. Wie viele Klötze hebt Johnny auf, wenn er alle Legosteine aufhebt?",
+    "judgement": {
+      "label": "Correct",
+      "extracted_answer": "2125",
+      "ground_truth": "2125",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0147.wav",
+    "tag": "de",
+    "response": "In den ersten sechs Stunden verlassen 30 Bienen den Bienenstock.  \nIn den nächsten sechs Stunden kehren halb so viele zurück, also 15 Bienen.  \nIn den darauffolgenden sechs Stunden verlassen doppelt so viele wie zuerst den Stock, also 2 × 30 = 60 Bienen.  \n\nBisher sind also 30 + 60 = 90 Bienen weggeflogen, davon sind 15 zurückgekehrt.  \nSomit sind noch 90 − 15 = 75 Bienen weg und nicht zurückgekehrt.  \n\nIn den letzten sechs Stunden kehren alle diese 75 Bienen zurück.  \n\n**Antwort: 75**",
+    "ground_truth": "75",
+    "question_text": "Debra beobachtet gerade einen Bienenstock, um zu sehen, wie viele Bienen pro Tag kommen und gehen. In den ersten 6 Stunden sieht sie 30 Bienen den Bienenstock verlassen und in den nächsten 6 Stunden sieht sie dann 1/2 so viele Bienen zurückkehren. In den nächsten 6 Stunden sieht sie doppelt so viele Bienen den Bienenstock verlassen, wie sie zuerst den Bienenstock verlassen sah. Jede Biene, die davor weggeflogen und noch nicht zurückgekehrt war, kehrte dann in den nächsten 6 Stunden in den Bienenstock zurück. Wie viele Bienen sah Debra in den letzten 6 Stunden des Tages in den Bienenstock zurückkehren?",
+    "judgement": {
+      "label": "Correct",
+      "extracted_answer": "75",
+      "ground_truth": "75",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0148.wav",
+    "tag": "de",
+    "response": "22",
+    "ground_truth": "30",
+    "question_text": "Brittany und ihre Mutter gehen ins Museum. Der Eintrittspreis beträgt 12 $ für Erwachsene und 10 $ für Kinder. Brittanys Mutter gibt dem Kassierer Geld für 1 Kinderkarte und 1 Erwachsenenkarte. Wenn sie 8 $ Wechselgeld bekam, wie viel Geld hatte sie dann dem Kassierer in Dollar gegeben?",
+    "judgement": {
+      "label": "Incorrect",
+      "extracted_answer": "22",
+      "ground_truth": "30",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0149.wav",
+    "tag": "de",
+    "response": "16",
+    "ground_truth": "16",
+    "question_text": "Charlie hat drei Mal so viele Facebook-Freunde wie Dorothy. James hat vier Mal so viele Freunde auf Facebook wie Dorothy. Wenn Charlie 12 Freunde auf Facebook hat, wie viele Facebook-Freunde hat dann James?",
+    "judgement": {
+      "label": "Correct",
+      "extracted_answer": "16",
+      "ground_truth": "16",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0150.wav",
+    "tag": "de",
+    "response": "Zuerst berechnen wir die Zeit, die Steve und Tim benötigen, um nach Hause zu gelangen.\n\n**Umrechnung von Meilen in Fuß:**\n1 Meile = 5280 Fuß\n\n- Steve wohnt 3 Meilen entfernt:  \n  \\( 3 \\times 5280 = 15840 \\) Fuß\n\n- Tim wohnt 2 Meilen entfernt:  \n  \\( 2 \\times 5280 = 10560 \\) Fuß\n\n**Geschwindigkeiten:**\n- Steve: 440 Fuß pro Minute\n- Tim: 264 Fuß pro Minute\n\n**Zeit berechnen:**\n\n- Steve:  \n  \\( \\frac{15840}{440} = 36 \\) Minuten\n\n- Tim:  \n  \\( \\frac{10560}{264} = 40 \\) Minuten\n\nSteve braucht 36 Minuten, Tim 40 Minuten.\n\nDer Gewinner ist Steve. Er wartet also \\( 40 - 36 = 4 \\) Minuten.\n\n**Antwort: 4 Minuten**",
+    "ground_truth": "4",
+    "question_text": "Steve und Tim beschließen herauszufinden, wer schneller von der Schule zu Hause ist. Steve wohnt weiter entfernt als Tim, darum darf er mit seinem Fahrrad fahren. Steve wohnt 3 Meilen von der Schule entfernt und kann mit dem Fahrrad 440 Fuß pro Minute zurücklegen. Tim wohnt 2 Meilen von der Schule entfernt. Wenn Tim mit seinem Skateboard 264 Fuß pro Minute zurücklegt, wie lang wartet der Gewinner dann bei sich zu Hause, bevor der Verlierer das Rennen beendet?",
+    "judgement": {
+      "label": "Correct",
+      "extracted_answer": "4",
+      "ground_truth": "4",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0151.wav",
+    "tag": "de",
+    "response": "$5.00",
+    "ground_truth": "5",
+    "question_text": "Shawnda beschließt, dass die Kinder in ihrer Nachbarschaft wirklich einen Fahrrad-Aufpump-Service gebrauchen könnten. Sie beschließt, dass pro Reifen abzurechnen, die beste Methode ist. Jeder Reifen kostet 25 Cent, um ihn aufzupumpen. Am ersten Tag kamen 5 Personen auf Fahrrädern vorbei, um beide Reifen aufpumpen zu lassen. 3 Personen kamen vorbei, um alle ihre Dreiradreifen aufpumpen zu lassen. Schließlich kam tatsächlich eine Person auf einem Einrad vorbei. Wie viel Dollar hat sie an diesem Tag verdient?",
+    "judgement": {
+      "label": "Correct",
+      "extracted_answer": "5.00",
+      "ground_truth": "5",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0152.wav",
+    "tag": "de",
+    "response": "Carl kauft 10 Kekspackungen, in jeder sind 6 Kekse → insgesamt 10 × 6 = 60 Kekse.  \nJeder Keks kostet 0,10 $ → Gesamtkosten: 60 × 0,10 = 6,00 $.  \nEr bezahlt mit einer 10 $-Note → Wechselgeld: 10,00 − 6,00 = 4,00 $.  \n\nAntwort: 4,00 $",
+    "ground_truth": "4",
+    "question_text": "Carl kauft zehn Kekspackungen. In jeder Kekspackung sind sechs Kekse. Jeder Keks kostest 0,10 $. Wie viel Wechselgeld bekommt Carl, wenn er mit einer 10$-Note bezahlt?",
+    "judgement": {
+      "label": "Correct",
+      "extracted_answer": "4,00",
+      "ground_truth": "4",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0153.wav",
+    "tag": "de",
+    "response": "Wir gehen Schritt für Schritt rückwärts, um herauszufinden, wie viele Pommes Frites ursprünglich in der Packung waren.\n\n---\n\n**Schritt 1: Letzter Zustand**\n\nAm Ende liegen **5 Pommes Frites** zurück, nachdem Ameisen **1 Pommes Frite** weggetragen haben.\n\nAlso vorher:  \n5 + 1 = **6 Pommes Frites** blieben übrig, bevor die Ameisen kamen.\n\n---\n\n**Schritt 2: Was der Waschbär geklaut hat**\n\nDer Waschbär klaute **2/3 der verbleibenden Pommes**, also blieben **1/3** übrig.\n\nDie 6 Pommes, die wir gerade berechnet haben, sind also **1/3** der Pommes vor dem Waschbärs-Überfall.\n\nAlso war vorher:  \n6 × 3 = **18 Pommes Frites**\n\n---\n\n**Schritt 3: Die Tauben**\n\nDrei Tauben verdrängten die Möwe und aßen jeweils 3 Pommes.\n\nAlso aßen die Tauben insgesamt:  \n3 × 3 = **9 Pommes Frites**\n\nDiese 9 Pommes wurden **vor** dem Waschbärs-Überfall gegessen.\n\nAlso vor dem Tauben-Überfall waren:  \n18 + 9 = **27 Pommes Frites**\n\n---\n\n**Schritt 4: Die Möwe**\n\nDie Möwe verschlang **halb so viele Pommes wie Dave**, der 14 gegessen hatte.\n\nAlso aß die Möwe:  \n14 ÷ 2 = **7 Pommes Frites**\n\nDiese 7 Pommes wurden **vor** den Tauben gegessen.\n\nAlso vor dem Möwe-Überfall waren:  \n27 + 7 = **34 Pommes Frites**\n\n---\n\n**Schritt 5: Dave**\n\nDave aß **14 Pommes**, bevor die Möwe die Packung klaute.\n\nAlso war die ursprüngliche Anzahl:  \n34 + 14 = **48 Pommes Frites**\n\n---\n\n✅ **Antwort: 48**",
+    "ground_truth": "48",
+    "question_text": "Dave kaufte eine große Packung Pommes frites und aß vierzehn, bevor eine hungrige Möwe die Packung aus seiner Hand klaute. Als die Möwe landete, verschlang sie halb so viele Pommes frites, wie Dave gegessen hatte. Dann drängelten sie drei Tauben von dem Essen weg, und jede Taube aß drei Pommes frites. Später klaute ein Waschbär zwei Drittel der verbleibenden Pommes frites. Ameisen trugen ein letztes Pommes frite davon und ließen fünf zurück. Wie viel Pommes frites waren in der Packung, als Dave sie kaufte?",
+    "judgement": {
+      "label": "Correct",
+      "extracted_answer": "48",
+      "ground_truth": "48",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0154.wav",
+    "tag": "de",
+    "response": "Kimo hat:\n\n- Montags, Mittwochs und Freitags: 3 einstündige Kurse → 3 Stunden pro Tag → 3 Tage × 3 Stunden = 9 Stunden pro Woche\n- Dienstags und Donnerstags: 2 zweistündige Kurse → 2 × 2 = 4 Stunden pro Tag → 2 Tage × 4 Stunden = 8 Stunden pro Woche\n\nGesamtstunden pro Woche: 9 + 8 = 17 Stunden\n\nEin Semester hat 16 Wochen → 17 Stunden/ Woche × 16 Wochen = 272 Stunden\n\nKimo verbringt in einem Semester **272 Stunden** mit Kursbesuchen.",
+    "ground_truth": "272",
+    "question_text": "Montags, mittwochs und freitags hat College-Student Kimo drei 1-stündige Kurse pro Tag. Dienstags und Donnerstags hat er zwei 2-stündige Kurse pro Tag. Ein Semester hat 16 Schulwochen. Wie viele Stunden verbringt Kimo in einem Semester mit Kursbesuchen?",
+    "judgement": {
+      "label": "Correct",
+      "extracted_answer": "272",
+      "ground_truth": "272",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0155.wav",
+    "tag": "de",
+    "response": "Zuerst berechnen wir die Gesamtlänge aller Backwaren in Zoll:\n\n- Brötchen: \\(300 \\times 4 = 1200\\) Zoll\n- Croissants: \\(120 \\times 6 = 720\\) Zoll\n- Baguettes: \\(60 \\times 24 = 1440\\) Zoll (da 1 Fuß = 12 Zoll, also 2 Fuß = 24 Zoll)\n\nGesamtlänge in Zoll:  \n\\(1200 + 720 + 1440 = 3360\\) Zoll\n\nJetzt in Fuß umrechnen:  \n\\(3360 \\div 12 = 280\\) Fuß\n\nDie Backwaren sind insgesamt **280 Fuß** lang.",
+    "ground_truth": "280",
+    "question_text": "Bill backt 300 Brötchen, 120 Schokoladencroissants und 60 Baguettes pro Tag. Jedes Brötchen ist 4 Zoll lang, jedes Croissant ist 6 Zoll lang und jedes Baguette ist zwei Fuß lang. Wenn Bill alle Backwaren aneinander legt, wie lang sind sie dann in Fuß?",
+    "judgement": {
+      "label": "Correct",
+      "extracted_answer": "280",
+      "ground_truth": "280",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0156.wav",
+    "tag": "de",
+    "response": "Zuerst berechnen wir die Gesamtmenge an Bananen, die die Affen, Gorillas und Paviane pro Monat benötigen:\n\n- Affen: 200 Bananen pro Monat\n- Gorillas: 400 Bananen pro Monat\n- Paviane: 100 Bananen pro Monat\n\nGesamtmenge pro Monat:  \n200 + 400 + 100 = 700 Bananen pro Monat\n\nFür zwei Monate benötigt man:  \n700 × 2 = 1400 Bananen\n\nDer Zoo-Wärter bestellt alle zwei Monate, also muss er **1400 Bananen** bestellen, um zwei Monate zu überdauern.\n\n**Antwort: 1400**",
+    "ground_truth": "1400",
+    "question_text": "Der Zoowärter füttert alle Affen in dem Zoo. Alle 2 Monate bestellt er alle Bananen bei einer lokalen Farm. Wenn jeden Monat die Affen 200 Bananen, die Gorillas 400 Bananen und die Paviane 100 Bananen brauchen, wie viele Bananen muss er bestellen, um 2 Monate zu überdauern?",
+    "judgement": {
+      "label": "Correct",
+      "extracted_answer": "1400",
+      "ground_truth": "1400",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0157.wav",
+    "tag": "de",
+    "response": "Blake läuft 15 Mal hin und zurück auf einem 100-Yard-Feld.  \nEin Hin- und Rückweg beträgt also:  \n100 Yards × 2 = 200 Yards pro Durchgang.  \n\nBlake:  \n15 × 200 = 3000 Yards.\n\nKelly läuft zuerst 1 Mal hin und zurück:  \n1 × 200 = 200 Yards.\n\nDann läuft sie 34 Mal von der 40-Yard-Linie zurück zum Anfang und wieder zurück.  \nDie Distanz von der 40-Yard-Linie zum Anfang ist 40 Yards, also hin und zurück:  \n40 × 2 = 80 Yards pro Durchgang.\n\n34 × 80 = 2720 Yards.\n\nKellys Gesamtdistanz:  \n200 + 2720 = 2920 Yards.\n\nBlake: 3000 Yards  \nKelly: 2920 Yards\n\nBlake ist der Gewinner.\n\nDifferenz:  \n3000 - 2920 = 80 Yards.\n\nDer Gewinner läuft **80 Yards** weiter als der Verlierer.",
+    "ground_truth": "80",
+    "question_text": "Blake und Kelly veranstalten einen Wettkampf, um zu sehen, wer in 15 Minuten weiter laufen kann. Sie beschließen, es auf einem Footballfeld zu tun, das 100 Yards lang ist. Blake läuft 15 Mal hin und zurück. Kelly läuft einmal hin und zurück und beschließt dann, dass sie nicht neben Blake laufen will; also beginnt sie, zur 40-Yard-Linie und zurück zu laufen. Sie tut dies 34 Mal. Wie viel läuft der Gewinner weiter als der Verlierer?",
+    "judgement": {
+      "label": "Correct",
+      "extracted_answer": "80",
+      "ground_truth": "80",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0158.wav",
+    "tag": "de",
+    "response": "Raphael gab insgesamt 36 Dollar für alles aus.",
+    "ground_truth": "34",
+    "question_text": "Raphael ging einige Schulsachen kaufen. Er kaufte 4 Stifte, die jeweils 1,5 $ kosten, 2 Hefte, die jeweils 4 $ kosten und ein Ries Schreibpapier, das 20 $ kostet. Wie viel gab er für alles aus?",
+    "judgement": {
+      "label": "Incorrect",
+      "extracted_answer": "36",
+      "ground_truth": "34",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0159.wav",
+    "tag": "de",
+    "response": "13",
+    "ground_truth": "15",
+    "question_text": "Florian beobachtet 11 Kaulquappen, die im Teich schwimmen. Plötzlich sieht er 6 Kaulquappen, die aus ihrem Versteck unter einem Seerosenblatt hervorkommen, dann sieht er, wie sich 2 von ihnen unter einem Stein verstecken. Wie viele Kaulquappen kann Florian jetzt im Teich sehen?",
+    "judgement": {
+      "label": "Incorrect",
+      "extracted_answer": "13",
+      "ground_truth": "15",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0160.wav",
+    "tag": "de",
+    "response": "Am Montag: 17 Fuß  \nAm Dienstag: 17 + 7 = 24 Fuß  \nAm Mittwoch: (2/3) × 24 = 16 Fuß  \n\nDie Wassertiefe am Mittwoch beträgt **16 Fuß**.",
+    "ground_truth": "16",
+    "question_text": "Ein Wassertank hat am Montag eine Tiefe von 17 Fuß. Am Dienstag hat der Tank 7 Fuß Wasser mehr. Am Mittwoch beträgt die Wassertiefe zwei Drittel dessen, was am Dienstag darin gewesen war. Wie ist die Wassertiefe des Tanks am Mittwoch?",
+    "judgement": {
+      "label": "Correct",
+      "extracted_answer": "16",
+      "ground_truth": "16",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0161.wav",
+    "tag": "de",
+    "response": "Anakin hat 10 Flundern, 6 Seepferdchen und 3 Clownfische gefangen, also insgesamt:\n\n10 + 6 + 3 = 19 Fische.\n\nLoxine hat:\n\n- 5 Flundern weniger als Anakin: 10 - 5 = 5 Flundern\n- 3 Seepferdchen weniger als Anakin: 6 - 3 = 3 Seepferdchen\n- 2 Clownfische mehr als Anakin: 3 + 2 = 5 Clownfische\n\nAlso hat Loxine:\n\n5 + 3 + 5 = 13 Fische gefangen.\n\nZusammen haben sie:\n\n19 + 13 = 32 Fische gefangen.\n\n**Antwort: 32**",
+    "ground_truth": "32",
+    "question_text": "Anakin und Locsin waren heute am Strand. Anakin hat 10 Flunder, 6 Seepferdchen und 3 Clownfische gefangen. Während Locsin 5 Flunder weniger als Anakin, 3 Seepferdchen weniger als Anakin und 2 Clownfische mehr als Anakin gefangen hat. Wie viele Fische konnten sie zusammen fangen?",
+    "judgement": {
+      "label": "Correct",
+      "extracted_answer": "32",
+      "ground_truth": "32",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0162.wav",
+    "tag": "de",
+    "response": "Nach 36 Monaten kostet eine Tüte Murmeln 128 Dollar.",
+    "ground_truth": "92",
+    "question_text": "Wenn eine Tüte Murmeln 20 Dollar kostet und der Preis alle zwei Monate um 20% des ursprünglichen Preises steigt, wie viel würde eine Tüte Murmeln nach 36 Monaten in Dollar kosten?",
+    "judgement": {
+      "label": "Incorrect",
+      "extracted_answer": "128",
+      "ground_truth": "92",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0163.wav",
+    "tag": "de",
+    "response": "Die Puppe kostet so viel wie drei Actionfiguren, also 3 × 5 = 15 Dollar.  \nEin rotes Auto kostet 4 Dollar, also fünf Autos kosten 5 × 4 = 20 Dollar.  \nDie drei Actionfiguren kosten 3 × 5 = 15 Dollar.  \nDie Puppe kostet 15 Dollar.  \n\nGesamtwert: 20 (Autos) + 15 (Actionfiguren) + 15 (Puppe) = 50 Dollar.  \n\nAlle Spielzeuge zusammen sind 50 Dollar wert.",
+    "ground_truth": "50",
+    "question_text": "In einem Zimmer gibt es verschiedene Spielzeuge: 5 rote Autos, 3 Actionfiguren und eine Puppe. Die Puppe kostete so viel wie 3 Actionfiguren. Ein rotes Auto kostete 4 Dollar. Wie viel sind alle Spielzeuge zusammen wert, wenn eine Actionfigur 5 Dollar kostet?",
+    "judgement": {
+      "label": "Correct",
+      "extracted_answer": "50",
+      "ground_truth": "50",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0164.wav",
+    "tag": "de",
+    "response": "Jackie verliert 3 Stunden × 35 Dollar = 105 Dollar an entgangenem Einkommen, wenn sie die Steuererklärung selbst macht. Der Buchhalter kostet 90 Dollar. Wenn sie den Buchhalter beauftragt, spart sie 105 Dollar an Einkommensverlust und zahlt nur 90 Dollar. Die Differenz beträgt 105 − 90 = 15 Dollar. Sie wird also 15 Dollar mehr Geld haben, wenn sie den Buchhalter beauftragt.",
+    "ground_truth": "15",
+    "question_text": "Jackie versucht gerade zu entscheiden, ob sie ihre Steuererklärung selbst machen oder einen Buchhalter beauftragen soll. Wenn sie die Steuererklärung selbst macht, kann sie 3 Stunden weniger freiberuflich tätig sein und verliert 35 $/Stunde in entgangenem Einkommen. Der Buchhalter berechnet 90 $. Wie viel mehr Geld wird sie haben, wenn sie den Buchhalter beauftragt?",
+    "judgement": {
+      "label": "Correct",
+      "extracted_answer": "15",
+      "ground_truth": "15",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0165.wav",
+    "tag": "de",
+    "response": "Elvira hat ein Budget von 1500 Euro. Sie kauft folgende Artikel:\n\n- Computer mit Zubehör: 1090 Euro  \n- Scanner: 157 Euro  \n- CD-Brenner: 74 Euro  \n- Drucker: 102 Euro  \n\nGesamtkosten:  \n1090 + 157 + 74 + 102 = 1423 Euro\n\nGeld für Kleidung:  \n1500 - 1423 = 77 Euro\n\nElvira wird 77 Euro für ihre Kleidung übrig haben.",
+    "ground_truth": "77",
+    "question_text": "Zu seinem 30. Geburtstag wünscht sich Elvira einen neuen Computer mit viel Zubehör als Geschenk. Sie hat ein Budget von 1500 €, gespendet von ihrer ganzen Familie, und denkt, dass sie etwas Geld behalten kann, um sich ein Kleidungsstück zu leisten. Sie geht in einen Computerladen und sucht einen Computer aus, der 1090 € kostet, samt Bildschirm, Tastatur und Maus. Sie nimmt auch einen Scanner für 157 €, einen CD-Brenner im Wert von 74 € und einen Drucker für 102 €. Wie viel Geld wird sie für ihre Kleidung übrig haben?",
+    "judgement": {
+      "label": "Correct",
+      "extracted_answer": "77",
+      "ground_truth": "77",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0166.wav",
+    "tag": "de",
+    "response": "Zuerst berechnen wir, wie viele Eier Sandra insgesamt benötigt:\n\nFür 1 spanischen Karamellpudding braucht sie 3 Eier.  \nFür 15 Puddings benötigt sie:  \n15 × 3 = 45 Eier.\n\nIhr Nachbar gibt ihr 9 Eier pro Babysitting.\n\nUm 45 Eier zu bekommen, muss sie:  \n45 ÷ 9 = 5 Mal babysitten.\n\n**Antwort: 5**",
+    "ground_truth": "5",
+    "question_text": "Sandras Nachbar gibt ihr einen Korb mit 9 Eiern, immer wenn sie seine Tochter hütet. Um einen spanischen Karamellpudding zu machen, braucht sie 3 Eier. Wenn Sandra beauftragt wurde, 15 spanische Karamellpuddings für die Spendensammlung ihrer Schule zu machen, wie oft muss Sandra dann babysitten?",
+    "judgement": {
+      "label": "Correct",
+      "extracted_answer": "5",
+      "ground_truth": "5",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0167.wav",
+    "tag": "de",
+    "response": "Seth ist 12 Jahre alt.",
+    "ground_truth": "16",
+    "question_text": "Seth ist doppelt so alt wie Brooke. In 2 Jahren wird die Summe ihres Alters 28 betragen. Wie alt ist Seth?",
+    "judgement": {
+      "label": "Incorrect",
+      "extracted_answer": "12",
+      "ground_truth": "16",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0168.wav",
+    "tag": "de",
+    "response": "Wenn Ethel 8 Dollar hat, dann hat Jimmy 2 Dollar mehr als das Doppelte von Ethels Geld.\n\nZuerst berechnen wir das Doppelte von Ethels Geld:\n\n2 × 8 = 16 Dollar\n\nDann addieren wir 2 Dollar:\n\n16 + 2 = 18 Dollar\n\nAlso hat Jimmy 18 Dollar.",
+    "ground_truth": "18",
+    "question_text": "Jimmy hat 2 $ mehr als doppelt so viel Geld wie Ethel. Wenn Ethal 8 $ hat, wie viel Geld hat dann Jimmy im Moment?",
+    "judgement": {
+      "label": "Correct",
+      "extracted_answer": "18",
+      "ground_truth": "18",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0169.wav",
+    "tag": "de",
+    "response": "130 Meilen",
+    "ground_truth": "120",
+    "question_text": "Pancho geht pro Tag 20 Meilen zu Fuß. Außer an Wochenenden, an denen er 10 Meilen zu Fuß geht. Wie viele Meilen geht er in einer Woche zu Fuß?",
+    "judgement": {
+      "label": "Incorrect",
+      "extracted_answer": "130",
+      "ground_truth": "120",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0170.wav",
+    "tag": "de",
+    "response": "Die Kosten der Uniform bestehen aus:\n\n- Hut: 25 $\n- Jacke: 3 × 25 $ = 75 $\n- Hosen: Durchschnitt von Hut und Jacke = (25 $ + 75 $) / 2 = 50 $\n\nGesamtkosten pro Uniform:  \n25 $ + 75 $ + 50 $ = **150 $**",
+    "ground_truth": "150",
+    "question_text": "Die Blaskapelle bestellt gerade neue Uniformen. Geliefert wird jede Uniform mit einem Hut, der 25 $ kostet, einer Jacke, die drei Mal so viel kostet wie der Hut, und Hosen, die den Durchschnittspreis von Hut und Jacke kosten. Wie viel kostet jede Uniform insgesamt?",
+    "judgement": {
+      "label": "Correct",
+      "extracted_answer": "150",
+      "ground_truth": "150",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0171.wav",
+    "tag": "de",
+    "response": "Um die Gesamtanzahl der Beine zu berechnen, multiplizieren wir die Anzahl der Tiere mit der Anzahl ihrer Beine und addieren anschließend alle Ergebnisse:\n\n- Spinnen: \\(80 \\times 8 = 640\\) Beine  \n- Insekten: \\(90 \\times 6 = 540\\) Beine  \n- Mutierte Invertebraten: \\(3 \\times 10 = 30\\) Beine  \n\nGesamt:  \n\\(640 + 540 + 30 = 1210\\)\n\nJake sieht insgesamt **1210 Beine**.",
+    "ground_truth": "1210",
+    "question_text": "Jake geht gerade durch das Entomologiemuseum. Er sieht 80 Spinnen mit jeweils 8 Beinen, 90 Insekten mit jeweils 6 Beinen und 3 seltene mutierte Invertebraten mit jeweils 10 Beinen. Wie viele Beine sieht Jake insgesamt?",
+    "judgement": {
+      "label": "Correct",
+      "extracted_answer": "1210",
+      "ground_truth": "1210",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0172.wav",
+    "tag": "de",
+    "response": "Gegeben:\n\n- Es gibt vier Vögel: Susi 2, Oma Rot, Susi 4 und Susi 32.\n- Susi 2 ist 3 Jahre älter als Oma Rot.\n- Oma Rot ist doppelt so alt wie Susi 4.\n- Susi 4 ist genauso alt wie Susi 32.\n- Susi 32 ist 8 Jahre alt.\n\nSchritt 1: Susi 32 ist 8 Jahre alt → Susi 4 ist ebenfalls 8 Jahre alt.\n\nSchritt 2: Oma Rot ist doppelt so alt wie Susi 4 → Oma Rot = 2 × 8 = 16 Jahre alt.\n\nSchritt 3: Susi 2 ist 3 Jahre älter als Oma Rot → Susi 2 = 16 + 3 = 19 Jahre alt.\n\nJetzt alle Alterssummen:\n\n- Susi 2: 19\n- Oma Rot: 16\n- Susi 4: 8\n- Susi 32: 8\n\nGesamtalter = 19 + 16 + 8 + 8 = 51 Jahre.\n\n**Antwort: 51**",
+    "ground_truth": "51",
+    "question_text": "Es gibt vier Vögel am Zugende. Susi Zwei ist drei Jahre älter als Oma Rot. Oma Rot ist doppelt so alt wie Susi Vier. Wenn Susi Vier genauso alt ist wie Susi Zweiunddreißig und Susi Zweiunddreißig 8 Jahre alt ist, wie hoch ist dann das Gesamtalter der vier Vögel in Jahren?",
+    "judgement": {
+      "label": "Correct",
+      "extracted_answer": "51",
+      "ground_truth": "51",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0173.wav",
+    "tag": "de",
+    "response": "Zuerst berechnen wir die monatlichen Mindestzahlungen:\n\n- Studentendarlehen: 300 $\n- Kreditkarte: 200 $\n- Hypothek: 500 $\n\nGesamte monatliche Mindestzahlung:  \n300 + 200 + 500 = 1000 $\n\nJessica möchte 50 % mehr als das Minimum zahlen:  \n1000 $ × 1,5 = 1500 $ pro Monat\n\nIn einem Jahr (12 Monate):  \n1500 $ × 12 = 18.000 $\n\n**Antwort: 18.000 $**",
+    "ground_truth": "18000",
+    "question_text": "Jessica versucht gerade herauszufinden, wie viel sie jeden Monat für alle ihre Schulden bezahlt. Ihr Studentendarlehen hat eine Mindestzahlung von 300 $/Monat, das Minimum ihrer Kreditkarte beträgt 200 $/Monat, und das Minimum ihrer Hypothek beträgt 500 $/Monat. Wenn Jessica 50 % mehr bezahlen möchte als das Minimum, wie viel bezahlt sie dann in einem Jahr?",
+    "judgement": {
+      "label": "Correct",
+      "extracted_answer": "18.000",
+      "ground_truth": "18000",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0174.wav",
+    "tag": "de",
+    "response": "Billy braucht 1,5 Minuten, um eine Kartoffel zu schälen, und 5 Sekunden, um sie zu zerschneiden.  \nDas ergibt für eine Kartoffel insgesamt:  \n1,5 Minuten = 90 Sekunden  \n90 Sekunden + 5 Sekunden = 95 Sekunden pro Kartoffel  \n\nFür 60 Kartoffeln:  \n60 × 95 Sekunden = 5700 Sekunden  \n\nUmrechnung in Minuten:  \n5700 ÷ 60 = 95 Minuten  \n\nBilly benötigt **95 Minuten**.",
+    "ground_truth": "95",
+    "question_text": "Billy schält und schneidet Kartoffeln zur Vorbereitung eines Kartoffelsalats für sein großes Familientreffen. Es ist eine große Veranstaltung, also muss er 60 Kartoffeln verarbeiten. Die Kartoffeln sind ungefähr gleich groß, daher dauert das Schälen und Schneiden jeder einzelnen etwa gleich lang. Billy braucht ungefähr eineinhalb Minuten, um eine Kartoffel zu schälen, aber nur etwa 5 Sekunden, um sie zu zerschneiden. Wie viele Minuten wird Billy benötigen, um die Vorbereitung der Kartoffeln abzuschließen?",
+    "judgement": {
+      "label": "Correct",
+      "extracted_answer": "95",
+      "ground_truth": "95",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0175.wav",
+    "tag": "de",
+    "response": "15",
+    "ground_truth": "15",
+    "question_text": "Juan und sein Bruder Carlos verkaufen gerade Limonade. Jede Gallone, die sie machen, kostet 3 $ für Zitronen und 2 $ für Zucker. Sie verkaufen jedes Glas für 0,50 $ und holen 20 Gläser pro Gallone heraus. Wenn Sie 25 $ Profit machten, wie viel hatten sie dann für Zitronen ausgegeben?",
+    "judgement": {
+      "label": "Correct",
+      "extracted_answer": "15",
+      "ground_truth": "15",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0176.wav",
+    "tag": "de",
+    "response": "160",
+    "ground_truth": "100",
+    "question_text": "In einen Rennen mit 240 Asiaten waren 80 Japaner und der Rest waren Chinesen. Wenn die Anzahl Jungen im chinesischen Team 60 betrug, wie viele Mädchen waren dann im chinesischen Team?",
+    "judgement": {
+      "label": "Incorrect",
+      "extracted_answer": "160",
+      "ground_truth": "100",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0177.wav",
+    "tag": "de",
+    "response": "Zuerst berechnen wir die Ausgaben und Spenden Schritt für Schritt:\n\nZaid verdient **6000 $ pro Monat**.\n\n1. **Miete**:  \n   Ein Viertel seines Gehalts:  \n   \\( \\frac{1}{4} \\times 6000 = 1500 \\) $\n\n2. **Autobenzin**:  \n   Ein Drittel seines Gehalts:  \n   \\( \\frac{1}{3} \\times 6000 = 2000 \\) $\n\nBisher ausgegeben:  \n\\( 1500 + 2000 = 3500 \\) $\n\nVerbleibender Betrag:  \n\\( 6000 - 3500 = 2500 \\) $\n\n3. **Spende**:  \n   Die Hälfte des verbleibenden Betrags:  \n   \\( \\frac{1}{2} \\times 2500 = 1250 \\) $\n\nVerbleibender Betrag nach Spende:  \n\\( 2500 - 1250 = 1250 \\) $\n\n4. **Geld für Tochter**:  \n   200 $\n\n5. **Geld für Frau**:  \n   700 $\n\nGesamte Ausgaben nach Spende:  \n\\( 200 + 700 = 900 \\) $\n\nVerbleibender Betrag:  \n\\( 1250 - 900 = 350 \\) $\n\n**Antwort: 350 $**",
+    "ground_truth": "350",
+    "question_text": "Zaid gibt 1/4 seines Gehalts für Miete aus, 1/3 für Autobenzin und spendet die Hälfte des verbleibenden Betrags an seine Lieblingswohltätigkeitsorganisation. Er gibt seiner Tochter 200$ für ihre regelmäßigen Ausgaben und 700$ seiner Frau für Lebensmittel und andere Haushaltswaren. Wenn Zaid 6000$ pro Monat verdient, wie viel Geld wird er nach all diesen Ausgaben und Spenden noch übrig haben?",
+    "judgement": {
+      "label": "Correct",
+      "extracted_answer": "350",
+      "ground_truth": "350",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0178.wav",
+    "tag": "de",
+    "response": "Bo hat 40 Krebse.  \nMuniek hat 4 Krebse weniger als Bo → 40 − 4 = 36 Krebse.  \nRani hat 10 Krebse mehr als Muniek → 36 + 10 = 46 Krebse.  \n\nGesamtanzahl: 40 + 36 + 46 = 122 Krebse.  \n\nAntwort: 122",
+    "ground_truth": "122",
+    "question_text": "Rani hat zehn Krebse mehr als Monic, die 4 Krebse weniger hat als Bo. Berechnen Sie die gesamte Anzahl der Krebse, die die drei zusammen haben, wenn Bo 40 Krebse hat.",
+    "judgement": {
+      "label": "Correct",
+      "extracted_answer": "122",
+      "ground_truth": "122",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0179.wav",
+    "tag": "de",
+    "response": "Lloyd verdiente in der ersten Woche 5 Stunden × 10 Dollar = 50 Dollar.  \nIn der zweiten Woche verdiente er 8 Stunden × 10 Dollar = 80 Dollar.  \nInsgesamt verdiente er 50 Dollar + 80 Dollar = 130 Dollar.",
+    "ground_truth": "130",
+    "question_text": "Lloyd verdient 10 $ pro Stunde für Mathenachhilfe. Er gab in der ersten Woche 5 Stunden und in der zweiten Woche 8 Stunden Nachhilfeunterricht. Wie viel verdiente er in den ersten beiden Wochen?",
+    "judgement": {
+      "label": "Correct",
+      "extracted_answer": "130",
+      "ground_truth": "130",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0180.wav",
+    "tag": "de",
+    "response": "20",
+    "ground_truth": "20",
+    "question_text": "Zwei Kandidaten bewerben sich als Klassensprecher in Sarais Schule. Berechnen Sie die Anzahl Stimmen, die der Verlierer bekam, wenn der Gewinner 3/4 der Stimmen erhielt und die Gesamtzahl der Schüler, die in der Klasse wählten, 80 betrug.",
+    "judgement": {
+      "label": "Correct",
+      "extracted_answer": "20",
+      "ground_truth": "20",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0181.wav",
+    "tag": "de",
+    "response": "200",
+    "ground_truth": "160",
+    "question_text": "Sandra, der Blumenladen um die Ecke, ist sehr unzufrieden mit Freds unvollständiger Lieferung der Bestellung. Sandra hatte vier Mal so viele rote Rosen bestellt wie weiße Nelken. Sie bestellte auch 200 rosa Zimmercalla, die fünf Mal der Anzahl weißer Nelken entsprachen. Sandra drohte damit, den Lieferanten zu wechseln, wenn die fehlenden roten Rosen nicht bis 17 Uhr geliefert würden. Wie viele rote Rosen muss Fred bis 17 Uhr liefern, um Sandras Einkauf zu behalten?",
+    "judgement": {
+      "label": "Incorrect",
+      "extracted_answer": "200",
+      "ground_truth": "160",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0182.wav",
+    "tag": "de",
+    "response": "Jean ist 32 Jahre alt.",
+    "ground_truth": "23",
+    "question_text": "Jean ist zwei Jahre älter als Mark. Vor zwei Jahren war Mark 5 Jahre älter als die Hälfte des Alters von Jan. Wenn Jan 30 ist, wie alt ist dann Jean?",
+    "judgement": {
+      "label": "Incorrect",
+      "extracted_answer": "32",
+      "ground_truth": "23",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0183.wav",
+    "tag": "de",
+    "response": "Das erste Team läuft jedes der vier 400-Meter-Läufe in 55 Sekunden.  \nGesamtzeit: \\(4 \\times 55 = 220\\) Sekunden.\n\nDas zweite Team:\n- 1. Läufer: 60 Sekunden\n- 2. Läufer: \\(60 - 3 = 57\\) Sekunden\n- 3. Läufer: \\(57 - 3 = 54\\) Sekunden\n- 4. Läufer: \\(54 - 3 = 51\\) Sekunden\n\nGesamtzeit: \\(60 + 57 + 54 + 51 = 222\\) Sekunden.\n\nDie Differenz: \\(222 - 220 = 2\\) Sekunden.\n\nDas schnellere Team gewinnt also um **2 Sekunden**.",
+    "ground_truth": "2",
+    "question_text": "Zwei Leichtathletikteams treten in einem 4 x 400 Meter Rennen gegeneinander an; ein Rennen, wo jedes Wettkampfteam vier Mitglieder hat, die jeweils 400 Meter oder eine Runde auf einer Standard-Strecke laufen. Eines der beiden Teams ist sehr ausgeglichen und jedes seiner Mitglieder wird seine 400 Meter Runde in genau 55 Sekunden laufen. Das andere Team ist weniger ausgeglichen; sein erster Läufer wir seine 400 Meter Runde in 60 Sekunden laufen, dann wird jeder folgende Läufer 3 Sekunden schneller laufen als der vorherige Läufer. Um wie viele Sekunden wird das schnellere Team ausgehend von diesen Informationen gewinnen?",
+    "judgement": {
+      "label": "Correct",
+      "extracted_answer": "2",
+      "ground_truth": "2",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0184.wav",
+    "tag": "de",
+    "response": "Die Wahrscheinlichkeit, eine Zahl größer als 3 zu würfeln, ist 50 % (da 4, 5 und 6 größer als 3 sind, also 3 von 6 Seiten → 3/6 = 50 %).\n\nDie Wahrscheinlichkeit, zwei gerade Zahlen hintereinander zu würfeln: Gerade Zahlen sind 2, 4, 6 → 3 von 6 Seiten → 50 % pro Wurf. Für zwei hintereinander: 0,5 × 0,5 = 0,25 = 25 %.\n\nDie Differenz ist 50 % − 25 % = 25 %.\n\nDie Wahrscheinlichkeit, eine Zahl größer als 3 zu würfeln, ist **25 Prozentpunkte** größer als die Wahrscheinlichkeit, zwei gerade Zahlen hintereinander zu würfeln.",
+    "ground_truth": "25",
+    "question_text": "Jerry würfelt mit einem sechsseitigen Würfel. Wie viel größer ist die Wahrscheinlichkeit (ausgedrückt in Prozent), eine Zahl größer als 3 zu würfeln, als die Wahrscheinlichkeit, zwei gerade Zahlen hintereinander zu würfeln?",
+    "judgement": {
+      "label": "Correct",
+      "extracted_answer": "25",
+      "ground_truth": "25",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0185.wav",
+    "tag": "de",
+    "response": "Jenna pflückte halb so viele Äpfel wie ihre Mutter. Wenn ihre Mutter 20 Äpfel pflückte, dann pflückte Jenna:\n\n20 ÷ 2 = 10 Äpfel.\n\nZusammen pflückten sie:\n\n20 + 10 = 30 Äpfel.\n\nAntwort: 30",
+    "ground_truth": "30",
+    "question_text": "Jenna und ihre Mutter pflückten einige Äpfel auf ihrer Apfelfarm. Jenna pflückte halb so viele Äpfel wie ihre Mutter. Wenn ihre Mutter 20 Äpfel hatte, wie viele Äpfel pflückten sie dann beide?",
+    "judgement": {
+      "label": "Correct",
+      "extracted_answer": "30",
+      "ground_truth": "30",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0186.wav",
+    "tag": "de",
+    "response": "Es gibt 10 Käfige mit Hamstern, in denen jeweils 5 Strohhalme verteilt werden.  \nDas ergibt:  \n10 Käfige × 5 Strohhalme = 50 Strohhalme für Hamster.\n\nEs gibt einen Hasenstall mit 20 Strohhalmen.\n\nInsgesamt wurden 160 Strohhalme unter den kleinen Nagetieren verteilt.  \nDavon sind 50 für Hamster und 20 für Hasen, also:  \n160 − 50 − 20 = 90 Strohhalme für Ratten.\n\nJede Ratte bekommt 6 Strohhalme.  \nAnzahl der Ratten:  \n90 ÷ 6 = 15 Ratten.\n\nDiese 15 Ratten sind in 3 Käfigen gleichmäßig verteilt.  \nAnzahl der Ratten pro Käfig:  \n15 ÷ 3 = 5.\n\n**Antwort: 5**",
+    "ground_truth": "5",
+    "question_text": "Russell arbeitet in einer Tierhandlung und verteilt gerade Stroh unter den Nagetieren. Die Ratten werden in 3 Käfigen in gleich großen Gruppen gehalten und jeder Ratte 6 Strohhalme gegeben. Es gibt 10 Käfige von Hamstern, die allein gehalten werden, und jedem Hamster werden 5 Strohhalme gegeben. Es gibt auch einen Hasenstall, in dem 20 Strohhalme unter den Hasen verteilt werden. Überall sonst in dem Laden wird kein Stroh verteilt. Wenn 160 Strohhalme unter den kleinen Nagetieren verteil wurden, wie viele Ratten sind dann in jedem Käfig?",
+    "judgement": {
+      "label": "Correct",
+      "extracted_answer": "5",
+      "ground_truth": "5",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0187.wav",
+    "tag": "de",
+    "response": "106 Dollar",
+    "ground_truth": "106",
+    "question_text": "Mandy schuldet Benedict 100 Dollar. Sie vereinbarten einen monatlichen Zins von 2% des ursprünglichen Betrags. Wenn Mandy es nach 3 Monaten zurückzahlen konnte, wie viel sollte sie Benedict geben?",
+    "judgement": {
+      "label": "Correct",
+      "extracted_answer": "106",
+      "ground_truth": "106",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0188.wav",
+    "tag": "de",
+    "response": "Der Händler kaufte die Säcke zu 20 Dollar pro Sack und musste 2 Dollar pro Sack transportieren, also betrug der Gesamtkostenpreis pro Sack 22 Dollar. Er verkaufte sie zu 30 Dollar pro Sack, also war der Gewinn pro Sack 8 Dollar.\n\nDa der Gesamtgewinn 400 Dollar betrug, ergibt sich die Anzahl der Säcke durch:\n\n400 ÷ 8 = 50\n\nEr verkaufte also 50 Säcke.",
+    "ground_truth": "50",
+    "question_text": "Ein Händler kauft ein paar Säcke Weizen bei einem Bauern zu einem Satz von 20 $ pro Sack. Wenn es 2 $ kostet, um jeden Sack von dem Bauernhof in das Lagerhaus zu transportieren, und der Händler einen Gesamtgewinn von 400 $ machte, nachdem er alle Säcke zu einem Satz von jeweils 30 $ verkauft hatte, wie viele Säcke verkaufte er dann?",
+    "judgement": {
+      "label": "Correct",
+      "extracted_answer": "50",
+      "ground_truth": "50",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0189.wav",
+    "tag": "de",
+    "response": "Zuerst berechnen wir die Gesamtkosten:\n\n1. **Eintrittskarten:**  \n   Drei Freunde gaben 20 + 25 = 45 Dollar für die Eintritte aus.\n\n2. **Essen:**  \n   Sie gaben 4,50 Dollar weniger für Essen aus als für die Eintrittskarten:  \n   45 − 4,50 = 40,50 Dollar.\n\n3. **Fahrten:**  \n   Sie fuhren mit zwei verschiedenen Bahnen, jede Fahrt kostet 33 Dollar.  \n   Gesamtkosten für Fahrten: 2 × 33 = 66 Dollar.\n\n4. **Gesamtkosten:**  \n   Eintritt + Essen + Fahrten = 45 + 40,50 + 66 = 151,50 Dollar.\n\n5. **Aufteilung auf drei Freunde:**  \n   151,50 ÷ 3 = 50,50 Dollar.\n\nJeder von ihnen zahlte **50,50 Dollar**.",
+    "ground_truth": "34",
+    "question_text": "Drei Freunde gaben 20,25 $ für 3 Eintritte in den Jahrmarkt aus. Sie gaben auch 4,50 $ weniger für Essen aus als für die Eintrittskarten. Sie fuhren auch mit 2 verschiedenen Bahnen, bei denen jede Fahrt 33 $ kostet. Wenn sie vereinbarten, alle Kosten gleichmäßig aufzuteilen, wie viel bezahlte dann jeder von ihnen?",
+    "judgement": {
+      "label": "Incorrect",
+      "extracted_answer": "50,50",
+      "ground_truth": "34",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0190.wav",
+    "tag": "de",
+    "response": "360",
+    "ground_truth": "360",
+    "question_text": "John sammelt 3 Stunden lang Pfirsiche ein. Er kann 2 Pfirsiche pro Minute einsammeln. Wie viele Pfirsiche sammelt er ein?",
+    "judgement": {
+      "label": "Correct",
+      "extracted_answer": "360",
+      "ground_truth": "360",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0191.wav",
+    "tag": "de",
+    "response": "17,5 Pfund",
+    "ground_truth": "5",
+    "question_text": "Enten müssen jede Woche 3,5 Pfund Insekten fressen, um zu überleben. Wenn es eine Schar von zehn Enten gibt, wie viel Pfund Insekten brauchen sie dann pro Tag?",
+    "judgement": {
+      "label": "Incorrect",
+      "extracted_answer": "17,5",
+      "ground_truth": "5",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0192.wav",
+    "tag": "de",
+    "response": "Nach 10 Jahren hat Tom 100 Bäume gepflanzt und 20 Bäume gefällt, also hat er 50 + 100 - 20 = 130 Bäume. Danach sterben 30 % der Bäume: 30 % von 130 = 39. Also bleiben 130 - 39 = 91 Bäume.",
+    "ground_truth": "91",
+    "question_text": "Tom pflanzt 10 Bäume pro Jahr. Jedes Jahr fällt er auch 2 Bäume pro Jahr. Er beginnt mit 50 Bäumen. Nach 10 Jahren sterben 30 % der Bäume. Wie viele Bäume behält er übrig?",
+    "judgement": {
+      "label": "Correct",
+      "extracted_answer": "91",
+      "ground_truth": "91",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0193.wav",
+    "tag": "de",
+    "response": "Am Freitagmorgen wurden 18 rosa Flamingos aufgestellt.  \nAm Samstagmorgen wurden 1/3 der 18 rosa Flamingos (also 6) weggenommen, weiß gestrichen und zurückgestellt.  \nDann blieben 18 – 6 = 12 rosa Flamingos übrig.  \nAm Sonntagmorgen wurden 18 weitere rosa Flamingos hinzugefügt.  \nAlso insgesamt rosa Flamingos: 12 + 18 = 30.  \nWeiße Flamingos: 6.  \nDie Differenz: 30 – 6 = 24.  \n\n**24**",
+    "ground_truth": "24",
+    "question_text": "Sue lebt in einer lustigen Nachbarschaft. An einem Wochenende beschließen ihre Nachbarn Sue einen Streich zu spielen. Am Freitagmorgen stellen die Nachbarn 18 rosa Plastik-Flamingos draußen in Sues Vorgarten. Am Samstagmorgen nahmen die Nachbarn einen Drittel der Flamingos wieder weg, strichen sie weiß und stellten diese frisch gestrichenen weißen Flamingos zurück in Sues Vorgarten. Am Sonntagmorgen fügten sie der Sammlung dann weitere 18 rosa Plastik-Flamingos hinzu. Wie viele rosa Plastik-Flamingos waren am Sonntagnachmittag mehr als weiße Plastik-Flamingos draußen?",
+    "judgement": {
+      "label": "Correct",
+      "extracted_answer": "24",
+      "ground_truth": "24",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0194.wav",
+    "tag": "de",
+    "response": "Sie bekommt 10 Dollar Wechselgeld.",
+    "ground_truth": "10",
+    "question_text": "Violetta will neue Farbstifte kaufen. Sie braucht sie in 5 verschiedenen Farben und sie legte 20 $ für diesen Kauf bereit. Ein Farbstift kostet 2 $. Wie viel Wechselgeld wird sie bekommen?",
+    "judgement": {
+      "label": "Correct",
+      "extracted_answer": "10",
+      "ground_truth": "10",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0195.wav",
+    "tag": "de",
+    "response": "Ein Stift kostet so viel wie ein Bleistift und ein Radierer zusammen.  \nEin Bleistift kostet 1,20 $ und ein Radierer kostet 0,30 $.  \nZusammen kosten sie:  \n1,20 $ + 0,30 $ = 1,50 $  \n\nAlso kostet ein Stift 1,50 $.  \nAcht Stifte kosten:  \n8 × 1,50 $ = 12,00 $  \n\nAntwort: 12,00 $",
+    "ground_truth": "12",
+    "question_text": "Ein Stift kostet so viel wie ein Bleistift und Radierer zusammen. Ein Bleistift kostet 1,20 $ und ein Radierer kostet 0,30 $. Wie viel kosten 8 Stifte?",
+    "judgement": {
+      "label": "Correct",
+      "extracted_answer": "12,00",
+      "ground_truth": "12",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0196.wav",
+    "tag": "de",
+    "response": "200 - (40 × 2) = 200 - 80 = 120 Pfund",
+    "ground_truth": "120",
+    "question_text": "200 Pfund Karotten müssen an 40 Restaurants in einer bestimmten Stadt verteilt werden. Jedes Restaurant soll 2 Pfund Karotten erhalten. Wie viel Pfund Karotten werden nicht gebraucht?",
+    "judgement": {
+      "label": "Correct",
+      "extracted_answer": "120",
+      "ground_truth": "120",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0197.wav",
+    "tag": "de",
+    "response": "22786 - 8417 - 9092 = 5277",
+    "ground_truth": "6277",
+    "question_text": "In der Stadt Soda gibt es genau 23786 Einwohner. Dazu gehören 8417 Männer und 9092 Frauen. Der Rest der Bevölkerung besteht aus Kindern. Wie viele Kinder gibt es in Soda?",
+    "judgement": {
+      "label": "Incorrect",
+      "extracted_answer": "5277",
+      "ground_truth": "6277",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0198.wav",
+    "tag": "de",
+    "response": "Elaine hatte anfänglich 20 Pokémon-Karten.\n\nIm ersten Monat sammelte sie das Dreifache dieser Zahl:  \n3 × 20 = 60 Karten.\n\nIm zweiten Monat sammelte sie 20 Karten weniger als im ersten Monat:  \n60 − 20 = 40 Karten.\n\nIm dritten Monat sammelte sie das Doppelte der Anzahl, die sie im ersten und zweiten Monat zusammen gesammelt hatte:  \n(60 + 40) × 2 = 100 × 2 = 200 Karten.\n\nGesamtzahl der Pokémon-Karten:  \nAnfangs: 20  \n+ 1. Monat: 60  \n+ 2. Monat: 40  \n+ 3. Monat: 200  \n= 20 + 60 + 40 + 200 = **320**\n\nElaine hat jetzt insgesamt **320** Pokémon-Karten.",
+    "ground_truth": "320",
+    "question_text": "Elaine hatte anfänglich 20 Pokemonkarten. Nach einem Monat hatte sie das Dreifache dieser Zahl gesammelt. Im zweiten Monat sammelte sie 20 Karten weniger, als sie im ersten Monat gesammelt hatte. Im dritten Monat sammelte sie das Doppelte der Anzahl Pokemonkarten, die sie im ersten und zweiten Monat zusammen gesammelt hatte. Wie viele Pokemonkarten hat sie jetzt insgesamt?",
+    "judgement": {
+      "label": "Correct",
+      "extracted_answer": "320",
+      "ground_truth": "320",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0199.wav",
+    "tag": "de",
+    "response": "666,67",
+    "ground_truth": "7500",
+    "question_text": "Mark ist Korrektor. Er bearbeitet jede Woche die gleiche Anzahl Sätze für zwei verschiedene Herausgeber, die ihm jeweils eine andere Rate pro Satz bezahlen. Herausgeber B bezahlt Mark das Doppelte dessen, was Herausgeber A bezahlt. Mark bearbeitet jede Woche eine Gesamtzahl von 1000 Sätzen, und Herausgeber A bezahlt ihm 5 Cent pro Satz. Wie viel verdient Mark in einer Woche in Cent?",
+    "judgement": {
+      "label": "Incorrect",
+      "extracted_answer": "666,67",
+      "ground_truth": "7500",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0200.wav",
+    "tag": "de",
+    "response": "Baldur holt jeden Tag insgesamt 55 Liter Wasser.",
+    "ground_truth": "55",
+    "question_text": "Baldur holt Wasser von einem Brunnen. Er holt jeden Morgen 5 Eimer Wasser und jeden Nachmittag 6 Eimer Wasser. Wenn jeder Eimer 5 Liter Wasser enthält, wie viel Liter Wasser holt er dann jeden Tag?",
+    "judgement": {
+      "label": "Correct",
+      "extracted_answer": "55",
+      "ground_truth": "55",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0201.wav",
+    "tag": "de",
+    "response": "John verdiente 2000 $ pro Woche. Ein Jahr hat 52 Wochen, also verdiente er vor der Lohnerhöhung:\n\n2000 $ × 52 = 104.000 $\n\nNach der Lohnerhöhung von 5 % verdient er:\n\n2000 $ × 1,05 = 2100 $ pro Woche\n\nEr erhielt die Lohnerhöhung am ersten Tag des Jahres, also verdiente er 2100 $ für alle 52 Wochen:\n\n2100 $ × 52 = 109.200 $\n\nZusätzlich erhielt er eine einmalige Belohnung von 5000 $.\n\nGesamtverdienst: 109.200 $ + 5000 $ = **114.200 $**",
+    "ground_truth": "114200",
+    "question_text": "John gewinnt einen Preis bei der Arbeit. Der Preis besteht in einer 1-maligen monetären Belohnung in Höhe von 5000 $ und einer Lohnerhöhung von 5 %. Wenn er jede Woche des Jahres 2000 pro Woche verdient und er den Preis am ersten Tag des Jahres bekam, wie viel Geld verdiente er dann in jenem Jahr?",
+    "judgement": {
+      "label": "Correct",
+      "extracted_answer": "114200",
+      "ground_truth": "114200",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0202.wav",
+    "tag": "de",
+    "response": "100",
+    "ground_truth": "100",
+    "question_text": "Josie pflanzt Weintrauben auf ihrem 10 Morgen großen Bauernhof an. Auf jedem Morgen werden 5 Tonnen Weintrauben pro Jahr erzeugt und aus jeder Tonne Weintrauben werden 2 Fässer Wein gemacht. Wie viele Fässer Wein erzeugt ihr Bauernhof pro Jahr?",
+    "judgement": {
+      "label": "Correct",
+      "extracted_answer": "100",
+      "ground_truth": "100",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0203.wav",
+    "tag": "de",
+    "response": "Zuerst berechnen wir die Anzahl der Scheiben Käse, die Karl für seine Sandwiches verwendet hat. Er aß 7 Tage lang ein Sandwich, und jedes Sandwich hatte 2 Scheiben Käse:\n\n7 × 2 = 14 Scheiben Käse\n\nDann berechnen wir die Käseverwendung für die Omeletts. Er aß 3 Tage lang Eier-Käse-Omeletts, und für jedes Omelett verwendete er eine Scheibe mehr als für ein Sandwich. Da er pro Sandwich 2 Scheiben verwendete, verwendet er pro Omelett 3 Scheiben:\n\n3 × 3 = 9 Scheiben Käse\n\nFür die Macaroni und Käse verwendete er 8 Scheiben Käse.\n\nJetzt addieren wir alle Scheiben Käse:\n\n14 (Sandwiches) + 9 (Omeletts) + 8 (Macaroni und Käse) = 31\n\nKarl verwendete insgesamt **31 Scheiben Käse**.",
+    "ground_truth": "31",
+    "question_text": "Carls Lieblingsessen ist Käse. Er aß diese Woche jeden Tag ein Sandwich zum Mittagessen und verwendete 2 Scheiben Käse auf jedem Sandwich. 3 Tage in der Woche aß er Eier-Käse-Omeletten zum Frühstück und verwendete dafür eine Scheibe mehr pro Omelette, als er pro Sandwich verwendete. Er machte eine große Portion Makkaroni und Käse, um ihm für mehrere Abendessen in der Woche zu reichen, und verwendete dafür 8 Scheiben Käse. Wie viele Scheiben Käse verwendete er?",
+    "judgement": {
+      "label": "Correct",
+      "extracted_answer": "31",
+      "ground_truth": "31",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0204.wav",
+    "tag": "de",
+    "response": "Janet hatte ursprünglich 22 grüne Stifte und 10 gelbe Stifte, also insgesamt 22 + 10 = 32 Stifte.\n\nSie kaufte 6 Beutel blaue Stifte mit jeweils 9 Stiften:  \n6 × 9 = 54 blaue Stifte.\n\nSie kaufte 2 Beutel rote Stifte mit jeweils 6 Stiften:  \n2 × 6 = 12 rote Stifte.\n\nInsgesamt hat Janet nun:  \n32 (ursprüngliche) + 54 (blaue) + 12 (rote) = 98 Stifte.\n\n**Antwort: 98**",
+    "ground_truth": "98",
+    "question_text": "Janet hatte 22 grüne Stifte und 10 gelbe Stifte. Dann kaufte sie 6 Beutel blaue Stifte und 2 Beutel rote Stifte. Es waren 9 Stifte in jedem Beutel der Blauen und 6 Stifte in jedem Beutel der Roten. Wie viele Stifte hat Janet jetzt?",
+    "judgement": {
+      "label": "Correct",
+      "extracted_answer": "98",
+      "ground_truth": "98",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0205.wav",
+    "tag": "de",
+    "response": "Um einen Durchschnitt von 93 zu erreichen, müssen die sechs Testpunkte insgesamt mindestens:\n\n93 × 6 = 558 Punkte ergeben.\n\nBrynlee hat in den ersten fünf Tests folgende Punkte:\n\n89 + 71 + 92 + 100 + 86 = 438\n\nSie darf die niedrigste Punktzahl streichen. Die niedrigste unter den ersten fünf Tests ist 71.\n\nDaher werden die Punkte 89, 92, 100, 86 und die Punktzahl des sechsten Tests berücksichtigt.\n\nSumme der vier besten der ersten fünf Tests:\n\n89 + 92 + 100 + 86 = 367\n\nZusammen mit dem sechsten Test muss die Summe 558 betragen:\n\n367 + x = 558\n\nx = 558 - 367 = 191\n\nDa es unmöglich ist, 191 Punkte im Test zu erreichen (maximal 100), ist es unmöglich, einen Durchschnitt von 93 zu erreichen.\n\nAber warte – wir haben einen Fehler gemacht.\n\nWir müssen die niedrigste Punktzahl streichen, also die 71, und dann die Summe der verbleibenden 5 Tests (4 der ersten 5 + der 6. Test) berechnen.\n\nSumme der 5 Tests nach Streichen der 71:\n\n89 + 92 + 100 + 86 + x = 367 + x\n\nDieser Wert muss durch 5 geteilt werden, um den Durchschnitt zu erhalten:\n\n(367 + x) / 5 = 93\n\n367 + x = 465\n\nx = 465 - 367 = 98\n\nAlso braucht Brynlee im sechsten Test **98 Punkte**, um einen Durchschnitt von 93 zu erreichen.\n\n**Antwort: 98**",
+    "ground_truth": "98",
+    "question_text": "Brinley ist in Mr. Berts Mathekurs. Mr. Bert macht jedes Semester sechs Tests. Er erlaubt den Studenten jedes Semester, die niedrigste Punktzahl aus dem Durchschnitt zu streichen. Wenn Brinley in den ersten fünf Tests Punktzahlen von 89, 71, 92, 100 und 86 hat, welche Punktzahl braucht sie dann im sechsten Test, um einen Durchschnitt von 93 zu erreichen?",
+    "judgement": {
+      "label": "Correct",
+      "extracted_answer": "98",
+      "ground_truth": "98",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0206.wav",
+    "tag": "de",
+    "response": "Michael legte insgesamt 1095 Kilometer zurück.\n\n**Berechnung:**\n\n**Erste Phase (4 Wochen):**\n- 5 Mal pro Woche × 4 Wochen = 20 Fahrten\n- Jede Fahrt: 25 km\n- Gesamt: 20 × 25 = 500 km\n\n**Zweite Phase (3 Wochen):**\n- 2 Mal pro Woche × 3 Wochen = 6 Fahrten\n- Jede Fahrt: 60 km\n- Gesamt: 6 × 60 = 360 km\n\n**Gesamtstrecke:**\n500 km + 360 km = **860 km**\n\n**Fehler in der vorherigen Antwort korrigiert:**\n\n500 + 360 = **860 km**\n\n✅ **Richtig: 860 Kilometer**",
+    "ground_truth": "860",
+    "question_text": "Micheal fährt liebend gerne Fahrrad. Er fuhr mindestens 5 Mal pro Woche und legte jedes Mal 25 Kilometer zurück. Er tat das vier Wochen lang und beschloss dann, das Fahrrad nur 2 Mal pro Woche zu fahren, aber jedes Mal 60 Kilometer weit, und tat das 3 Wochen lang. Wie viele Kilometer legte Micheal insgesamt zurück?",
+    "judgement": {
+      "label": "Correct",
+      "extracted_answer": "860",
+      "ground_truth": "860",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0207.wav",
+    "tag": "de",
+    "response": "1800",
+    "ground_truth": "2600",
+    "question_text": "In Joes Süßigkeitentüte von Halloween sind 25 Schokoladenriegel und 80 kandierte Äpfel. Jeder Schokoladenriegel wiegt doppelt so viel wie jeder kandierte Apfel. Wenn jeder Schokoladenriegen 40 g wiegt, wie viel wiegt dann Joes Süßigkeitentüte in Gramm?",
+    "judgement": {
+      "label": "Incorrect",
+      "extracted_answer": "1800",
+      "ground_truth": "2600",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0208.wav",
+    "tag": "de",
+    "response": "Am Montag kaufte Rose 4 Kuchen.  \nAm Dienstag kaufte sie dreimal so viele wie am Montag:  \n3 × 4 = 12 Kuchen.  \nAm Mittwoch kaufte sie fünfmal so viele wie am Dienstag:  \n5 × 12 = 60 Kuchen.  \n\nInsgesamt kaufte sie:  \n4 + 12 + 60 = 76 Kuchen.  \n\n**Antwort: 76**",
+    "ground_truth": "76",
+    "question_text": "Rose ging am Montag in den Laden und kaufte 4 Kuchen. Am Dienstag ging sie in einen anderen Laden und kaufte dreimal so viele Kuchen. Am Mittwoch ging sie in einen anderen Laden und kaufte 5-mal so viele Kuchen, wie sie am Dienstag gekauft hatte. Wie viele Kuchen hatte sie nach allen drei Tagen gekauft?",
+    "judgement": {
+      "label": "Correct",
+      "extracted_answer": "76",
+      "ground_truth": "76",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0209.wav",
+    "tag": "de",
+    "response": "6000 / 6 = 1000 (Preis pro Teller)  \n1000 * 0,5 = 500 (Gesamtkosten für ein halbes Dutzend Teller)  \n500 - 1200 = -700 (Das ergibt einen negativen Wert, was nicht sinnvoll ist.)\n\nEs scheint, dass die Aufgabenstellung widersprüchlich ist. Wenn 20 Dutzend Tassen (also 240 Tassen) 1200 $ weniger kosten als die Gesamtkosten für ein halbes Dutzend Teller (500 $), dann wären die Kosten für die Tassen:\n\n500 - 1200 = -700 $ → negativ, was nicht möglich ist.\n\nBitte überprüfen Sie die Aufgabenstellung.",
+    "ground_truth": "145",
+    "question_text": "Zwanzig Duzend Tassen kosten 1200 $ weniger als die Gesamtkosten für ein halbes Duzend Teller, das jeweils zu 6000 $ verkauft wird. Berechnen Sie die Gesamtkosten für den Kauf jeder Tasse.",
+    "judgement": {
+      "label": "No Answer",
+      "extracted_answer": null,
+      "ground_truth": "145",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0210.wav",
+    "tag": "de",
+    "response": "Sarah möchte eine Jacke für 30 Dollar und zwei Paar Schuhe für jeweils 20 Dollar, also insgesamt:\n\n30 + 2 × 20 = 30 + 40 = 70 Dollar.\n\nSie hat bereits 10 Dollar gespart.\n\nSie muss also noch:  \n70 − 10 = 60 Dollar verdienen.\n\nSie hütet die Nachbarskinder viermal und verdient jedes Mal 5 Dollar:  \n4 × 5 = 20 Dollar.\n\nSie verdient also bereits 20 Dollar durch Babysitten.\n\nSie braucht noch:  \n60 − 20 = 40 Dollar.\n\nSie verdient 4 Dollar pro Rasenmähen.\n\nSie muss also:  \n40 ÷ 4 = 10 Mal den Rasen mähen.\n\n**Antwort: 10**",
+    "ground_truth": "10",
+    "question_text": "Sara möchte sich eine neue Jacke und 2 Paar Schuhe kaufen. Die Jacke, die sie möchte, kostet 30 $, und jedes Paar Schuhe kostet 20 $. Sara hütet die Nachbarskinder 4 Mal und verdient jedes Mal, wenn sie sie hütet, 5 $. Ihre Eltern zahlen ihr jedes Mal 4 $, wenn sie den Rasen mäht. Wenn Sara bereits 10 $ gespart hatte, bevor sie zu Hüten anfing, wie oft muss sie dann den Rasen mähen, bevor sie sich die Jacke und die Schuhe leisten kann?",
+    "judgement": {
+      "label": "Correct",
+      "extracted_answer": "10",
+      "ground_truth": "10",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0211.wav",
+    "tag": "de",
+    "response": "6",
+    "ground_truth": "4",
+    "question_text": "Jerry hat eine Hühnerschar. Die roten Hennen legen 3 Eier pro Tag und die weißen Hennen legen 5 Eier pro Tag. Jeden Tag sammelt Jerry 42 Eier ein. Wenn er zwei weiße Hennen mehr hat als rote Hennen, wie viele rote Hennen hat er dann?",
+    "judgement": {
+      "label": "Incorrect",
+      "extracted_answer": "6",
+      "ground_truth": "4",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0212.wav",
+    "tag": "de",
+    "response": "Um die Zeit zu berechnen, die Gary braucht, um den Rand des Parks entlangzugehen, müssen wir zuerst den Umfang des Parks berechnen.\n\nDer Park ist ein Rechteck mit den Seitenlängen 1,5 Meilen und 6 Meilen.\n\nDer Umfang \\( U \\) eines Rechtecks ist:\n\n\\[\nU = 2 \\times (Länge + Breite)\n\\]\n\n\\[\nU = 2 \\times (6 + 1,5) = 2 \\times 7,5 = 15 \\text{ Meilen}\n\\]\n\nGary geht mit einer Geschwindigkeit von 3 Meilen pro Stunde.\n\nDie benötigte Zeit \\( t \\) ist:\n\n\\[\nt = \\frac{\\text{Strecke}}{\\text{Geschwindigkeit}} = \\frac{15}{3} = 5 \\text{ Stunden}\n\\]\n\n**Antwort: 5 Stunden**",
+    "ground_truth": "5",
+    "question_text": "Gary geht gerne rund um den Rand des örtlichen Parks, der ein Rechteck ist, das 1,5 Meilen auf 6 Meilen misst. Wenn er mit 3 Meilen/Stunde geht, wie viele Stunden verbringt er dann mit Gehen?",
+    "judgement": {
+      "label": "Correct",
+      "extracted_answer": "5",
+      "ground_truth": "5",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0213.wav",
+    "tag": "de",
+    "response": "500",
+    "ground_truth": "250",
+    "question_text": "Während sie im Dollar-Shop ist, zählt Sloane 100 Kunden, die den Laden betreten. Am nächsten Tag zählt sie 50 Kunden mehr als am ersten Tag. Wenn die Gesamtzahl der Kunden am dritten Tag 500 betrug, wie viele Kunden hat sie am dritten Tag gezählt?",
+    "judgement": {
+      "label": "Incorrect",
+      "extracted_answer": "500",
+      "ground_truth": "250",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0214.wav",
+    "tag": "de",
+    "response": "16 Gallonen",
+    "ground_truth": "8",
+    "question_text": "Jerry hat zwei Swimmingpools, beide mit Lecks, aus denen 4 Gallonen/Minute auslaufen. Vor 4 Minuten hatte der große Swimmingpool doppelt so viel Wasser wie der kleine Swimmingpool. Jetzt hat der große Swimmingpool vier Mal so viel Wasser wie der kleine Swimmingpool. Wie viel Wasser hat der kleine Swimmingpool jetzt?",
+    "judgement": {
+      "label": "Incorrect",
+      "extracted_answer": "16",
+      "ground_truth": "8",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0215.wav",
+    "tag": "de",
+    "response": "Laurie muss 47 Stunden arbeiten.",
+    "ground_truth": "44",
+    "question_text": "Lori will ein Paar Schuhe für 320,00 $ und einen passenden Gürtel, der 32,00 $ kostet, kaufen. Bei ihrem Teilzeitjob bezahlt man ihr 8,00 $ pro Stunde. Wie viele Stunden muss sie arbeiten, bevor sie ihren Einkauf tätigen kann?",
+    "judgement": {
+      "label": "Incorrect",
+      "extracted_answer": "47",
+      "ground_truth": "44",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0216.wav",
+    "tag": "de",
+    "response": "Janeth zahlt 12 Monate lang 165 Dollar pro Monat, also insgesamt:\n\n12 × 165 = 1980 Dollar.\n\nSie hat sich 2000 Dollar geliehen und zahlt 1980 Dollar zurück.\n\nDas Restguthaben beträgt also:\n\n2000 − 1980 = 20 Dollar.\n\nDa sie versprochen hat, den Betrag mit zusätzlichen 10 % zurückzuzahlen, beträgt der Gesamtbetrag, den sie zurückzahlen muss:\n\n2000 × 1,10 = 2200 Dollar.\n\nSie zahlt jedoch nur 1980 Dollar zurück, also fehlen ihr:\n\n2200 − 1980 = 220 Dollar.\n\nDas Restguthaben beträgt also 220 Dollar.",
+    "ground_truth": "220",
+    "question_text": "Janeth lieh sich 2000 $ und versprach, den Betrag mit zusätzlichen 10 % zurückzuzahlen. Wenn sie 12 Monate lang 165 $ pro Monat zahlt, wie hoch wird Janeths Restguthaben bis dahin sein?",
+    "judgement": {
+      "label": "Correct",
+      "extracted_answer": "220",
+      "ground_truth": "220",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0217.wav",
+    "tag": "de",
+    "response": "15",
+    "ground_truth": "15",
+    "question_text": "Es gibt 4 Rosen in der Vase. Es gibt 7 Dahlien mehr als Rosen in der Vase. Wie viele Blumen gibt es insgesamt in der Vase?",
+    "judgement": {
+      "label": "Correct",
+      "extracted_answer": "15",
+      "ground_truth": "15",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0218.wav",
+    "tag": "de",
+    "response": "Wenn Harriet jetzt 21 Jahre alt ist, dann ist Adrian das Dreifache ihres Alters:  \nAdrian = 3 × 21 = 63 Jahre.\n\nHarriet ist halb so alt wie Zack, also ist Zack doppelt so alt wie Harriet:  \nZack = 2 × 21 = 42 Jahre.\n\nIn drei Jahren werden sie alle drei um drei Jahre älter sein:\n\n- Adrian: 63 + 3 = 66  \n- Harriet: 21 + 3 = 24  \n- Zack: 42 + 3 = 45\n\nDurchschnittsalter in drei Jahren:  \n(66 + 24 + 45) / 3 = 135 / 3 = 45\n\nDas Durchschnittsalter der drei in drei Jahren beträgt **45 Jahre**.",
+    "ground_truth": "45",
+    "question_text": "Adrians Alter ist das Dreifache des Alters von Harriet, und Harriet ist halb so alt wie Zack. Berechnen Sie das Durchschnittsalter der drei in drei Jahren, wenn Harriet jetzt 21 Jahre alt ist.",
+    "judgement": {
+      "label": "Correct",
+      "extracted_answer": "45",
+      "ground_truth": "45",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0219.wav",
+    "tag": "de",
+    "response": "Zuerst berechnen wir die Punkte von Yuri:\n\nNaomi erzielte 68 Punkte.  \nHalb so viele wie Naomi: \\( \\frac{68}{2} = 34 \\)  \nYuri erzielte 10 Punkte mehr als das: \\( 34 + 10 = 44 \\)\n\nBriana erzielte 17 Punkte mehr als Naomi:  \n\\( 68 + 17 = 85 \\)\n\nJetzt addieren wir die Punkte von Naomi, Yuri und Briana:  \n\\( 68 + 44 + 85 = 197 \\)\n\nGesamtpunktzahl: 251  \nPunkte von Jojo: \\( 251 - 197 = 54 \\)\n\n**Antwort: 54**",
+    "ground_truth": "54",
+    "question_text": "Vier Schüler erzielten eine Summe von 251 Punkten in einem Brettspiel. Naomi erzielte 68 der Punkte. Yuri erzielte 10 Punkte mehr als halb so viele wie Naomi, und Brianna erzielte 17 Punkte mehr als Naomi. Wie viele Punkte erzielte Jojo?",
+    "judgement": {
+      "label": "Correct",
+      "extracted_answer": "54",
+      "ground_truth": "54",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0220.wav",
+    "tag": "de",
+    "response": "Carmen braucht 10 Minuten für ein Kreuzworträtsel und 5 Minuten für eine Sudoku-Aufgabe.\n\nÜber das Wochenende löste sie:\n- 3 Kreuzworträtsel → 3 × 10 = 30 Minuten\n- 8 Sudoku-Aufgaben → 8 × 5 = 40 Minuten\n\nGesamtzeit: 30 + 40 = 70 Minuten.\n\nCarmen verbrachte 70 Minuten mit dem Spielen dieser Spiele.",
+    "ground_truth": "70",
+    "question_text": "Carmen braucht 10 Minuten, um ein Kreuzworträtsel zu beenden, und 5 Minuten, um eine Sudoku-Aufgabe zu beenden. Über das Wochenende löste sie 3 Kreuzworträtsel und 8 Sudoku-Aufgaben. Wie viel Zeit verbrachte sie mit dem Spielen dieser Spiele?",
+    "judgement": {
+      "label": "Correct",
+      "extracted_answer": "70",
+      "ground_truth": "70",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0221.wav",
+    "tag": "de",
+    "response": "Nachdem Celine 90 Liter aus dem Tank verbraucht hat, sind noch 120 - 90 = 30 Liter übrig. Sie konnte dann zweimal so viel Regenwasser sammeln, also 2 × 30 = 60 Liter. Insgesamt sind jetzt 30 + 60 = 90 Liter im Tank.",
+    "ground_truth": "90",
+    "question_text": "Ein Wassertank ist mit 120 Liter Wasser gefüllt. Celine verbrauchte 90 Liter Wasser aus dem Tank, um ihren kleinen Garten zu tränken. Sie konnte dann zwei Mal so viel Regenwasser sammeln, als noch übrig war. Wie viel Liter Wasser sind jetzt in dem Tank?",
+    "judgement": {
+      "label": "Correct",
+      "extracted_answer": "90",
+      "ground_truth": "90",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0222.wav",
+    "tag": "de",
+    "response": "Andy pflanzt insgesamt 140 Blumen.",
+    "ground_truth": "140",
+    "question_text": "Andy pflanzt 90 Geranien und 40 Petunien weniger als Geranien. Wie viele Blumen pflanzt er insgesamt?",
+    "judgement": {
+      "label": "Correct",
+      "extracted_answer": "140",
+      "ground_truth": "140",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0223.wav",
+    "tag": "de",
+    "response": "Zuerst berechnen wir den Werbebetrag im zweiten Jahr:\n\nEin Drittel von 15.000 Dollar ist:\n\n15.000 ÷ 3 = 5.000 Dollar\n\nIm ersten Jahr wurden 15.000 Dollar ausgegeben, im zweiten Jahr 5.000 Dollar.\n\nGesamtausgabe:\n\n15.000 + 5.000 = 20.000 Dollar\n\nDie Firma gab insgesamt 20.000 Dollar für Werbung aus.",
+    "ground_truth": "20000",
+    "question_text": "Eine Firma gibt ein Jahr lang 15000 $ für Werbung aus und gibt dann ein weiteres Jahr lang einen Drittel dieses Betrags für Werbung aus. Welchen Gesamtbetrag gab die Firma in diesen beiden Jahren für Werbung aus?",
+    "judgement": {
+      "label": "Correct",
+      "extracted_answer": "20000",
+      "ground_truth": "20000",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0224.wav",
+    "tag": "de",
+    "response": "Carlos zahlt 30 $/Stunde × 3 Stunden = 90 $.  \nBenji zahlt 18 $/Stunde × 5 Stunden = 90 $.  \nGesamt: 90 $ + 90 $ = 180 $.",
+    "ground_truth": "180",
+    "question_text": "Carlos und Benji sind am Strand. Carlos mietet ein Kanu für 30 $ pro Stunde und Benji mietet einen Bananen-Wasserschlitten für 18 $ pro Stunde. Wenn Carlos das Boot 3 Stunden lang benutzt, und Benji den Wasserschlitten 5 Stunden lang benutzt, wie viel zahlen sie dann insgesamt für ihre Leihe?",
+    "judgement": {
+      "label": "Correct",
+      "extracted_answer": "180",
+      "ground_truth": "180",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0225.wav",
+    "tag": "de",
+    "response": "Andrew reist insgesamt 9 Tage.",
+    "ground_truth": "9",
+    "question_text": "Andrew plant eine Fahrt von New Jersey nach Rochester. Es dauert 6 Tage, um mit dem Bus zu reisen, und halb so viele Tage, um mit dem Auto von New Jersey nach Rochester zu reisen. Wie viele Tage reist er, wenn er plant, mit dem Bus nach Rochester zu fahren und von Rochester mit dem Auto zurückzukommen?",
+    "judgement": {
+      "label": "Correct",
+      "extracted_answer": "9",
+      "ground_truth": "9",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0226.wav",
+    "tag": "de",
+    "response": "44",
+    "ground_truth": "33",
+    "question_text": "James zählt gerade seine Pokemonkarten. Er hat 30 Feuerartige, 20 Pflanzenartige und 40 Wasserartige. Wenn er 8 der Wasserartigen verlegt und 14 Pflanzenartige kauft, wie hoch ist dann die Wahrscheinlichkeit in Prozent (gerundet auf die nächste ganze Zahl), dass eine zufällig gezogene Karte eine Wasserartige sein wird?",
+    "judgement": {
+      "label": "Incorrect",
+      "extracted_answer": "44",
+      "ground_truth": "33",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0227.wav",
+    "tag": "de",
+    "response": "Der einfache Burrito kostet 6,50 Euro.  \nExtra Fleisch: 2,00 Euro  \nExtra Käse: 1,00 Euro  \nAvocado: 1,00 Euro  \nZwei Soßen: 0,25 Euro × 2 = 0,50 Euro  \nAufwertung (Chips und Getränk): 3,00 Euro  \n\nGesamtkosten:  \n6,50 + 2,00 + 1,00 + 1,00 + 0,50 + 3,00 = 14,00 Euro  \n\nEr verwendet eine Geschenkkarte von 5,00 Euro.  \n\nNoch zu bezahlen:  \n14,00 - 5,00 = 9,00 Euro  \n\nEr schuldet noch 9,00 Euro.",
+    "ground_truth": "9",
+    "question_text": "Chad bestellte Mach-deinen-eigenen-Burrito zum Mittagessen. Der einfache Burrito kostet 6,50 $. Er fügt extra Fleisch für 2,00 $, extra Käse für 1,00 $, Avocado für 1,00 $ und 2 Saucen für jeweils 0,25 $ hinzu. Er beschließt, seine Mahlzeit für 3,00 $ extra aufzuwerten, wofür Chips und ein Getränk hinzukommen. Er hat eine Geschenkkarte für 5,00 $, die er an der Kasse verwendet. Wie viel schuldet er noch?",
+    "judgement": {
+      "label": "Correct",
+      "extracted_answer": "9,00",
+      "ground_truth": "9",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0228.wav",
+    "tag": "de",
+    "response": "Kalinda fügt 4 Teile pro Minute hinzu, ihre Mutter halb so viele, also 2 Teile pro Minute. Zusammen fügen sie also 4 + 2 = 6 Teile pro Minute hinzu.\n\nDas Puzzle hat 360 Teile.  \nZeit in Minuten: 360 ÷ 6 = 60 Minuten.\n\n60 Minuten = 1 Stunde.\n\nSie brauchen **1 Stunde**.",
+    "ground_truth": "1",
+    "question_text": "Kalinda arbeitet gerade an einem 360-teiligen Puzzle mit ihrer Mutter. Kalinda kann normalerweise 4 Teile pro Minute hinzufügen. Ihre Mutter kann üblicherweise halb so viele Teile pro Minuten platzieren wie Kalinda. Wie viele Stunden brauchen sie, um das Puzzle zu vervollständigen?",
+    "judgement": {
+      "label": "Correct",
+      "extracted_answer": "1",
+      "ground_truth": "1",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0229.wav",
+    "tag": "de",
+    "response": "Nachdem Ashlyn die ersten 30 % der Wassermelonen geerntet hatte, blieben 70 % übrig.  \n120 × 0,7 = 84 Wassermelonen blieben übrig.  \n\nZwei Wochen später waren 3/4 der verbleibenden Wassermelonen reif, also:  \n84 × 3/4 = 63 Wassermelonen wurden geerntet.  \n\nDie restlichen Wassermelonen, die nicht reif waren, betragen:  \n84 – 63 = 21  \n\nAntwort: 21",
+    "ground_truth": "21",
+    "question_text": "Eine Wassermelonenfarm erzeugt 120 Baby-Wassermelonen. Ashlyn ging nach zwei Monaten zu der Farm und fand heraus, dass 30 % der Wassermelonen reif für die Ernte waren, also nahm sie sie nach Hause. Als sie zwei Wochen später zurückkam, waren 3/4 der verbleibenden Wassermelonen reif, also erntete sie sie. Wie viele Melonen waren nach den zwei Wochen nicht reif, um geerntet zu werden?",
+    "judgement": {
+      "label": "Correct",
+      "extracted_answer": "21",
+      "ground_truth": "21",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0230.wav",
+    "tag": "de",
+    "response": "Mark kauft 12 Autos zu je 20.000 Dollar, also kostet die Flotte:\n\n12 × 20.000 = 240.000 Dollar.\n\nEr zahlt 10 % Steuer auf die Autos:\n\n10 % von 240.000 = 0,10 × 240.000 = 24.000 Dollar.\n\nFür die Registrierung zahlt er 1.000 Dollar pro Auto:\n\n12 × 1.000 = 12.000 Dollar.\n\nGesamtkosten:\n\n240.000 (Autokosten) + 24.000 (Steuer) + 12.000 (Registrierung) = 276.000 Dollar.\n\nMark zahlt insgesamt **276.000 Dollar**.",
+    "ground_truth": "276000",
+    "question_text": "Mark kauft eine Flotte von 12 Autos für seine Firma. Jedes Auto ist für 20000 $ zu haben. Er zahlt 10 % Steuer auf die Autos und weitere 1000 $ für jedes davon für die Registrierung. Wie viel bezahlt er für alles?",
+    "judgement": {
+      "label": "Correct",
+      "extracted_answer": "276.000",
+      "ground_truth": "276000",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0231.wav",
+    "tag": "de",
+    "response": "25",
+    "ground_truth": "50",
+    "question_text": "Kylie und Robert gehen gerne an den Strand, um Muscheln zu sammeln. Am Montag sammelt Kylie 5 Muscheln mehr als Robert, der 20 Muscheln sammelt. Am Dienstag sammelt Kylie doppelt so viele Muscheln wie am Montag. Wie viele Muscheln sammelt Kylie am Dienstag?",
+    "judgement": {
+      "label": "Incorrect",
+      "extracted_answer": "25",
+      "ground_truth": "50",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0232.wav",
+    "tag": "de",
+    "response": "Es gab 50 Ameisen. Es gab halb so viele Käfer wie Ameisen, also 50 / 2 = 25 Käfer. Die Gesamtzahl der Insekten ist 50 + 25 = 75.",
+    "ground_truth": "75",
+    "question_text": "Dax ging zu seiner Farm, um ein paar Äpfel zu pflücken, und fand halb sie viele Käfer wie Ameisen in dem Garten. Berechnen Sie die Gesamtzahl der Insekten in dem Garten, wenn es dort 50 Ameisen gab.",
+    "judgement": {
+      "label": "Correct",
+      "extracted_answer": "75",
+      "ground_truth": "75",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0233.wav",
+    "tag": "de",
+    "response": "12",
+    "ground_truth": "12",
+    "question_text": "Es gibt 36 sich sonnende Pinguine im Schnee. Ein Drittel davon springt hinein und schwimmt im Ozean. Ein weiteres Drittel geht in die Höhle, um zu Abend zu fressen. Wie viele sich sonnende Pinguine sind noch übrig?",
+    "judgement": {
+      "label": "Correct",
+      "extracted_answer": "12",
+      "ground_truth": "12",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0234.wav",
+    "tag": "de",
+    "response": "Stefan isst 6 Tomaten pro Tag, also 6 × 7 = 42 Tomaten pro Woche.  \nSeine Freundin isst halb so viele, also 3 Tomaten pro Tag, also 3 × 7 = 21 Tomaten pro Woche.  \nZusammen essen sie 42 + 21 = 63 Tomaten pro Woche.  \n\nEine Ranke produziert 3 Tomaten pro Woche.  \nAlso benötigt Stefan 63 ÷ 3 = 21 Ranken.",
+    "ground_truth": "21",
+    "question_text": "Stefan beschließt, mehr Tomaten zu essen und baut für sich und seine Freundin eigene Kirschtomaten an. Er isst doppelt so viele wie seine Freundin. Er isst 6 pro Tag. Wenn eine Ranke 3 Tomaten pro Woche produzieren kann, wie viele Ranken braucht er?",
+    "judgement": {
+      "label": "Correct",
+      "extracted_answer": "21",
+      "ground_truth": "21",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0235.wav",
+    "tag": "de",
+    "response": "John und seine 19 Freunde sind insgesamt 20 Personen. Jeder soll 4 Stücke haben, also benötigen sie insgesamt:\n\n20 × 4 = 80 Stücke.\n\nDa jede Pizza in 8 Stücke geschnitten ist, müssen wir 80 durch 8 teilen:\n\n80 ÷ 8 = 10.\n\nJohn muss also **10 Pizzen** bestellen.",
+    "ground_truth": "10",
+    "question_text": "John bestellt einige Pizzen, um sie mit seinen Freunden zu teilen. Sie sind 20 Freunde, einschließlich ihm, und John möchte sicherstellen, dass jeder 4 Stücke haben kann. Pizzen werden nur in 8 Stücke geschnitten verkauft. Wie viele Pizzen muss John bestellen?",
+    "judgement": {
+      "label": "Correct",
+      "extracted_answer": "10",
+      "ground_truth": "10",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0236.wav",
+    "tag": "de",
+    "response": "25 + 5 + 1 = 31",
+    "ground_truth": "31",
+    "question_text": "Ram verbraucht einen Haufen Stifte. Er entdeckt, dass er Geld sparen kann, indem er die Tinte von fünf leeren Stiften mischt, um einen Stift voll zu machen. Wenn er 25 Stifte kauft und sie dann verwendet, um neue Stifte zu machen, wenn die Tinte ausgeht, wie viele Stifte kann er dann insgesamt haben?",
+    "judgement": {
+      "label": "Correct",
+      "extracted_answer": "31",
+      "ground_truth": "31",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0237.wav",
+    "tag": "de",
+    "response": "30 Dollar wurden verdreifacht, also 30 × 3 = 90 Dollar.",
+    "ground_truth": "90",
+    "question_text": "Johnny nahm seine 20 $ Taschengeld und fügte 10 $ extra hinzu. Er investierte dann diese Geldsumme, die sich in einem Jahr verdreifachte. Wie viel Geld hatte er nach einem Jahr?",
+    "judgement": {
+      "label": "Correct",
+      "extracted_answer": "90",
+      "ground_truth": "90",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0238.wav",
+    "tag": "de",
+    "response": "61",
+    "ground_truth": "68",
+    "question_text": "Mary ist zwei Jahre jünger als Joan, die fünf Jahre älter ist als Jessa. Wenn Jessa 20 Jahre alt ist, was ergibt dann die Summe des Alters der drei Mädchen?",
+    "judgement": {
+      "label": "Incorrect",
+      "extracted_answer": "61",
+      "ground_truth": "68",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0239.wav",
+    "tag": "de",
+    "response": "120",
+    "ground_truth": "280",
+    "question_text": "Die Anzahl Schüler in einer Aula betrug 1000. Die Aula hatte 3 Eingänge, A, B und C, die auch als Ausgänge dienten. Berechnen Sie die Anzahl Schüler, die durch Ausgang C hinausgingen, wenn 30 % der Schüler nach einem Treffen durch Ausgang A aus dem Gebäude gingen, 3/5 der verbleibenden durch Ausgang B hinausgingen und der Rest durch Ausgang C hinausging.",
+    "judgement": {
+      "label": "Incorrect",
+      "extracted_answer": "120",
+      "ground_truth": "280",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0240.wav",
+    "tag": "de",
+    "response": "John hat 54 Bonbons.  \nDa John doppelt so viele Bonbons hat wie Robert, hat Robert:\n\n54 ÷ 2 = 27 Bonbons.\n\nJames hat 6 Bonbons mehr als Robert:\n\n27 + 6 = 33 Bonbons.\n\nDie Differenz zwischen Johns und James' Bonbons ist:\n\n54 − 33 = 21.\n\nJohn hat also 21 Bonbons mehr als James.",
+    "ground_truth": "21",
+    "question_text": "James hat 6 Bonbons mehr als Robert. John hat doppelt so viele Bonbons wie Robert. Wenn John 54 Bonbons hat, wie viele Bonbons hat John dann mehr als James?",
+    "judgement": {
+      "label": "Correct",
+      "extracted_answer": "21",
+      "ground_truth": "21",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0241.wav",
+    "tag": "de",
+    "response": "Dolly hat 2 Bücher, Pandora hat 1 Buch. Wenn beide die Bücher des anderen und ihre eigenen lesen, dann:\n\n- Dolly liest ihre eigenen 2 Bücher + Pandoras 1 Buch = 3 Leseereignisse\n- Pandora liest ihre eigenen 1 Buch + Dollies 2 Bücher = 3 Leseereignisse\n\nGesamtzahl der Leseereignisse: 3 + 3 = 6\n\nAntwort: 6",
+    "ground_truth": "6",
+    "question_text": "Dolly hat zwei Bücher. Pandora hat eines. Wenn sowohl Dolly als auch Pandora die Bücher des anderen sowie ihre eigenen lesen, was ist die Gesamtzahl der einzelnen Leseereignisse, die stattgefunden haben werden?",
+    "judgement": {
+      "label": "Correct",
+      "extracted_answer": "6",
+      "ground_truth": "6",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0242.wav",
+    "tag": "de",
+    "response": "Er erhält von zwei Brieffreunden je zwei Briefe pro Woche, also insgesamt 4 Briefe pro Woche. Jeder Brief ist 5 Seiten lang, also insgesamt 4 × 5 = 20 Seiten pro Woche.\n\nEr antwortet auf dieselbe Weise, also schreibt er ebenfalls 20 Seiten pro Woche.\n\nEr kann alle 6 Minuten eine Seite schreiben, also braucht er für 20 Seiten:\n\n20 × 6 = 120 Minuten pro Woche.\n\n120 Minuten = 2 Stunden.\n\nEr verbringt also **2 Stunden** pro Woche mit Schreiben.",
+    "ground_truth": "3",
+    "question_text": "Mike war von 5 Personen Brieffreund. Er hörte mit 2 von ihnen auf, Brieffreunde zu sein. Sie senden ihm jeweils 2 Briefe pro Woche, die 5 Seiten lang sind. Er antwortet auf die gleiche Weise. Er kann alle 6 Minuten eine Seite schreiben. Wie viele Stunden verbringt er pro Woche mit Schreiben?",
+    "judgement": {
+      "label": "Incorrect",
+      "extracted_answer": "2",
+      "ground_truth": "3",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0243.wav",
+    "tag": "de",
+    "response": "Jason hat 1000 Minuten pro Monat. Er führt täglich ein 15-minütiges Gespräch mit seinem Chef, also 15 Minuten × 30 Tage = 450 Minuten. Außerdem hat er 300 Minuten extra mit anderen Personen. Insgesamt verbraucht er also 450 + 300 = 750 Minuten. Von den 1000 Minuten bleiben also 1000 - 750 = 250 Minuten übrig.\n\nAntwort: 250",
+    "ground_truth": "250",
+    "question_text": "Jason hat einen Telefontarif mit 1000 Minuten pro Monat. Jeden Tag führt er ein 15-minütiges Telefonat mit seinem Chef und hat diesen Monat 300 Anrufminuten extra mit anderen Personen. Wie viele Minuten hat Jason übrig, wenn dieser Monat 30 Tage hat?",
+    "judgement": {
+      "label": "Correct",
+      "extracted_answer": "250",
+      "ground_truth": "250",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0244.wav",
+    "tag": "de",
+    "response": "14",
+    "ground_truth": "20",
+    "question_text": "Griffin hatte 24 Pommes frites, aber Kyle nahm 5 davon. Billy nahm doppelt so viele wie Kyle. Ginger gab Griffin eine Handvoll ihrer Pommes frites, und dann nahm Colby von Griffin 3 Pommes frites weniger als die Anzahl, die Kyle genommen hatte. Wenn Griffin am Ende 27 Pommes frites hatte, wie viele Pommes frites gab Ginger dann Griffin?",
+    "judgement": {
+      "label": "Incorrect",
+      "extracted_answer": "14",
+      "ground_truth": "20",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0245.wav",
+    "tag": "de",
+    "response": "14",
+    "ground_truth": "7",
+    "question_text": "Es gibt 4 Schnecken in einem Aquarium und 32 Schnecken in einem anderen Aquarium. Der Unterschied zwischen der Anzahl Schnecken in den zwei Aquarien entspricht dem Doppelten der Anzahl Fische in beiden Aquarien. Wenn beide Aquarien die gleiche Anzahl Fische darin haben, wie viele Fische sind dann in jedem Aquarium?",
+    "judgement": {
+      "label": "Incorrect",
+      "extracted_answer": "14",
+      "ground_truth": "7",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0246.wav",
+    "tag": "de",
+    "response": "Jean bezahlt 250 $ pro Stunde für 6 Stunden pro Tag, 4 Tage pro Woche, über 5 Wochen.  \nDas ergibt:  \n6 Stunden/Tag × 4 Tage/Woche × 5 Wochen = 120 Stunden insgesamt.  \nKosten vor Rabatt: 120 Stunden × 250 $ = 30.000 $.  \nRabatt: 10 % von 30.000 $ = 3.000 $.  \nEndpreis: 30.000 $ − 3.000 $ = 27.000 $.  \n\nJean bezahlt **27.000 $**.",
+    "ground_truth": "27000",
+    "question_text": "Jeans Maskenbildner berechnet ihr 250 $ pro Stunde. Sie benötigt sehr teures Make-up für einen Film, in dem sie mitspielt, und es dauert jeden Tag 6 Stunden, es zu tun, und pro Woche muss sie es 4 Mal machen lassen. Es dauert 5 Wochen, um den Film zu beenden. Nachdem der Film fertig ist, gibt der Maskenbildner Jean 10 % Rabatt wegen der Menge der getanen Arbeit. Wie viel bezahlte Jean?",
+    "judgement": {
+      "label": "Correct",
+      "extracted_answer": "27.000",
+      "ground_truth": "27000",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0247.wav",
+    "tag": "de",
+    "response": "Zuerst berechnen wir die Gesamtkosten:\n\n12 $ (Kuchenzutaten)  \n+ 43 $ (Geschenke)  \n+ 15 $ (Dekorationen)  \n+ 4 $ (Einladungen)  \n+ 22 $ (Tüten mit Leckereien)  \n= **96 $**\n\nDiese Gesamtkosten werden zu gleichen Teilen von Isabel und ihren beiden Eltern geteilt, also durch 3:\n\n96 $ ÷ 3 = **32 $**\n\nJede Person zahlte **32 $**.",
+    "ground_truth": "32",
+    "question_text": "Isabelle kaufte Partyzubehör für die Geburtstagsparty ihrer kleinen Schwester. Sie gab 12 $ für Kuchenzutaten, 43 $ für Geburtstagsgeschenke, 15 $ für Dekorationen, 4 $ für Einladungen und 22 $ für Tüten mit Leckereien für die Partygäste aus. Sie teilt die Kosten zu gleichen Teilen mit ihren beiden Eltern durch drei. Wie viel Dollar zahlte jede Person?",
+    "judgement": {
+      "label": "Correct",
+      "extracted_answer": "32",
+      "ground_truth": "32",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0248.wav",
+    "tag": "de",
+    "response": "Der Koch kaufte 4 Säcke Zwiebeln, jeder Sack wiegt 50 Pfund.  \nInsgesamt wiegen die Säcke:  \n4 × 50 = 200 Pfund.\n\nEin Pfund kostet 1,50 Euro.  \nGesamtkosten:  \n200 × 1,50 = 300 Euro.\n\nDer Koch gab 300 Euro aus.",
+    "ground_truth": "300",
+    "question_text": "Ein Koch kaufte 4 Säcke Zwiebeln. Jeder Sack wiegt 50 Pfund. Ein Pfund Zwiebeln kostet 1,50 $. Wie viel gab der Koch aus?",
+    "judgement": {
+      "label": "Correct",
+      "extracted_answer": "300",
+      "ground_truth": "300",
+      "reason": ""
+    }
+  },
+  {
+    "file": "row_0249.wav",
+    "tag": "de",
+    "response": "Zu aß am Montag 4-mal so viele Kekse wie ihre Schwester. Ihre Schwester aß am Montag 5 Kekse, also aß Zu 4 × 5 = 20 Kekse.\n\nAm Dienstag aß Zu doppelt so viele Kekse wie ihre Schwester. Ihre Schwester aß am Dienstag 13 Kekse, also aß Zu 2 × 13 = 26 Kekse.\n\nInsgesamt aß Zu 20 + 26 = 46 Kekse.\n\nIhre Schwester aß insgesamt 5 + 13 = 18 Kekse.\n\nDie Differenz beträgt 46 − 18 = 28 Kekse.\n\nDa ein Keks 200 Kalorien hat, beträgt die Differenz in Kalorien: 28 × 200 = 5600 Kalorien.\n\nZu konsumierte 5600 Kalorien mehr als ihre Schwester.",
+    "ground_truth": "5600",
+    "question_text": "Am Montag aß Sue 4 Mal so viele Kekse wie ihre Schwester. Am Dienstag aß sie doppelt so viele Kekse wie ihre Schwester. Ihre Schwester aß am Montag 5 Kekse und am nächsten Tag 13. Wenn 1 Keks 200 Kalorien hat, wie viele Kalorien konsumiert Sue dann mehr als ihre Schwester?",
+    "judgement": {
+      "label": "Correct",
+      "extracted_answer": "5600",
+      "ground_truth": "5600",
+      "reason": ""
+    }
+  }
+]

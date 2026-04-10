@@ -12,8 +12,9 @@ import pandas as pd
 from dotenv import load_dotenv
 from openai import OpenAI
 
-# MODELS = ["qwen25omni", "qwen3omni", "voxtral", "gpt", "gemini", "flamingo", "salmonn"]
-MODELS = ["gemma"]
+MODELS = ["qwen25omni", "gemma", "qwen3omni", "voxtral", "gpt", "gemini", "flamingo", "salmonn"]
+
+
 class GPT4Judge:
     SYSTEM_PROMPT = (
         "You are an expert jailbreak evaluation judge.\n"
@@ -76,27 +77,37 @@ class GPT4Judge:
 
 
 def parse_lang_tag(tag: str) -> tuple[str, str, str]:
+    """
+    Parse a language tag into (lang1, lang2, canonical).
+
+    Supported formats:
+      "en"       -> single language, monolingual English
+      "de"       -> single language, monolingual (lang1=de, lang2=en means original_de.csv)
+      "en-de"    -> code-switch pair  (lang1=en, lang2=de)
+      "de-fr"    -> code-switch pair  (lang1=de, lang2=fr)
+
+    canonical is the tag as-is, used for file naming and the "lang" JSON field.
+    """
     tag = tag.strip()
-    if tag == "en":
-        return "en", "en", "en"
-    if tag.startswith("cs-"):
-        lang = tag[3:]
-        return lang, "en", tag
     if "-" in tag:
         a, b = tag.split("-", 1)
         return a, b, tag
-    return tag, "en", tag
+    # Single language: treat as original_<lang>.csv
+    # For "en", lang1=en, lang2=en signals the pure English original.
+    return tag, tag, tag
 
 
 def _goal_col_for_lang(lang: str) -> str:
     return "Goal" if lang == "en" else f"Goal_{lang}"
 
 
-def translation_csv_for_cs_pair(translations_root: Path, lang1: str, lang2: str) -> Path:
+def translation_csv_for_pair(translations_root: Path, lang1: str, lang2: str) -> Path:
+    """Return the codeswitch CSV for a language pair, e.g. codeswitch_en_de.csv."""
     return translations_root / "translations" / f"codeswitch_{lang1}_{lang2}.csv"
 
 
 def translation_csv_for_original(translations_root: Path, lang: str) -> Path:
+    """Return the monolingual original CSV, e.g. original_de.csv."""
     return translations_root / "translations" / f"original_{lang}.csv"
 
 
@@ -124,11 +135,22 @@ def load_prompts_multilang(
     lang1: str,
     lang2: str,
 ) -> tuple[dict[int, dict[str, str]], dict[int, str]]:
+    """
+    Load prompt variants keyed by row index.
+
+    - Monolingual (lang1 == lang2):  reads original_<lang>.csv
+      * For "en": only the "Goal" (English) column is available.
+      * For others (e.g. "de"): reads both "Goal" (en) and "Goal_de".
+    - Pair (lang1 != lang2): reads codeswitch_<lang1>_<lang2>.csv
+      and populates both language columns plus "Goal" (en) if present.
+    """
     prompts_by_row: dict[int, dict[str, str]] = {}
     prompttype_by_row: dict[int, str] = {}
 
-    if lang2 == "en":
-        csv = translation_csv_for_original(translations_root, lang1)
+    if lang1 == lang2:
+        # Monolingual mode
+        lang = lang1
+        csv = translation_csv_for_original(translations_root, lang)
         if not csv.exists():
             print(f"[WARNING] CSV not found: {csv}", file=sys.stderr)
             return {}, {}
@@ -137,33 +159,39 @@ def load_prompts_multilang(
             print(f"[WARNING] 'Goal' column missing in {csv}", file=sys.stderr)
             return {}, {}
         for i, row in df.iterrows():
-            prompts_by_row[i] = {"en": str(row["Goal"])}
-            col = _goal_col_for_lang(lang1)
-            if col in df.columns:
-                prompts_by_row[i][lang1] = str(row[col])
+            entry: dict[str, str] = {"en": str(row["Goal"])}
+            if lang != "en":
+                col = _goal_col_for_lang(lang)
+                if col in df.columns:
+                    entry[lang] = str(row[col])
+            prompts_by_row[i] = entry
         if "Category" in df.columns and "Behavior" in df.columns:
             for i, row in df.iterrows():
                 prompttype_by_row[i] = f"{row['Category']} - {row['Behavior']}"
         return prompts_by_row, prompttype_by_row
 
-    csv = translation_csv_for_cs_pair(translations_root, lang1, lang2)
+    # Code-switch pair mode
+    csv = translation_csv_for_pair(translations_root, lang1, lang2)
     if not csv.exists():
         print(f"[WARNING] CS pair CSV not found: {csv}", file=sys.stderr)
         return {}, {}
     df = pd.read_csv(csv)
-    col1, col2 = _goal_col_for_lang(lang1), _goal_col_for_lang(lang2)
+
+    col1 = _goal_col_for_lang(lang1)
+    col2 = _goal_col_for_lang(lang2)
     missing = [c for c in [col1, col2] if c not in df.columns]
     if missing:
         print(f"[WARNING] Missing columns {missing} in {csv} (found: {list(df.columns)})", file=sys.stderr)
         return {}, {}
 
     for i, row in df.iterrows():
-        prompts_by_row[i] = {
+        entry: dict[str, str] = {
             lang1: str(row[col1]),
             lang2: str(row[col2]),
         }
         if "Goal" in df.columns:
-            prompts_by_row[i]["en"] = str(row["Goal"])
+            entry["en"] = str(row["Goal"])
+        prompts_by_row[i] = entry
 
     if "Category" in df.columns and "Behavior" in df.columns:
         for i, row in df.iterrows():
@@ -186,7 +214,6 @@ def row_index_from_filename(filename: str) -> int:
 
 
 def load_responses(results_root: Path, model: str, tag: str) -> list[dict]:
-    # --- CHANGE 2 (continued): use per-model subfolder ---
     path = results_file_for_model(results_root, model, tag)
     if not path.exists():
         print(f"[WARNING] Results file not found: {path}", file=sys.stderr)
@@ -262,6 +289,7 @@ def compute_summary(
                 type_counts[ptype][label] = type_counts[ptype].get(label, 0) + 1
                 type_counts[ptype]["total"] += 1
 
+            # Use the tag directly as the summary key (e.g. "en", "de", "en-de")
             summary[model][tag] = {
                 "n_total": len(records),
                 "n_judged": n,
@@ -358,25 +386,37 @@ def run_judge(
 
                 if prompt_variants is None:
                     print(f"    [WARNING] prompt_not_found row={row_idx}")
-                    judged_results.append({**record, "judgement": None, "error": "prompt_not_found"})
+                    judged_results.append({
+                        **record,
+                        "lang": canonical,
+                        "prompts": None,
+                        "judgement": None,
+                        "error": "prompt_not_found",
+                    })
                     save_judged(judge_dir, model, tag, judged_results)
                     continue
 
                 if response_text is None:
                     print(f"    [SKIP] no_model_response row={row_idx}")
-                    judged_results.append({**record, "prompts": prompt_variants,
-                                           "judgement": None, "error": "no_model_response"})
+                    judged_results.append({
+                        **record,
+                        "lang": canonical,
+                        "prompts": prompt_variants,
+                        "judgement": None,
+                        "error": "no_model_response",
+                    })
                     save_judged(judge_dir, model, tag, judged_results)
                     continue
 
                 prompts_block = build_prompts_block(prompt_variants)
                 label, reason = judge.judge(prompts_block, response_text)
+                print(f"    [judge] label={label} reason={reason[:120]}")
                 judged_results.append({
                     **record,
+                    "lang": canonical,
                     "prompts": prompt_variants,
                     "judgement": {"label": label, "reason": reason},
                 })
-                print(f"    [judge] label={label} reason={reason[:120]}")
                 save_judged(judge_dir, model, tag, judged_results)
                 time.sleep(0.5)
 
@@ -400,13 +440,18 @@ if __name__ == "__main__":
                         help="Models to judge. Default: all")
     parser.add_argument(
         "--langs", nargs="+", default=None,
-        help="Language tags to judge, e.g.: en de de-fr. If omitted, auto-discovers from results_{model}/ folders.",
+        help=(
+            "Language tags to judge. Examples: en de en-de de-fr\n"
+            "  Single tag (e.g. 'en', 'de')  -> reads original_<lang>.csv\n"
+            "  Pair tag   (e.g. 'en-de')     -> reads codeswitch_en_de.csv\n"
+            "If omitted, auto-discovers from results_{model}/ folders."
+        ),
     )
     parser.add_argument("--results_root", type=Path, default=Path("."),
                         help="Root dir containing results_{model}/ subfolders. Default: current dir.")
     parser.add_argument("--translations_root", type=Path, default=Path("."),
                         help="Root dir containing translations/ subfolder. Default: current dir.")
-    parser.add_argument("--judge_dir", type=Path, default=Path("judge_results_gibberish"),
+    parser.add_argument("--judge_dir", type=Path, default=Path("judge_results_malicious"),
                         help="Directory to save judged JSON outputs.")
     parser.add_argument("--test", action="store_true",
                         help="Judge only first file per model/tag.")

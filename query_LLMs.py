@@ -1,22 +1,10 @@
-"""
-    --model      : one of qwen25omni, qwen3omni, voxtral, flamingo, gpt, gemini, salmonn
-    --quantize   : load in 4-bit (required for large models on single GPU)
-    --langs      : single-language audio folders to run (original_{lang}_nordic tags)
-    --cs_pairs   : codeswitched pairs to run, e.g. de-es de-fr en-de
-                   'en-X' or 'X-en' means English<->X (folder: audio_xtts_nordic/codeswitch_en_X_nordic)
-                   'X-Y'  means X<->Y                 (folder: audio_xtts_nordic/codeswitch_X_Y_nordic)
-    --data_root  : root folder (default: .)
-    --out_dir    : where to save JSON results (default: ./results)
-    --test       : run only first file per language/pair (sanity check)
-    --resume     : skip already-completed files
-"""
-
 import argparse
 import base64
 import json
 import os
 import sys
 from pathlib import Path
+from typing import Optional
 
 import pandas as pd
 
@@ -26,6 +14,7 @@ try:
 except Exception:
     pass
 
+
 SYSTEM_PROMPT = (
     "You are a direct assistant. Listen to the audio and respond "
     "to it immediately and only. Do not repeat the question, "
@@ -34,25 +23,40 @@ SYSTEM_PROMPT = (
 )
 
 SINGLE_LANGS = ["de", "es", "fr", "it", "en"]
-N_FILES = 100
+N_FILES = 250
 
-FOREIGN_AUDIO_DIR = "audio_xtts_gibberish"
-
+FOREIGN_AUDIO_DIR = "audio_gemini_mgsm"
+MGSM_CSV_DIR = "global_mgsm"
 
 
 def single_lang_folder(data_root: Path, lang: str) -> Path:
-    return data_root / FOREIGN_AUDIO_DIR / f"original_{lang}_gibberish"
-    # return data_root / FOREIGN_AUDIO_DIR / f"audio_xtts_{lang}"
+    return data_root / FOREIGN_AUDIO_DIR / f"global_mgsm_{lang}"
 
 
-def cs_en_folder(data_root: Path, lang: str) -> Path:
-    return data_root / FOREIGN_AUDIO_DIR / f"codeswitch_en_{lang}_gibberish"
-    # return data_root / FOREIGN_AUDIO_DIR / f"audio_xtts_cs_{lang}"
+def single_lang_manifest_path(data_root: Path, lang: str) -> Path:
+    return data_root / FOREIGN_AUDIO_DIR / f"global_mgsm_{lang}_manifest.csv"
 
 
-def cs_pair_folder(data_root: Path, lang1: str, lang2: str) -> Path:
-    return data_root / FOREIGN_AUDIO_DIR / f"codeswitch_{lang1}_{lang2}_gibberish"
-    # return data_root / FOREIGN_AUDIO_DIR / f"audio_xtts_{lang1}_{lang2}"
+def single_lang_text_csv_path(data_root: Path, lang: str) -> Path:
+    return data_root / "mgsm" / MGSM_CSV_DIR / f"global_mgsm_{lang}.csv"
+
+
+def _sorted_audio_files(folder: Path) -> list[Path]:
+    exts = ("*.wav", "*.mp3", "*.flac", "*.m4a")
+    paths = []
+    for pattern in exts:
+        paths.extend(folder.glob(pattern))
+
+    def sort_key(p: Path):
+        stem = p.stem
+        if stem.startswith("row_"):
+            try:
+                return (0, int(stem.split("_")[1]))
+            except Exception:
+                pass
+        return (1, stem)
+
+    return sorted(paths, key=sort_key)
 
 
 def get_single_lang_paths(data_root: Path, langs: list[str]) -> dict[str, list[Path]]:
@@ -62,88 +66,88 @@ def get_single_lang_paths(data_root: Path, langs: list[str]) -> dict[str, list[P
         if not folder.exists():
             print(f"[WARNING] Folder not found: {folder}", file=sys.stderr)
             continue
-        paths = sorted(folder.glob("row_????.wav"))
+
+        paths = _sorted_audio_files(folder)
         if len(paths) != N_FILES:
-            print(f"[WARNING] Expected {N_FILES} files in {folder}, found {len(paths)}", file=sys.stderr)
+            print(
+                f"[WARNING] Expected {N_FILES} files in {folder}, found {len(paths)}",
+                file=sys.stderr
+            )
         result[lang] = paths
     return result
 
 
-def get_cs_paths(data_root: Path, cs_pairs: list[str]) -> dict[str, list[Path]]:
-    """
-    cs_pairs entries:
-      'en-{lang}' or '{lang}-en' -> English<->lang  (folder: codeswitch_en_{lang}_nordic)
-      '{lang1}-{lang2}'          -> lang1<->lang2    (folder: codeswitch_{lang1}_{lang2}_nordic)
-    Returns dict keyed by the pair tag (e.g. 'en-de', 'de-es').
-    """
-    result = {}
-    for pair in cs_pairs:
-        parts = pair.split("-", 1)
-        if len(parts) != 2:
-            print(f"[WARNING] Invalid cs_pair format: {pair}", file=sys.stderr)
-            continue
-        l1, l2 = parts
-
-        if l1 == "en":
-            folder = cs_en_folder(data_root, l2)
-        elif l2 == "en":
-            folder = cs_en_folder(data_root, l1)
-        else:
-            folder = cs_pair_folder(data_root, l1, l2)
-
-        if not folder.exists():
-            print(f"[WARNING] Folder not found: {folder}", file=sys.stderr)
-            continue
-        paths = sorted(folder.glob("row_????.wav"))
-        if len(paths) != N_FILES:
-            print(f"[WARNING] Expected {N_FILES} files in {folder}, found {len(paths)}", file=sys.stderr)
-        result[pair] = paths
-    return result
+def load_single_lang_manifest(data_root: Path, lang: str) -> Optional[pd.DataFrame]:
+    path = single_lang_manifest_path(data_root, lang)
+    if not path.exists():
+        print(f"[WARNING] Manifest not found: {path}", file=sys.stderr)
+        return None
+    return pd.read_csv(path)
 
 
-def load_ground_truth_single(data_root: Path) -> dict[int, str]:
-    """
-    Single-lang (including English<->X cs) ground truth from
-    translations/jbb_behaviors_de_12b.csv, column 'Goal'.
-    Row index = file row number (0-based).
-    """
-    csv_path = (data_root / ".." / "malicious" / "translations" / "original_en.csv").resolve()
-    if not csv_path.exists():
-        print(f"[WARNING] Ground truth CSV not found: {csv_path}", file=sys.stderr)
+def load_single_lang_questions(data_root: Path, lang: str) -> dict[int, str]:
+    path = single_lang_text_csv_path(data_root, lang)
+    if not path.exists():
+        print(f"[WARNING] Question CSV not found: {path}", file=sys.stderr)
         return {}
-    df = pd.read_csv(csv_path)
-    if "Goal" not in df.columns:
-        print(f"[WARNING] 'Goal' column not found in {csv_path}", file=sys.stderr)
+
+    df = pd.read_csv(path)
+
+    candidate_cols = [
+        "question",
+        f"question_{lang}",
+        "Question",
+        f"Question_{lang}",
+        "input",
+        "prompt",
+    ]
+
+    q_col = next((c for c in candidate_cols if c in df.columns), None)
+    if q_col is None:
+        print(
+            f"[WARNING] Could not find a question column in {path}. "
+            f"Available columns: {list(df.columns)}",
+            file=sys.stderr
+        )
         return {}
-    return {i: str(row["Goal"]) for i, row in df.iterrows()}
+
+    return {i: str(row[q_col]) for i, row in df.iterrows()}
 
 
-def load_ground_truth_cs_pair(data_root: Path, lang1: str, lang2: str) -> dict[int, dict[str, str]]:
-    """
-    Two-language cs ground truth from
-    translations/codeswitch_{lang1}_{lang2}.csv
-    columns: Goal_{lang1}, Goal_{lang2}
-    Returns dict[row_idx] = {"lang1": ..., "lang2": ...}
-    """
-    csv_path = (data_root / ".." / "malicious" / "translations" / f"codeswitch_{lang1}_{lang2}.csv").resolve()
-    if not csv_path.exists():
-        print(f"[WARNING] CS ground truth CSV not found: {csv_path}", file=sys.stderr)
+def load_ground_truth_single(data_root: Path, lang: str) -> dict[int, str]:
+    path = single_lang_text_csv_path(data_root, lang)
+    if not path.exists():
+        print(f"[WARNING] Ground-truth CSV not found: {path}", file=sys.stderr)
         return {}
-    df = pd.read_csv(csv_path)
-    col1, col2 = f"Goal_{lang1}", f"Goal_{lang2}"
-    missing = [c for c in [col1, col2] if c not in df.columns]
-    if missing:
-        print(f"[WARNING] Missing columns {missing} in {csv_path}", file=sys.stderr)
+
+    df = pd.read_csv(path)
+
+    candidate_cols = [
+        "answer",
+        f"answer_{lang}",
+        "Answer",
+        "question",
+        f"question_{lang}",
+        "Question",
+    ]
+
+    gt_col = next((c for c in candidate_cols if c in df.columns), None)
+    if gt_col is None:
+        print(
+            f"[WARNING] Could not find a ground-truth column in {path}. "
+            f"Available columns: {list(df.columns)}",
+            file=sys.stderr
+        )
         return {}
-    return {
-        i: {lang1: str(row[col1]), lang2: str(row[col2])}
-        for i, row in df.iterrows()
-    }
+
+    return {i: str(row[gt_col]) for i, row in df.iterrows()}
 
 
 def row_index_from_filename(filename: str) -> int:
-    return int(Path(filename).stem.split("_")[1])
-
+    stem = Path(filename).stem
+    if stem.startswith("row_"):
+        return int(stem.split("_")[1])
+    raise ValueError(f"Cannot infer row index from filename: {filename}")
 
 
 def save_results(out_dir: Path, model_name: str, tag: str, results: list[dict]):
@@ -171,7 +175,6 @@ def load_existing_results(out_dir: Path, model_name: str, tag: str) -> list[dict
         return json.load(f)
 
 
-
 def safe_inputs_to_device(inputs, device, dtype):
     import torch
     result = {}
@@ -185,33 +188,13 @@ def safe_inputs_to_device(inputs, device, dtype):
     return result
 
 
-def attach_ground_truth(record: dict, filename: str, tag: str, data_root: Path) -> dict:
-    """
-    Attach ground truth to a result record based on the audio tag type.
-      - single lang (e.g. 'de', 'en'):  gt = Goal string
-      - en-{lang} or {lang}-en:          gt = Goal string
-      - {lang1}-{lang2}:                 gt = {lang1: ..., lang2: ...}
-    """
+def attach_ground_truth(record: dict, filename: str, lang: str, data_root: Path) -> dict:
     row_idx = row_index_from_filename(filename)
-
-    if "-" not in tag:
-        # pure single-language
-        gt_map = load_ground_truth_single(data_root)
-        record["ground_truth"] = gt_map.get(row_idx)
-    else:
-        parts = tag.split("-", 1)
-        l1, l2 = parts[0], parts[1]
-        if l1 == "en" or l2 == "en":
-            # English <-> lang
-            gt_map = load_ground_truth_single(data_root)
-            record["ground_truth"] = gt_map.get(row_idx)
-        else:
-            # lang1 <-> lang2
-            gt_map = load_ground_truth_cs_pair(data_root, l1, l2)
-            record["ground_truth"] = gt_map.get(row_idx)
-
+    gt_map = load_ground_truth_single(data_root, lang)
+    q_map = load_single_lang_questions(data_root, lang)
+    record["ground_truth"] = gt_map.get(row_idx)
+    record["question_text"] = q_map.get(row_idx)
     return record
-
 
 
 def run_qwen25omni(audio_paths: dict, out_dir: Path, quantize: bool, data_root: Path, resume: bool = False):
@@ -236,11 +219,11 @@ def run_qwen25omni(audio_paths: dict, out_dir: Path, quantize: bool, data_root: 
     model_dtype = next(model.parameters()).dtype
     model_device = next(model.parameters()).device
 
-    for tag, paths in audio_paths.items():
-        completed = load_completed(out_dir, "qwen25omni", tag) if resume else set()
+    for lang, paths in audio_paths.items():
+        completed = load_completed(out_dir, "qwen25omni", lang) if resume else set()
         pending = [p for p in paths if p.name not in completed]
-        results = load_existing_results(out_dir, "qwen25omni", tag) if resume else []
-        print(f"\n[qwen25omni] tag={tag} ({len(pending)}/{len(paths)} files)")
+        results = load_existing_results(out_dir, "qwen25omni", lang) if resume else []
+        print(f"\n[qwen25omni] lang={lang} ({len(pending)}/{len(paths)} files)")
 
         for path in pending:
             try:
@@ -250,23 +233,30 @@ def run_qwen25omni(audio_paths: dict, out_dir: Path, quantize: bool, data_root: 
                 ]
                 text = processor.apply_chat_template(conversation, add_generation_prompt=True, tokenize=False)
                 audios, images, videos = process_mm_info(conversation, use_audio_in_video=False)
-                inputs = processor(text=text, audio=audios, images=images, videos=videos,
-                                   return_tensors="pt", padding=True)
+                inputs = processor(
+                    text=text,
+                    audio=audios,
+                    images=images,
+                    videos=videos,
+                    return_tensors="pt",
+                    padding=True,
+                )
                 inputs = safe_inputs_to_device(inputs, model_device, model_dtype)
                 with torch.no_grad():
                     text_ids = model.generate(**inputs, max_new_tokens=512, return_audio=False)
                 response = processor.batch_decode(
                     text_ids[:, inputs["input_ids"].shape[1]:],
-                    skip_special_tokens=True, clean_up_tokenization_spaces=False,
+                    skip_special_tokens=True,
+                    clean_up_tokenization_spaces=False,
                 )[0]
-                record = {"file": path.name, "tag": tag, "response": response}
-                record = attach_ground_truth(record, path.name, tag, data_root)
+                record = {"file": path.name, "tag": lang, "response": response}
+                record = attach_ground_truth(record, path.name, lang, data_root)
                 results.append(record)
                 print(f"  {path.name}: {response[:80]}...")
             except Exception as e:
                 print(f"  [ERROR] {path.name}: {e}", file=sys.stderr)
-                results.append({"file": path.name, "tag": tag, "response": None, "error": str(e)})
-            save_results(out_dir, "qwen25omni", tag, results)
+                results.append({"file": path.name, "tag": lang, "response": None, "error": str(e)})
+            save_results(out_dir, "qwen25omni", lang, results)
 
 
 def run_qwen3omni(audio_paths: dict, out_dir: Path, quantize: bool, data_root: Path, resume: bool = False):
@@ -291,11 +281,11 @@ def run_qwen3omni(audio_paths: dict, out_dir: Path, quantize: bool, data_root: P
     model_dtype = next(model.parameters()).dtype
     model_device = next(model.parameters()).device
 
-    for tag, paths in audio_paths.items():
-        completed = load_completed(out_dir, "qwen3omni", tag) if resume else set()
+    for lang, paths in audio_paths.items():
+        completed = load_completed(out_dir, "qwen3omni", lang) if resume else set()
         pending = [p for p in paths if p.name not in completed]
-        results = load_existing_results(out_dir, "qwen3omni", tag) if resume else []
-        print(f"\n[qwen3omni] tag={tag} ({len(pending)}/{len(paths)} files)")
+        results = load_existing_results(out_dir, "qwen3omni", lang) if resume else []
+        print(f"\n[qwen3omni] lang={lang} ({len(pending)}/{len(paths)} files)")
 
         for path in pending:
             try:
@@ -305,23 +295,30 @@ def run_qwen3omni(audio_paths: dict, out_dir: Path, quantize: bool, data_root: P
                 ]
                 text = processor.apply_chat_template(conversation, add_generation_prompt=True, tokenize=False)
                 audios, images, videos = process_mm_info(conversation, use_audio_in_video=False)
-                inputs = processor(text=text, audio=audios, images=images, videos=videos,
-                                   return_tensors="pt", padding=True)
+                inputs = processor(
+                    text=text,
+                    audio=audios,
+                    images=images,
+                    videos=videos,
+                    return_tensors="pt",
+                    padding=True,
+                )
                 inputs = safe_inputs_to_device(inputs, model_device, model_dtype)
                 with torch.no_grad():
                     output_ids = model.generate(**inputs, max_new_tokens=512)
                 response = processor.batch_decode(
                     output_ids[:, inputs["input_ids"].shape[1]:],
-                    skip_special_tokens=True, clean_up_tokenization_spaces=False,
+                    skip_special_tokens=True,
+                    clean_up_tokenization_spaces=False,
                 )[0]
-                record = {"file": path.name, "tag": tag, "response": response}
-                record = attach_ground_truth(record, path.name, tag, data_root)
+                record = {"file": path.name, "tag": lang, "response": response}
+                record = attach_ground_truth(record, path.name, lang, data_root)
                 results.append(record)
                 print(f"  {path.name}: {response[:80]}...")
             except Exception as e:
                 print(f"  [ERROR] {path.name}: {e}", file=sys.stderr)
-                results.append({"file": path.name, "tag": tag, "response": None, "error": str(e)})
-            save_results(out_dir, "qwen3omni", tag, results)
+                results.append({"file": path.name, "tag": lang, "response": None, "error": str(e)})
+            save_results(out_dir, "qwen3omni", lang, results)
 
 
 def run_voxtral(audio_paths: dict, out_dir: Path, quantize: bool, data_root: Path, resume: bool = False):
@@ -344,11 +341,11 @@ def run_voxtral(audio_paths: dict, out_dir: Path, quantize: bool, data_root: Pat
     model_dtype = next(model.parameters()).dtype
     model_device = next(model.parameters()).device
 
-    for tag, paths in audio_paths.items():
-        completed = load_completed(out_dir, "voxtral", tag) if resume else set()
+    for lang, paths in audio_paths.items():
+        completed = load_completed(out_dir, "voxtral", lang) if resume else set()
         pending = [p for p in paths if p.name not in completed]
-        results = load_existing_results(out_dir, "voxtral", tag) if resume else []
-        print(f"\n[voxtral] tag={tag} ({len(pending)}/{len(paths)} files)")
+        results = load_existing_results(out_dir, "voxtral", lang) if resume else []
+        print(f"\n[voxtral] lang={lang} ({len(pending)}/{len(paths)} files)")
 
         for path in pending:
             try:
@@ -364,19 +361,25 @@ def run_voxtral(audio_paths: dict, out_dir: Path, quantize: bool, data_root: Pat
                 inputs = processor.apply_chat_template(conversation)
                 inputs = inputs.to(model_device, dtype=model_dtype)
                 with torch.no_grad():
-                    output_ids = model.generate(**inputs, max_new_tokens=512,
-                                                temperature=0.2, top_p=0.95, do_sample=True)
+                    output_ids = model.generate(
+                        **inputs,
+                        max_new_tokens=512,
+                        temperature=0.2,
+                        top_p=0.95,
+                        do_sample=True,
+                    )
                 response = processor.batch_decode(
-                    output_ids[:, inputs.input_ids.shape[1]:], skip_special_tokens=True,
+                    output_ids[:, inputs.input_ids.shape[1]:],
+                    skip_special_tokens=True,
                 )[0]
-                record = {"file": path.name, "tag": tag, "response": response}
-                record = attach_ground_truth(record, path.name, tag, data_root)
+                record = {"file": path.name, "tag": lang, "response": response}
+                record = attach_ground_truth(record, path.name, lang, data_root)
                 results.append(record)
                 print(f"  {path.name}: {response[:80]}...")
             except Exception as e:
                 print(f"  [ERROR] {path.name}: {e}", file=sys.stderr)
-                results.append({"file": path.name, "tag": tag, "response": None, "error": str(e)})
-            save_results(out_dir, "voxtral", tag, results)
+                results.append({"file": path.name, "tag": lang, "response": None, "error": str(e)})
+            save_results(out_dir, "voxtral", lang, results)
 
 
 def run_flamingo(audio_paths: dict, out_dir: Path, quantize: bool, data_root: Path, resume: bool = False):
@@ -399,11 +402,11 @@ def run_flamingo(audio_paths: dict, out_dir: Path, quantize: bool, data_root: Pa
     model_dtype = next(model.parameters()).dtype
     model_device = next(model.parameters()).device
 
-    for tag, paths in audio_paths.items():
-        completed = load_completed(out_dir, "flamingo", tag) if resume else set()
+    for lang, paths in audio_paths.items():
+        completed = load_completed(out_dir, "flamingo", lang) if resume else set()
         pending = [p for p in paths if p.name not in completed]
-        results = load_existing_results(out_dir, "flamingo", tag) if resume else []
-        print(f"\n[flamingo] tag={tag} ({len(pending)}/{len(paths)} files)")
+        results = load_existing_results(out_dir, "flamingo", lang) if resume else []
+        print(f"\n[flamingo] lang={lang} ({len(pending)}/{len(paths)} files)")
 
         for path in pending:
             transcription = None
@@ -417,7 +420,8 @@ def run_flamingo(audio_paths: dict, out_dir: Path, quantize: bool, data_root: Pa
                     t_ids = model.generate(**inputs, max_new_tokens=256)
                 transcription = processor.batch_decode(
                     t_ids[:, inputs["input_ids"].shape[1]:],
-                    skip_special_tokens=True, strip_prefix=True,
+                    skip_special_tokens=True,
+                    strip_prefix=True,
                 )[0].strip()
                 print(f"  {path.name} [transcription]: {transcription[:80]}...")
             except Exception as e:
@@ -430,26 +434,32 @@ def run_flamingo(audio_paths: dict, out_dir: Path, quantize: bool, data_root: Pa
                         {"role": "user", "content": transcription},
                     ]
                     text = processor.apply_chat_template(
-                        conversation, tokenize=False, add_generation_prompt=True)
+                        conversation,
+                        tokenize=False,
+                        add_generation_prompt=True,
+                    )
                     inputs2 = processor(text=text, return_tensors="pt")
                     inputs2 = safe_inputs_to_device(inputs2, model_device, model_dtype)
                     with torch.no_grad():
                         r_ids = model.generate(**inputs2, max_new_tokens=512)
                     response = processor.batch_decode(
-                        r_ids[:, inputs2["input_ids"].shape[1]:], skip_special_tokens=True,
+                        r_ids[:, inputs2["input_ids"].shape[1]:],
+                        skip_special_tokens=True,
                     )[0].strip()
                     print(f"  {path.name} [response]: {response[:80]}...")
                 except Exception as e:
                     print(f"  [ERROR] {path.name} response: {e}", file=sys.stderr)
 
             record = {
-                "file": path.name, "tag": tag,
-                "transcription": transcription, "response": response,
+                "file": path.name,
+                "tag": lang,
+                "transcription": transcription,
+                "response": response,
                 "error": None if (transcription and response) else "partial_or_failed",
             }
-            record = attach_ground_truth(record, path.name, tag, data_root)
+            record = attach_ground_truth(record, path.name, lang, data_root)
             results.append(record)
-            save_results(out_dir, "flamingo", tag, results)
+            save_results(out_dir, "flamingo", lang, results)
 
 
 def run_gpt(audio_paths: dict, out_dir: Path, data_root: Path, resume: bool = False, **_):
@@ -465,11 +475,11 @@ def run_gpt(audio_paths: dict, out_dir: Path, data_root: Path, resume: bool = Fa
     MAX_RETRIES = 5
     INITIAL_WAIT = 10
 
-    for tag, paths in audio_paths.items():
-        completed = load_completed(out_dir, "gpt", tag) if resume else set()
+    for lang, paths in audio_paths.items():
+        completed = load_completed(out_dir, "gpt", lang) if resume else set()
         pending = [p for p in paths if p.name not in completed]
-        results = load_existing_results(out_dir, "gpt", tag) if resume else []
-        print(f"\n[gpt] tag={tag} ({len(pending)}/{len(paths)} files)")
+        results = load_existing_results(out_dir, "gpt", lang) if resume else []
+        print(f"\n[gpt] lang={lang} ({len(pending)}/{len(paths)} files)")
 
         for path in pending:
             with open(path, "rb") as f:
@@ -483,9 +493,18 @@ def run_gpt(audio_paths: dict, out_dir: Path, data_root: Path, resume: bool = Fa
                         model=model_id,
                         messages=[
                             {"role": "system", "content": SYSTEM_PROMPT},
-                            {"role": "user", "content": [
-                                {"type": "input_audio", "input_audio": {"data": audio_b64, "format": "wav"}},
-                            ]},
+                            {
+                                "role": "user",
+                                "content": [
+                                    {
+                                        "type": "input_audio",
+                                        "input_audio": {
+                                            "data": audio_b64,
+                                            "format": "wav",
+                                        },
+                                    },
+                                ],
+                            },
                         ],
                         max_tokens=512,
                     )
@@ -504,26 +523,22 @@ def run_gpt(audio_paths: dict, out_dir: Path, data_root: Path, resume: bool = Fa
                         break
 
             if response_obj is None:
-                results.append({"file": path.name, "tag": tag, "response": None,
-                                 "error": "api_error_or_rate_limit"})
+                results.append({
+                    "file": path.name,
+                    "tag": lang,
+                    "response": None,
+                    "error": "api_error_or_rate_limit",
+                })
             else:
                 text = response_obj.choices[0].message.content
-                record = {"file": path.name, "tag": tag, "response": text}
-                record = attach_ground_truth(record, path.name, tag, data_root)
+                record = {"file": path.name, "tag": lang, "response": text}
+                record = attach_ground_truth(record, path.name, lang, data_root)
                 results.append(record)
                 print(f"  {path.name}: {text[:80]}...")
-            save_results(out_dir, "gpt", tag, results)
-
+            save_results(out_dir, "gpt", lang, results)
 
 
 def run_gemini(audio_paths: dict, out_dir: Path, data_root: Path, resume: bool = False, **_):
-    """
-    Uses google-generativeai SDK with GOOGLE_API_KEY env var.
-    Install: pip install google-genai
-
-    Model: gemini-2.5-pro  (or set GEMINI_MODEL env var to override)
-    Audio is passed inline as base64 WAV via the Parts API.
-    """
     import time
     from google import genai
     from google.genai import types
@@ -539,11 +554,11 @@ def run_gemini(audio_paths: dict, out_dir: Path, data_root: Path, resume: bool =
     MAX_RETRIES = 5
     INITIAL_WAIT = 10
 
-    for tag, paths in audio_paths.items():
-        completed = load_completed(out_dir, "gemini", tag) if resume else set()
+    for lang, paths in audio_paths.items():
+        completed = load_completed(out_dir, "gemini", lang) if resume else set()
         pending = [p for p in paths if p.name not in completed]
-        results = load_existing_results(out_dir, "gemini", tag) if resume else []
-        print(f"\n[gemini] tag={tag} ({len(pending)}/{len(paths)} files)")
+        results = load_existing_results(out_dir, "gemini", lang) if resume else []
+        print(f"\n[gemini] lang={lang} ({len(pending)}/{len(paths)} files)")
 
         for path in pending:
             with open(path, "rb") as f:
@@ -589,32 +604,17 @@ def run_gemini(audio_paths: dict, out_dir: Path, data_root: Path, resume: bool =
                         break
 
             if response_text is None:
-                results.append({"file": path.name, "tag": tag, "response": None, "error": last_error})
+                results.append({"file": path.name, "tag": lang, "response": None, "error": last_error})
             else:
-                record = {"file": path.name, "tag": tag, "response": response_text}
-                record = attach_ground_truth(record, path.name, tag, data_root)
+                record = {"file": path.name, "tag": lang, "response": response_text}
+                record = attach_ground_truth(record, path.name, lang, data_root)
                 results.append(record)
                 print(f"  {path.name}: {response_text[:80]}...")
-            save_results(out_dir, "gemini", tag, results)
+            save_results(out_dir, "gemini", lang, results)
 
 
 def run_salmonn(audio_paths: dict, out_dir: Path, quantize: bool, data_root: Path, resume: bool = False):
-    """
-    SALMonn — local inference using the tsinghua-ee/SALMONN repo.
-
-    Requirements:
-      - SALMONN repo cloned to ./SALMONN (or set SALMONN_REPO env var)
-      - salmonn_v1.pth at ./SALMONN/salmonn_v1.pth (or set SALMONN_CKPT)
-      - BEATs checkpoint at ./SALMONN/beats/BEATs_iter3_plus_AS2M_finetuned_on_AS2M_cpt2.pt
-        (or set SALMONN_BEATS_PATH)
-      - Vicuna-13B available via HF (lmsys/vicuna-13b-v1.1) or set SALMONN_LLM_PATH
-      - Always run with --quantize; loading in bf16 OOMs on 80GB H100
-
-    sbatch requirements:
-      export LD_LIBRARY_PATH=/cvmfs/ai.mila.quebec/apps/x86_64/common/cuda/12.2.2/targets/x86_64-linux/lib:$LD_LIBRARY_PATH
-    """
     import torch
-    import torchaudio
 
     salmonn_repo = os.environ.get("SALMONN_REPO", str(data_root / "SALMONN"))
     if salmonn_repo not in sys.path:
@@ -625,12 +625,12 @@ def run_salmonn(audio_paths: dict, out_dir: Path, quantize: bool, data_root: Pat
     except ImportError as e:
         raise ImportError(f"Cannot import SALMONN from {salmonn_repo}. Error: {e}")
 
-    ckpt_path    = os.environ.get("SALMONN_CKPT",         f"{salmonn_repo}/salmonn_v1.pth")
-    beats_path   = os.environ.get("SALMONN_BEATS_PATH",   f"{salmonn_repo}/beats/BEATs_iter3_plus_AS2M_finetuned_on_AS2M_cpt2.pt")
+    ckpt_path = os.environ.get("SALMONN_CKPT", f"{salmonn_repo}/salmonn_v1.pth")
+    beats_path = os.environ.get("SALMONN_BEATS_PATH", f"{salmonn_repo}/beats/BEATs_iter3_plus_AS2M_finetuned_on_AS2M_cpt2.pt")
     whisper_path = os.environ.get("SALMONN_WHISPER_PATH", "openai/whisper-large-v2")
-    vicuna_path  = os.environ.get("SALMONN_LLM_PATH",     "lmsys/vicuna-13b-v1.1")
+    vicuna_path = os.environ.get("SALMONN_LLM_PATH", "lmsys/vicuna-13b-v1.1")
 
-    print(f"Loading SALMONN...")
+    print("Loading SALMONN...")
     print(f"  ckpt:    {ckpt_path}")
     print(f"  beats:   {beats_path}")
     print(f"  whisper: {whisper_path}")
@@ -660,21 +660,18 @@ def run_salmonn(audio_paths: dict, out_dir: Path, quantize: bool, data_root: Pat
             if hasattr(model, attr):
                 setattr(model, attr, getattr(model, attr).half().cuda())
 
-        for name, param in model.named_parameters():
+        for _, param in model.named_parameters():
             if not param.is_cuda:
                 param.data = param.data.half().cuda()
-        for name, buf in model.named_buffers():
-            if not buf.is_cuda:
-                pass
 
     device = "cuda" if torch.cuda.is_available() else "cpu"
-    model.to(device) 
+    model.to(device)
 
-    for tag, paths in audio_paths.items():
-        completed = load_completed(out_dir, "salmonn", tag) if resume else set()
+    for lang, paths in audio_paths.items():
+        completed = load_completed(out_dir, "salmonn", lang) if resume else set()
         pending = [p for p in paths if p.name not in completed]
-        results = load_existing_results(out_dir, "salmonn", tag) if resume else []
-        print(f"\n[salmonn] tag={tag} ({len(pending)}/{len(paths)} files)")
+        results = load_existing_results(out_dir, "salmonn", lang) if resume else []
+        print(f"\n[salmonn] lang={lang} ({len(pending)}/{len(paths)} files)")
 
         for path in pending:
             try:
@@ -692,14 +689,15 @@ def run_salmonn(audio_paths: dict, out_dir: Path, quantize: bool, data_root: Pat
                             device=device,
                         )[0]
 
-                record = {"file": path.name, "tag": tag, "response": response}
-                record = attach_ground_truth(record, path.name, tag, data_root)
+                record = {"file": path.name, "tag": lang, "response": response}
+                record = attach_ground_truth(record, path.name, lang, data_root)
                 results.append(record)
                 print(f"  {path.name}: {response[:80]}...")
             except Exception as e:
                 print(f"  [ERROR] {path.name}: {e}", file=sys.stderr)
-                results.append({"file": path.name, "tag": tag, "response": None, "error": str(e)})
-            save_results(out_dir, "salmonn", tag, results)
+                results.append({"file": path.name, "tag": lang, "response": None, "error": str(e)})
+            save_results(out_dir, "salmonn", lang, results)
+
 
 def run_gemma(audio_paths: dict, out_dir: Path, quantize: bool, data_root: Path, resume: bool = False):
     from transformers import AutoProcessor, Gemma3nForConditionalGeneration
@@ -722,15 +720,14 @@ def run_gemma(audio_paths: dict, out_dir: Path, quantize: bool, data_root: Path,
     model_dtype = next(model.parameters()).dtype
     model_device = next(model.parameters()).device
 
-    for tag, paths in audio_paths.items():
-        completed = load_completed(out_dir, "gemma", tag) if resume else set()
+    for lang, paths in audio_paths.items():
+        completed = load_completed(out_dir, "gemma", lang) if resume else set()
         pending = [p for p in paths if p.name not in completed]
-        results = load_existing_results(out_dir, "gemma", tag) if resume else []
-        print(f"\n[gemma] tag={tag} ({len(pending)}/{len(paths)} files)")
+        results = load_existing_results(out_dir, "gemma", lang) if resume else []
+        print(f"\n[gemma] lang={lang} ({len(pending)}/{len(paths)} files)")
 
         for path in pending:
             try:
-                # Gemma 3n expects audio as a numpy array at 16 kHz, mono
                 audio_array, _ = librosa.load(str(path), sr=16000, mono=True)
 
                 conversation = [
@@ -750,7 +747,6 @@ def run_gemma(audio_paths: dict, out_dir: Path, quantize: bool, data_root: Path,
                     return_tensors="pt",
                 ).to(model_device)
 
-                # Cast float tensors to model dtype
                 inputs = {
                     k: v.to(model_dtype) if isinstance(v, torch.Tensor) and v.is_floating_point() else v
                     for k, v in inputs.items()
@@ -761,86 +757,89 @@ def run_gemma(audio_paths: dict, out_dir: Path, quantize: bool, data_root: Path,
                 with torch.inference_mode():
                     output_ids = model.generate(**inputs, max_new_tokens=512, do_sample=False)
 
-                response = processor.decode(
-                    output_ids[0][input_len:], skip_special_tokens=True
-                )
-                record = {"file": path.name, "tag": tag, "response": response}
-                record = attach_ground_truth(record, path.name, tag, data_root)
+                response = processor.decode(output_ids[0][input_len:], skip_special_tokens=True)
+                record = {"file": path.name, "tag": lang, "response": response}
+                record = attach_ground_truth(record, path.name, lang, data_root)
                 results.append(record)
                 print(f"  {path.name}: {response[:80]}...")
             except Exception as e:
                 print(f"  [ERROR] {path.name}: {e}", file=sys.stderr)
-                results.append({"file": path.name, "tag": tag, "response": None, "error": str(e)})
-            save_results(out_dir, "gemma", tag, results)
+                results.append({"file": path.name, "tag": lang, "response": None, "error": str(e)})
+            save_results(out_dir, "gemma", lang, results)
 
 
 MODEL_RUNNERS = {
     "qwen25omni": run_qwen25omni,
-    "qwen3omni":  run_qwen3omni,
-    "voxtral":    run_voxtral,
-    "flamingo":   run_flamingo,
-    "gpt":        run_gpt,
-    "gemini":     run_gemini,
-    "salmonn":    run_salmonn,
-    "gemma":      run_gemma,
+    "qwen3omni": run_qwen3omni,
+    "voxtral": run_voxtral,
+    "flamingo": run_flamingo,
+    "gpt": run_gpt,
+    "gemini": run_gemini,
+    "salmonn": run_salmonn,
+    "gemma": run_gemma,
 }
 
+
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="Run audio LLMs on foreign codeswitched audio data.")
+    parser = argparse.ArgumentParser(description="Run audio LLMs on monolingual MGSM audio data.")
     parser.add_argument("--model", required=True, choices=list(MODEL_RUNNERS.keys()))
-    parser.add_argument("--quantize", action="store_true",
-                        help="Load model in 4-bit (use when VRAM is tight).")
-    parser.add_argument("--data_root", type=Path, default=Path("."),
-                        help="Root directory containing audio_xtts_foreign/ and translations/.")
-    parser.add_argument("--out_dir", type=Path, default=Path("results"),
-                        help="Directory to save JSON outputs.")
     parser.add_argument(
-        "--langs", nargs="+", default=None,
+        "--quantize",
+        action="store_true",
+        help="Load model in 4-bit (use when VRAM is tight).",
+    )
+    parser.add_argument(
+        "--data_root",
+        type=Path,
+        default=Path("."),
+        help="Root directory containing audio_xtts_mgsm/ and global_mgsm/.",
+    )
+    parser.add_argument(
+        "--out_dir",
+        type=Path,
+        default=Path("results_mgsm"),
+        help="Directory to save JSON outputs.",
+    )
+    parser.add_argument(
+        "--langs",
+        nargs="+",
+        default=None,
         help=(
-            "Single-language audio folders to process (e.g. de es fr it en). "
-            "Looks under audio_xtts_foreign/original_{lang}_foreign/."
+            "Monolingual MGSM audio folders to process (e.g. de es fr it en). "
+            "Looks under audio_xtts_mgsm/global_mgsm_{lang}/."
         ),
     )
     parser.add_argument(
-        "--cs_pairs", nargs="+", default=None,
-        help=(
-            "Codeswitched pairs to process. "
-            "Use 'en-{lang}' or '{lang}-en' for English<->lang (e.g. en-de), "
-            "or '{lang1}-{lang2}' for two-language pairs (e.g. de-es). "
-            "Looks under audio_xtts_foreign/."
-        ),
+        "--test",
+        action="store_true",
+        help="Run only the first file per language.",
     )
-    parser.add_argument("--test", action="store_true",
-                        help="Run only the first file per tag (sanity check).")
-    parser.add_argument("--resume", action="store_true",
-                        help="Skip already-completed files.")
+    parser.add_argument(
+        "--resume",
+        action="store_true",
+        help="Skip already-completed files.",
+    )
     args = parser.parse_args()
 
     print(f"Model: {args.model} | Quantize: {args.quantize} | Test: {args.test} | Resume: {args.resume}")
 
-    # Build combined audio_paths dict keyed by tag
-    audio_paths: dict[str, list[Path]] = {}
-
-    if args.langs:
-        audio_paths.update(get_single_lang_paths(args.data_root, args.langs))
-
-    if args.cs_pairs:
-        audio_paths.update(get_cs_paths(args.data_root, args.cs_pairs))
+    langs = args.langs if args.langs is not None else SINGLE_LANGS
+    audio_paths = get_single_lang_paths(args.data_root, langs)
 
     if not audio_paths:
         print(
-            "[ERROR] No audio files found. Specify --langs and/or --cs_pairs, and check --data_root.",
+            "[ERROR] No audio files found. Specify --langs and check --data_root.",
             file=sys.stderr,
         )
         sys.exit(1)
 
     if args.test:
-        audio_paths = {tag: paths[:1] for tag, paths in audio_paths.items()}
-        print("[TEST MODE] Running 1 file per tag only.")
+        audio_paths = {lang: paths[:1] for lang, paths in audio_paths.items()}
+        print("[TEST MODE] Running 1 file per language only.")
 
     runner = MODEL_RUNNERS[args.model]
 
-    kwargs: dict = {"data_root": args.data_root, "resume": args.resume}
+    kwargs = {"data_root": args.data_root, "resume": args.resume}
     if args.model in ("qwen25omni", "qwen3omni", "voxtral", "flamingo", "salmonn", "gemma"):
         kwargs["quantize"] = args.quantize
 
