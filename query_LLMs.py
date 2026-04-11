@@ -30,11 +30,11 @@ MGSM_CSV_DIR = "global_mgsm"
 
 
 def single_lang_folder(data_root: Path, lang: str) -> Path:
-    return data_root / FOREIGN_AUDIO_DIR / f"global_mgsm_{lang}"
+    return data_root / "mgsm" / FOREIGN_AUDIO_DIR / f"global_mgsm_{lang}"
 
 
 def single_lang_manifest_path(data_root: Path, lang: str) -> Path:
-    return data_root / FOREIGN_AUDIO_DIR / f"global_mgsm_{lang}_manifest.csv"
+    return data_root / "mgsm" / FOREIGN_AUDIO_DIR / f"global_mgsm_{lang}_manifest.csv"
 
 
 def single_lang_text_csv_path(data_root: Path, lang: str) -> Path:
@@ -702,23 +702,18 @@ def run_salmonn(audio_paths: dict, out_dir: Path, quantize: bool, data_root: Pat
 def run_gemma(audio_paths: dict, out_dir: Path, quantize: bool, data_root: Path, resume: bool = False):
     from transformers import AutoProcessor, Gemma3nForConditionalGeneration
     import torch
-    import librosa
 
-    model_id = "google/gemma-3n-E4B-it"
+    model_id = "google/gemma-3n-e4b-it"
     print(f"Loading {model_id}...")
-    processor = AutoProcessor.from_pretrained(model_id)
 
-    load_kwargs = dict(device_map="auto")
+    load_kwargs = dict(device_map="auto", torch_dtype=torch.bfloat16)
     if quantize:
         from transformers import BitsAndBytesConfig
+        load_kwargs.pop("torch_dtype")
         load_kwargs["quantization_config"] = BitsAndBytesConfig(load_in_4bit=True)
-    else:
-        load_kwargs["torch_dtype"] = torch.bfloat16
 
-    model = Gemma3nForConditionalGeneration.from_pretrained(model_id, **load_kwargs)
-    model.eval()
-    model_dtype = next(model.parameters()).dtype
-    model_device = next(model.parameters()).device
+    model = Gemma3nForConditionalGeneration.from_pretrained(model_id, **load_kwargs).eval()
+    processor = AutoProcessor.from_pretrained(model_id)
 
     for lang, paths in audio_paths.items():
         completed = load_completed(out_dir, "gemma", lang) if resume else set()
@@ -728,14 +723,15 @@ def run_gemma(audio_paths: dict, out_dir: Path, quantize: bool, data_root: Path,
 
         for path in pending:
             try:
-                audio_array, _ = librosa.load(str(path), sr=16000, mono=True)
-
                 conversation = [
+                    {
+                        "role": "system",
+                        "content": [{"type": "text", "text": SYSTEM_PROMPT}],
+                    },
                     {
                         "role": "user",
                         "content": [
-                            {"type": "audio", "audio": audio_array},
-                            {"type": "text", "text": SYSTEM_PROMPT},
+                            {"type": "audio", "audio": str(path)},
                         ],
                     },
                 ]
@@ -745,12 +741,7 @@ def run_gemma(audio_paths: dict, out_dir: Path, quantize: bool, data_root: Path,
                     tokenize=True,
                     return_dict=True,
                     return_tensors="pt",
-                ).to(model_device)
-
-                inputs = {
-                    k: v.to(model_dtype) if isinstance(v, torch.Tensor) and v.is_floating_point() else v
-                    for k, v in inputs.items()
-                }
+                ).to(model.device)
 
                 input_len = inputs["input_ids"].shape[-1]
 
@@ -766,6 +757,111 @@ def run_gemma(audio_paths: dict, out_dir: Path, quantize: bool, data_root: Path,
                 print(f"  [ERROR] {path.name}: {e}", file=sys.stderr)
                 results.append({"file": path.name, "tag": lang, "response": None, "error": str(e)})
             save_results(out_dir, "gemma", lang, results)
+            
+def run_gemma4(audio_paths: dict, out_dir: Path, data_root: Path, quantize: bool = False, resume: bool = False):
+    import sys
+    import numpy as np
+    import torch
+    import librosa
+    from transformers import AutoProcessor, AutoModelForMultimodalLM
+
+    model_id = "google/gemma-4-E4B-it"
+    print(f"Loading {model_id}...")
+
+    processor = AutoProcessor.from_pretrained(model_id)
+
+    load_kwargs = {
+        "device_map": "auto",
+        "dtype": torch.bfloat16 if torch.cuda.is_available() else torch.float32,
+    }
+
+    model = AutoModelForMultimodalLM.from_pretrained(model_id, **load_kwargs)
+    model.eval()
+
+    for lang, paths in audio_paths.items():
+        completed = load_completed(out_dir, "gemma4", lang) if resume else set()
+        pending = [p for p in paths if p.name not in completed]
+        results = load_existing_results(out_dir, "gemma4", lang) if resume else []
+
+        print(f"\n[gemma4] lang={lang} ({len(pending)}/{len(paths)} files)")
+
+        for path in pending:
+            try:
+                # Gemma audio expects mono 16kHz float audio.
+                audio, sr = librosa.load(str(path), sr=16000, mono=True)
+                audio = np.asarray(audio, dtype=np.float32)
+                audio = np.clip(audio, -1.0, 1.0)
+
+                messages = [
+                    {
+                        "role": "user",
+                        "content": [
+                            {"type": "audio", "audio": audio},
+                            {
+                                "type": "text",
+                                "text": "Answer the question asked in the audio. Return only the final numeric answer."
+                            },
+                        ],
+                    }
+                ]
+
+                inputs = processor.apply_chat_template(
+                    messages,
+                    tokenize=True,
+                    return_dict=True,
+                    return_tensors="pt",
+                    add_generation_prompt=True,
+                )
+
+                moved_inputs = {}
+                for k, v in inputs.items():
+                    if torch.is_tensor(v):
+                        # Keep integer tensors as integers.
+                        if v.dtype in (
+                            torch.int8, torch.int16, torch.int32, torch.int64,
+                            torch.uint8, torch.bool
+                        ):
+                            moved_inputs[k] = v.to(model.device)
+                        else:
+                            moved_inputs[k] = v.to(model.device, dtype=load_kwargs["dtype"])
+                    else:
+                        moved_inputs[k] = v
+
+                input_len = moved_inputs["input_ids"].shape[-1]
+
+                with torch.inference_mode():
+                    output_ids = model.generate(
+                        **moved_inputs,
+                        max_new_tokens=64,
+                        do_sample=False,
+                    )
+
+                generated_ids = output_ids[0][input_len:]
+                raw_response = processor.decode(
+                    generated_ids,
+                    skip_special_tokens=True
+                ).strip()
+
+                record = {
+                    "file": path.name,
+                    "tag": lang,
+                    "response": raw_response,
+                }
+                record = attach_ground_truth(record, path.name, lang, data_root)
+                results.append(record)
+
+                print(f"  {path.name}: {raw_response[:80]}...")
+
+            except Exception as e:
+                print(f"  [ERROR] {path.name}: {e}", file=sys.stderr)
+                results.append({
+                    "file": path.name,
+                    "tag": lang,
+                    "response": None,
+                    "error": str(e),
+                })
+
+            save_results(out_dir, "gemma4", lang, results)
 
 
 MODEL_RUNNERS = {
@@ -777,6 +873,7 @@ MODEL_RUNNERS = {
     "gemini": run_gemini,
     "salmonn": run_salmonn,
     "gemma": run_gemma,
+    "gemma4": run_gemma4,
 }
 
 
