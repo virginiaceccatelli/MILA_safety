@@ -1103,6 +1103,69 @@ def run_gemma(audio_paths: dict, out_dir: Path, quantize: bool, data_root: Path,
                 results.append({"file": path.name, "tag": lang, "response": None, "error": str(e)})
             save_results(out_dir, "gemma", lang, results)
 
+def run_gemma4(audio_paths: dict, out_dir: Path, data_root: Path, quantize: bool = False, resume: bool = False):
+    import numpy as np
+    import torch
+    import librosa
+    from transformers import AutoProcessor, AutoModelForMultimodalLM
+
+    model_id = "google/gemma-4-E4B-it"
+    print(f"Loading {model_id}...")
+
+    processor = AutoProcessor.from_pretrained(model_id)
+
+    load_kwargs = dict(device_map="auto", torch_dtype=torch.bfloat16)
+    if quantize:
+        from transformers import BitsAndBytesConfig
+        load_kwargs.pop("torch_dtype")
+        load_kwargs["quantization_config"] = BitsAndBytesConfig(load_in_4bit=True)
+
+    model = AutoModelForMultimodalLM.from_pretrained(model_id, **load_kwargs).eval()
+    model_dtype = next(model.parameters()).dtype
+
+    for tag, paths in audio_paths.items():
+        completed = load_completed(out_dir, "gemma4", tag) if resume else set()
+        pending = [p for p in paths if p.name not in completed]
+        results = load_existing_results(out_dir, "gemma4", tag) if resume else []
+        print(f"\n[gemma4] tag={tag} ({len(pending)}/{len(paths)} files)")
+
+        for path in pending:
+            try:
+                audio, _ = librosa.load(str(path), sr=16000, mono=True)
+                audio = np.clip(np.asarray(audio, dtype=np.float32), -1.0, 1.0)
+
+                conversation = [
+                    {
+                        "role": "system",
+                        "content": [{"type": "text", "text": SYSTEM_PROMPT}],
+                    },
+                    {
+                        "role": "user",
+                        "content": [{"type": "audio", "audio": audio}],
+                    },
+                ]
+                inputs = processor.apply_chat_template(
+                    conversation,
+                    add_generation_prompt=True,
+                    tokenize=True,
+                    return_dict=True,
+                    return_tensors="pt",
+                )
+                inputs = safe_inputs_to_device(inputs, model.device, model_dtype)
+                input_len = inputs["input_ids"].shape[-1]
+
+                with torch.inference_mode():
+                    output_ids = model.generate(**inputs, max_new_tokens=512, do_sample=False)
+
+                response = processor.decode(output_ids[0][input_len:], skip_special_tokens=True).strip()
+                record = {"file": path.name, "tag": tag, "response": response}
+                record = attach_ground_truth(record, path.name, tag, data_root)
+                results.append(record)
+                print(f"  {path.name}: {response[:80]}...")
+            except Exception as e:
+                print(f"  [ERROR] {path.name}: {e}", file=sys.stderr)
+                results.append({"file": path.name, "tag": tag, "response": None, "error": str(e)})
+            save_results(out_dir, "gemma4", tag, results)
 
 MODEL_RUNNERS = {
     "qwen25omni": run_qwen25omni,
@@ -1113,6 +1176,7 @@ MODEL_RUNNERS = {
     "gemini": run_gemini,
     "salmonn": run_salmonn,
     "gemma": run_gemma,
+    "gemma4": run_gemma4
 }
 
 
@@ -1133,7 +1197,7 @@ if __name__ == "__main__":
     parser.add_argument(
         "--out_dir",
         type=Path,
-        default=Path("gibberish_meaning"),
+        default=Path("gibberish_meaning_gemma4"),
         help="Directory to save JSON outputs.",
     )
     parser.add_argument(

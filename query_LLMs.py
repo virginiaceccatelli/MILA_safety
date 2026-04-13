@@ -23,42 +23,23 @@ SYSTEM_PROMPT = (
 )
 
 SINGLE_LANGS = ["de", "es", "fr", "it", "en"]
-N_FILES = 250
-
-FOREIGN_AUDIO_DIR = "audio_gemini_mgsm"
-MGSM_CSV_DIR = "global_mgsm"
-
-
+N_FILES = 100
+ 
+FOREIGN_AUDIO_DIR = "audio_xtts_gibberish"
+ 
+ 
 def single_lang_folder(data_root: Path, lang: str) -> Path:
-    return data_root / "mgsm" / FOREIGN_AUDIO_DIR / f"global_mgsm_{lang}"
-
-
-def single_lang_manifest_path(data_root: Path, lang: str) -> Path:
-    return data_root / "mgsm" / FOREIGN_AUDIO_DIR / f"global_mgsm_{lang}_manifest.csv"
-
-
-def single_lang_text_csv_path(data_root: Path, lang: str) -> Path:
-    return data_root / "mgsm" / MGSM_CSV_DIR / f"global_mgsm_{lang}.csv"
-
-
-def _sorted_audio_files(folder: Path) -> list[Path]:
-    exts = ("*.wav", "*.mp3", "*.flac", "*.m4a")
-    paths = []
-    for pattern in exts:
-        paths.extend(folder.glob(pattern))
-
-    def sort_key(p: Path):
-        stem = p.stem
-        if stem.startswith("row_"):
-            try:
-                return (0, int(stem.split("_")[1]))
-            except Exception:
-                pass
-        return (1, stem)
-
-    return sorted(paths, key=sort_key)
-
-
+    return data_root / "gibberish_2" / FOREIGN_AUDIO_DIR / f"original_{lang}_gibberish"
+ 
+ 
+def cs_en_folder(data_root: Path, lang: str) -> Path:
+    return data_root / "gibberish_2" / FOREIGN_AUDIO_DIR / f"codeswitch_en_{lang}_gibberish"
+ 
+ 
+def cs_pair_folder(data_root: Path, lang1: str, lang2: str) -> Path:
+    return data_root / "gibberish_2" / FOREIGN_AUDIO_DIR / f"codeswitch_{lang1}_{lang2}_gibberish"
+ 
+ 
 def get_single_lang_paths(data_root: Path, langs: list[str]) -> dict[str, list[Path]]:
     result = {}
     for lang in langs:
@@ -66,98 +47,97 @@ def get_single_lang_paths(data_root: Path, langs: list[str]) -> dict[str, list[P
         if not folder.exists():
             print(f"[WARNING] Folder not found: {folder}", file=sys.stderr)
             continue
-
-        paths = _sorted_audio_files(folder)
+        paths = sorted(folder.glob("row_????.wav"))
         if len(paths) != N_FILES:
-            print(
-                f"[WARNING] Expected {N_FILES} files in {folder}, found {len(paths)}",
-                file=sys.stderr
-            )
+            print(f"[WARNING] Expected {N_FILES} files in {folder}, found {len(paths)}", file=sys.stderr)
         result[lang] = paths
     return result
-
-
-def load_single_lang_manifest(data_root: Path, lang: str) -> Optional[pd.DataFrame]:
-    path = single_lang_manifest_path(data_root, lang)
-    if not path.exists():
-        print(f"[WARNING] Manifest not found: {path}", file=sys.stderr)
-        return None
-    return pd.read_csv(path)
-
-
-def load_single_lang_questions(data_root: Path, lang: str) -> dict[int, str]:
-    path = single_lang_text_csv_path(data_root, lang)
-    if not path.exists():
-        print(f"[WARNING] Question CSV not found: {path}", file=sys.stderr)
+ 
+ 
+def get_cs_paths(data_root: Path, cs_pairs: list[str]) -> dict[str, list[Path]]:
+    """
+    cs_pairs entries:
+      'en-{lang}' or '{lang}-en' -> English<->lang  (folder: codeswitch_en_{lang}_nordic)
+      '{lang1}-{lang2}'          -> lang1<->lang2    (folder: codeswitch_{lang1}_{lang2}_nordic)
+    Returns dict keyed by the pair tag (e.g. 'en-de', 'de-es').
+    """
+    result = {}
+    for pair in cs_pairs:
+        parts = pair.split("-", 1)
+        if len(parts) != 2:
+            print(f"[WARNING] Invalid cs_pair format: {pair}", file=sys.stderr)
+            continue
+        l1, l2 = parts
+ 
+        if l1 == "en":
+            folder = cs_en_folder(data_root, l2)
+        elif l2 == "en":
+            folder = cs_en_folder(data_root, l1)
+        else:
+            folder = cs_pair_folder(data_root, l1, l2)
+ 
+        if not folder.exists():
+            print(f"[WARNING] Folder not found: {folder}", file=sys.stderr)
+            continue
+        paths = sorted(folder.glob("row_????.wav"))
+        if len(paths) != N_FILES:
+            print(f"[WARNING] Expected {N_FILES} files in {folder}, found {len(paths)}", file=sys.stderr)
+        result[pair] = paths
+    return result
+ 
+ 
+def load_ground_truth_single(data_root: Path) -> dict[int, str]:
+    """
+    Single-lang (including English<->X cs) ground truth from
+    translations/jbb_behaviors_de_12b.csv, column 'Goal'.
+    Row index = file row number (0-based).
+    """
+    csv_path = data_root / "malicious" / "translations" / "original_en.csv"
+    if not csv_path.exists():
+        print(f"[WARNING] Ground truth CSV not found: {csv_path}", file=sys.stderr)
         return {}
-
-    df = pd.read_csv(path)
-
-    candidate_cols = [
-        "question",
-        f"question_{lang}",
-        "Question",
-        f"Question_{lang}",
-        "input",
-        "prompt",
-    ]
-
-    q_col = next((c for c in candidate_cols if c in df.columns), None)
-    if q_col is None:
-        print(
-            f"[WARNING] Could not find a question column in {path}. "
-            f"Available columns: {list(df.columns)}",
-            file=sys.stderr
-        )
+    df = pd.read_csv(csv_path)
+    if "Goal" not in df.columns:
+        print(f"[WARNING] 'Goal' column not found in {csv_path}", file=sys.stderr)
         return {}
-
-    return {i: str(row[q_col]) for i, row in df.iterrows()}
-
-
-def load_ground_truth_single(data_root: Path, lang: str) -> dict[int, str]:
-    path = single_lang_text_csv_path(data_root, lang)
-    if not path.exists():
-        print(f"[WARNING] Ground-truth CSV not found: {path}", file=sys.stderr)
+    return {i: str(row["Goal"]) for i, row in df.iterrows()}
+ 
+ 
+def load_ground_truth_cs_pair(data_root: Path, lang1: str, lang2: str) -> dict[int, dict[str, str]]:
+    """
+    Two-language cs ground truth from
+    translations/codeswitch_{lang1}_{lang2}.csv
+    columns: Goal_{lang1}, Goal_{lang2}
+    Returns dict[row_idx] = {"lang1": ..., "lang2": ...}
+    """
+    csv_path = data_root / "malicious" / "translations" / f"codeswitch_{lang1}_{lang2}.csv"
+    if not csv_path.exists():
+        print(f"[WARNING] CS ground truth CSV not found: {csv_path}", file=sys.stderr)
         return {}
-
-    df = pd.read_csv(path)
-
-    candidate_cols = [
-        "answer",
-        f"answer_{lang}",
-        "Answer",
-        "question",
-        f"question_{lang}",
-        "Question",
-    ]
-
-    gt_col = next((c for c in candidate_cols if c in df.columns), None)
-    if gt_col is None:
-        print(
-            f"[WARNING] Could not find a ground-truth column in {path}. "
-            f"Available columns: {list(df.columns)}",
-            file=sys.stderr
-        )
+    df = pd.read_csv(csv_path)
+    col1, col2 = f"Goal_{lang1}", f"Goal_{lang2}"
+    missing = [c for c in [col1, col2] if c not in df.columns]
+    if missing:
+        print(f"[WARNING] Missing columns {missing} in {csv_path}", file=sys.stderr)
         return {}
-
-    return {i: str(row[gt_col]) for i, row in df.iterrows()}
-
-
+    return {
+        i: {lang1: str(row[col1]), lang2: str(row[col2])}
+        for i, row in df.iterrows()
+    }
+ 
+ 
 def row_index_from_filename(filename: str) -> int:
-    stem = Path(filename).stem
-    if stem.startswith("row_"):
-        return int(stem.split("_")[1])
-    raise ValueError(f"Cannot infer row index from filename: {filename}")
-
-
+    return int(Path(filename).stem.split("_")[1])
+ 
+ 
 def save_results(out_dir: Path, model_name: str, tag: str, results: list[dict]):
     out_dir.mkdir(parents=True, exist_ok=True)
     out_file = out_dir / f"{model_name}_{tag}.json"
     with open(out_file, "w", encoding="utf-8") as f:
         json.dump(results, f, ensure_ascii=False, indent=2)
     print(f"  -> Saved {len(results)} results to {out_file}")
-
-
+ 
+ 
 def load_completed(out_dir: Path, model_name: str, tag: str) -> set[str]:
     path = out_dir / f"{model_name}_{tag}.json"
     if not path.exists():
@@ -165,16 +145,16 @@ def load_completed(out_dir: Path, model_name: str, tag: str) -> set[str]:
     with open(path, encoding="utf-8") as f:
         existing = json.load(f)
     return {r["file"] for r in existing if r.get("response") is not None}
-
-
+ 
+ 
 def load_existing_results(out_dir: Path, model_name: str, tag: str) -> list[dict]:
     path = out_dir / f"{model_name}_{tag}.json"
     if not path.exists():
         return []
     with open(path, encoding="utf-8") as f:
         return json.load(f)
-
-
+ 
+ 
 def safe_inputs_to_device(inputs, device, dtype):
     import torch
     result = {}
@@ -186,16 +166,34 @@ def safe_inputs_to_device(inputs, device, dtype):
         else:
             result[k] = v.to(device)
     return result
-
-
-def attach_ground_truth(record: dict, filename: str, lang: str, data_root: Path) -> dict:
+ 
+ 
+def attach_ground_truth(record: dict, filename: str, tag: str, data_root: Path) -> dict:
+    """
+    Attach ground truth to a result record based on the audio tag type.
+      - single lang (e.g. 'de', 'en'):  gt = Goal string
+      - en-{lang} or {lang}-en:          gt = Goal string
+      - {lang1}-{lang2}:                 gt = {lang1: ..., lang2: ...}
+    """
     row_idx = row_index_from_filename(filename)
-    gt_map = load_ground_truth_single(data_root, lang)
-    q_map = load_single_lang_questions(data_root, lang)
-    record["ground_truth"] = gt_map.get(row_idx)
-    record["question_text"] = q_map.get(row_idx)
+ 
+    if "-" not in tag:
+        # pure single-language
+        gt_map = load_ground_truth_single(data_root)
+        record["ground_truth"] = gt_map.get(row_idx)
+    else:
+        parts = tag.split("-", 1)
+        l1, l2 = parts[0], parts[1]
+        if l1 == "en" or l2 == "en":
+            # English <-> lang
+            gt_map = load_ground_truth_single(data_root)
+            record["ground_truth"] = gt_map.get(row_idx)
+        else:
+            # lang1 <-> lang2
+            gt_map = load_ground_truth_cs_pair(data_root, l1, l2)
+            record["ground_truth"] = gt_map.get(row_idx)
+ 
     return record
-
 
 def run_qwen25omni(audio_paths: dict, out_dir: Path, quantize: bool, data_root: Path, resume: bool = False):
     from transformers import Qwen2_5OmniForConditionalGeneration, Qwen2_5OmniProcessor
@@ -759,7 +757,6 @@ def run_gemma(audio_paths: dict, out_dir: Path, quantize: bool, data_root: Path,
             save_results(out_dir, "gemma", lang, results)
             
 def run_gemma4(audio_paths: dict, out_dir: Path, data_root: Path, quantize: bool = False, resume: bool = False):
-    import sys
     import numpy as np
     import torch
     import librosa
@@ -770,99 +767,58 @@ def run_gemma4(audio_paths: dict, out_dir: Path, data_root: Path, quantize: bool
 
     processor = AutoProcessor.from_pretrained(model_id)
 
-    load_kwargs = {
-        "device_map": "auto",
-        "dtype": torch.bfloat16 if torch.cuda.is_available() else torch.float32,
-    }
+    load_kwargs = dict(device_map="auto", torch_dtype=torch.bfloat16)
+    if quantize:
+        from transformers import BitsAndBytesConfig
+        load_kwargs.pop("torch_dtype")
+        load_kwargs["quantization_config"] = BitsAndBytesConfig(load_in_4bit=True)
 
-    model = AutoModelForMultimodalLM.from_pretrained(model_id, **load_kwargs)
-    model.eval()
+    model = AutoModelForMultimodalLM.from_pretrained(model_id, **load_kwargs).eval()
+    model_dtype = next(model.parameters()).dtype
 
-    for lang, paths in audio_paths.items():
-        completed = load_completed(out_dir, "gemma4", lang) if resume else set()
+    for tag, paths in audio_paths.items():
+        completed = load_completed(out_dir, "gemma4", tag) if resume else set()
         pending = [p for p in paths if p.name not in completed]
-        results = load_existing_results(out_dir, "gemma4", lang) if resume else []
-
-        print(f"\n[gemma4] lang={lang} ({len(pending)}/{len(paths)} files)")
+        results = load_existing_results(out_dir, "gemma4", tag) if resume else []
+        print(f"\n[gemma4] tag={tag} ({len(pending)}/{len(paths)} files)")
 
         for path in pending:
             try:
-                # Gemma audio expects mono 16kHz float audio.
-                audio, sr = librosa.load(str(path), sr=16000, mono=True)
-                audio = np.asarray(audio, dtype=np.float32)
-                audio = np.clip(audio, -1.0, 1.0)
+                audio, _ = librosa.load(str(path), sr=16000, mono=True)
+                audio = np.clip(np.asarray(audio, dtype=np.float32), -1.0, 1.0)
 
-                messages = [
+                conversation = [
+                    {
+                        "role": "system",
+                        "content": [{"type": "text", "text": SYSTEM_PROMPT}],
+                    },
                     {
                         "role": "user",
-                        "content": [
-                            {"type": "audio", "audio": audio},
-                            {
-                                "type": "text",
-                                "text": "Answer the question asked in the audio. Return only the final numeric answer."
-                            },
-                        ],
-                    }
+                        "content": [{"type": "audio", "audio": audio}],
+                    },
                 ]
-
                 inputs = processor.apply_chat_template(
-                    messages,
+                    conversation,
+                    add_generation_prompt=True,
                     tokenize=True,
                     return_dict=True,
                     return_tensors="pt",
-                    add_generation_prompt=True,
                 )
-
-                moved_inputs = {}
-                for k, v in inputs.items():
-                    if torch.is_tensor(v):
-                        # Keep integer tensors as integers.
-                        if v.dtype in (
-                            torch.int8, torch.int16, torch.int32, torch.int64,
-                            torch.uint8, torch.bool
-                        ):
-                            moved_inputs[k] = v.to(model.device)
-                        else:
-                            moved_inputs[k] = v.to(model.device, dtype=load_kwargs["dtype"])
-                    else:
-                        moved_inputs[k] = v
-
-                input_len = moved_inputs["input_ids"].shape[-1]
+                inputs = safe_inputs_to_device(inputs, model.device, model_dtype)
+                input_len = inputs["input_ids"].shape[-1]
 
                 with torch.inference_mode():
-                    output_ids = model.generate(
-                        **moved_inputs,
-                        max_new_tokens=64,
-                        do_sample=False,
-                    )
+                    output_ids = model.generate(**inputs, max_new_tokens=512, do_sample=False)
 
-                generated_ids = output_ids[0][input_len:]
-                raw_response = processor.decode(
-                    generated_ids,
-                    skip_special_tokens=True
-                ).strip()
-
-                record = {
-                    "file": path.name,
-                    "tag": lang,
-                    "response": raw_response,
-                }
-                record = attach_ground_truth(record, path.name, lang, data_root)
+                response = processor.decode(output_ids[0][input_len:], skip_special_tokens=True).strip()
+                record = {"file": path.name, "tag": tag, "response": response}
+                record = attach_ground_truth(record, path.name, tag, data_root)
                 results.append(record)
-
-                print(f"  {path.name}: {raw_response[:80]}...")
-
+                print(f"  {path.name}: {response[:80]}...")
             except Exception as e:
                 print(f"  [ERROR] {path.name}: {e}", file=sys.stderr)
-                results.append({
-                    "file": path.name,
-                    "tag": lang,
-                    "response": None,
-                    "error": str(e),
-                })
-
-            save_results(out_dir, "gemma4", lang, results)
-
+                results.append({"file": path.name, "tag": tag, "response": None, "error": str(e)})
+            save_results(out_dir, "gemma4", tag, results)
 
 MODEL_RUNNERS = {
     "qwen25omni": run_qwen25omni,
@@ -878,67 +834,62 @@ MODEL_RUNNERS = {
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="Run audio LLMs on monolingual MGSM audio data.")
+    parser = argparse.ArgumentParser(description="Run audio LLMs on foreign codeswitched audio data.")
     parser.add_argument("--model", required=True, choices=list(MODEL_RUNNERS.keys()))
+    parser.add_argument("--quantize", action="store_true",
+                        help="Load model in 4-bit (use when VRAM is tight).")
+    parser.add_argument("--data_root", type=Path, default=Path("."),
+                        help="Root directory containing audio_xtts_foreign/ and translations/.")
+    parser.add_argument("--out_dir", type=Path, default=Path("results"),
+                        help="Directory to save JSON outputs.")
     parser.add_argument(
-        "--quantize",
-        action="store_true",
-        help="Load model in 4-bit (use when VRAM is tight).",
-    )
-    parser.add_argument(
-        "--data_root",
-        type=Path,
-        default=Path("."),
-        help="Root directory containing audio_xtts_mgsm/ and global_mgsm/.",
-    )
-    parser.add_argument(
-        "--out_dir",
-        type=Path,
-        default=Path("results_mgsm"),
-        help="Directory to save JSON outputs.",
-    )
-    parser.add_argument(
-        "--langs",
-        nargs="+",
-        default=None,
+        "--langs", nargs="+", default=None,
         help=(
-            "Monolingual MGSM audio folders to process (e.g. de es fr it en). "
-            "Looks under audio_xtts_mgsm/global_mgsm_{lang}/."
+            "Single-language audio folders to process (e.g. de es fr it en). "
+            "Looks under audio_xtts_foreign/original_{lang}_foreign/."
         ),
     )
     parser.add_argument(
-        "--test",
-        action="store_true",
-        help="Run only the first file per language.",
+        "--cs_pairs", nargs="+", default=None,
+        help=(
+            "Codeswitched pairs to process. "
+            "Use 'en-{lang}' or '{lang}-en' for English<->lang (e.g. en-de), "
+            "or '{lang1}-{lang2}' for two-language pairs (e.g. de-es). "
+            "Looks under audio_xtts_foreign/."
+        ),
     )
-    parser.add_argument(
-        "--resume",
-        action="store_true",
-        help="Skip already-completed files.",
-    )
+    parser.add_argument("--test", action="store_true",
+                        help="Run only the first file per tag (sanity check).")
+    parser.add_argument("--resume", action="store_true",
+                        help="Skip already-completed files.")
     args = parser.parse_args()
-
+ 
     print(f"Model: {args.model} | Quantize: {args.quantize} | Test: {args.test} | Resume: {args.resume}")
-
-    langs = args.langs if args.langs is not None else SINGLE_LANGS
-    audio_paths = get_single_lang_paths(args.data_root, langs)
-
+ 
+    audio_paths: dict[str, list[Path]] = {}
+ 
+    if args.langs:
+        audio_paths.update(get_single_lang_paths(args.data_root, args.langs))
+ 
+    if args.cs_pairs:
+        audio_paths.update(get_cs_paths(args.data_root, args.cs_pairs))
+ 
     if not audio_paths:
         print(
-            "[ERROR] No audio files found. Specify --langs and check --data_root.",
+            "[ERROR] No audio files found. Specify --langs and/or --cs_pairs, and check --data_root.",
             file=sys.stderr,
         )
         sys.exit(1)
-
+ 
     if args.test:
-        audio_paths = {lang: paths[:1] for lang, paths in audio_paths.items()}
-        print("[TEST MODE] Running 1 file per language only.")
-
+        audio_paths = {tag: paths[:1] for tag, paths in audio_paths.items()}
+        print("[TEST MODE] Running 1 file per tag only.")
+ 
     runner = MODEL_RUNNERS[args.model]
-
-    kwargs = {"data_root": args.data_root, "resume": args.resume}
+ 
+    kwargs: dict = {"data_root": args.data_root, "resume": args.resume}
     if args.model in ("qwen25omni", "qwen3omni", "voxtral", "flamingo", "salmonn", "gemma"):
         kwargs["quantize"] = args.quantize
-
+ 
     runner(audio_paths, args.out_dir, **kwargs)
     print("\nDone.")

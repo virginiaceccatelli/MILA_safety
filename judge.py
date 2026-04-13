@@ -12,8 +12,8 @@ import pandas as pd
 from dotenv import load_dotenv
 from openai import OpenAI
 
-MODELS = ["qwen25omni", "gemma", "qwen3omni", "voxtral", "gpt", "gemini", "flamingo", "salmonn"]
-
+# MODELS = ["qwen25omni", "gemma", "qwen3omni", "voxtral", "gpt", "gemini", "flamingo", "salmonn"]
+MODELS = ["gemma4"]
 
 class GPT4Judge:
     SYSTEM_PROMPT = (

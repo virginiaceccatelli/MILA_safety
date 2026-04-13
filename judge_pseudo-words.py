@@ -1,33 +1,3 @@
-#!/usr/bin/env python3
-"""
-Judge pseudo-word meanings and write only compact summary JSON.
-
-Input:
-  - Excel or CSV produced by extract_pseudoword_meanings.py
-    Typically: pseudoword_meanings_long.xlsx / .csv
-
-Output:
-  - summary JSON only, grouped by model and language:
-    {
-      "judge_model": "...",
-      "input_file": "...",
-      "totals": {...},
-      "by_model_lang": [
-        {
-          "model": "gemini",
-          "lang": "en",
-          "n_items": 42,
-          "harmless_meaning_count": 20,
-          "harmful_meaning_count": 15,
-          "noise_count": 7,
-          "harmless_meaning_rate": 0.4762,
-          "harmful_meaning_rate": 0.3571,
-          "noise_rate": 0.1667
-        }
-      ]
-    }
-"""
-
 import argparse
 import json
 import re
@@ -207,7 +177,7 @@ def aggregate(df: pd.DataFrame, labels: List[str], judge_model: str, input_file:
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--input_file", type=Path, required=True, help="CSV/XLSX from extract_pseudoword_meanings.py")
+    ap.add_argument("--input_file", type=Path, required=True, help="CSV/XLSX from pseudo-words_meanings.py")
     ap.add_argument("--out_json", type=Path, required=True, help="Path to write summary JSON")
     ap.add_argument("--judge_model", type=str, default="gpt-4.1", help="Judge model name")
     args = ap.parse_args()

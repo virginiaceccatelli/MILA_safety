@@ -3,11 +3,6 @@ import json
 import seaborn as sns
 import matplotlib.pyplot as plt
 
-# load multilingual results
-# df = pd.read_excel("malicious/judge_results_summaries/full_results.xlsx")
-# df = df[
-#     ["model","language","refused_rate","jailbroken_rate","deflected_rate"]
-# ].drop_duplicates()
 
 def load_summary_json(path):
     with open(path, "r") as f:
@@ -25,31 +20,17 @@ def load_summary_json(path):
             })
     return pd.DataFrame(rows)
 
-# MALICIOUS
-# df_en = load_summary_json("malicious/judge_results_summaries/summary_en.json")
-# df_single = load_summary_json("malicious/judge_results_summaries/summary_single-langs.json")
-# df_gemini = load_summary_json("malicious/judge_results_summaries/summary_gemini.json")
-# df_gemini_single = load_summary_json("malicious/judge_results_summaries/summary_gemini_single.json")
-# df_salmonn = load_summary_json("malicious/judge_results_summaries/summary_salmonn.json")
-# df_gemma = load_summary_json("malicious/judge_results_summaries/summary_gemma.json")
-
-# GIBBERISH 2
-# df = load_summary_json("gibberish_10/judge_results_gibberish/summary.json")
-# df_gemma = load_summary_json("gibberish_10/judge_results_gibberish/judge_results_gemma/summary.json")
-# df_qwen3 = load_summary_json("gibberish_10/judge_results_gibberish/judge_results_qwen3/summary.json")
-
+# GIBBERISH 
+df = load_summary_json("gibberish_2/judge_results_gibberish/summary.json")
+df_gemma3 = load_summary_json("gibberish_2/judge_results_gibberish/judge_results_gemma3/summary.json")
+df_gemma4 = load_summary_json("gibberish_2/judge_results_gibberish/judge_results_gemma4/summary.json")
+df_salmonn = load_summary_json("gibberish_2/judge_results_gibberish/judge_results_salmonn/summary.json")
 
 def normalize_cs_tags(lang):
     if lang.startswith("cs-"):
         return "en-" + lang[3:]
     return lang
 
-# MALICIOUS
-# df_en["language"] = df_en["language"].apply(normalize_cs_tags)
-# df_single["language"] = df_single["language"].apply(normalize_cs_tags)
-# df_gemini["language"] = df_gemini["language"].apply(normalize_cs_tags)
-# df_gemini_single["language"] = df_gemini_single["language"].apply(normalize_cs_tags)
-# df_salmonn["language"]  = df_salmonn["language"].apply(normalize_cs_tags)
 
 # relabel results.xlsx languages: bare codes (e.g. 'fr') become 'fr-en', 'en' stays 'en'
 def relabel_multilingual(lang):
@@ -59,14 +40,8 @@ def relabel_multilingual(lang):
         return lang
     return f"en-{lang}"
 
-#MALICIOUS
-# df["language"] = df["language"].apply(relabel_multilingual)
-# df_all = pd.concat([df, df_en, df_single, df_gemini, df_gemini_single, df_salmonn, df_gemma], ignore_index=True)
-
-# GIBBERISH 2
-# df_all = pd.concat([df, df_gemma, df_qwen3], ignore_index=True)
-
-df_all = load_summary_json("judge_results_malicious/summary.json")
+# GIBBERISH 
+df_all = pd.concat([df, df_gemma3, df_gemma4, df_salmonn], ignore_index=True)
 
 # drop duplicate (model, language) pairs — keep first occurrence
 df_all = df_all.drop_duplicates(subset=["model", "language"])
@@ -171,7 +146,7 @@ bar_width   = 0.25
 x           = np.arange(n_languages)
  
 n_models = len(models)
-n_cols   = 4
+n_cols   = 3
 n_rows   = math.ceil(n_models / n_cols)   # 2 rows for 5-7 models, etc.
  
 fig, axes = plt.subplots(
