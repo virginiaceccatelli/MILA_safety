@@ -7,8 +7,8 @@ import numpy as np
 import pandas as pd
 import seaborn as sns
 
-SUMMARY_PATH = "mgsm/judge_results_mgsm/summary.json"
-OUT_DIR      = Path("plots_mgsm")
+SUMMARY_PATH = "fleurs_sib/judge_results_fleurs_sib/summary.json"
+OUT_DIR      = Path("plots_fleurs_sem")
 OUT_DIR.mkdir(exist_ok=True)
 
 with open(SUMMARY_PATH) as f:

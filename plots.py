@@ -14,17 +14,20 @@ def load_summary_json(path):
                 "model": model,
                 "language": lang,
                 "refused_rate": metrics["refused_rate"],
-                "jailbroken_rate": metrics["jailbroken_rate"],
+                "complied_rate": metrics["complied_rate"],
                 "deflected_rate": metrics["deflected_rate"],
                 "n_total": metrics["n_total"]
             })
     return pd.DataFrame(rows)
 
 # GIBBERISH 
-df = load_summary_json("gibberish_2/judge_results_gibberish/summary.json")
-df_gemma3 = load_summary_json("gibberish_2/judge_results_gibberish/judge_results_gemma3/summary.json")
-df_gemma4 = load_summary_json("gibberish_2/judge_results_gibberish/judge_results_gemma4/summary.json")
-df_salmonn = load_summary_json("gibberish_2/judge_results_gibberish/judge_results_salmonn/summary.json")
+# df = load_summary_json("gibberish_10/judge_results_gibberish/summary.json")
+# df_gemma3 = load_summary_json("gibberish_10/judge_results_gibberish/judge_results_gemma3/summary.json")
+# df_gemma4 = load_summary_json("gibberish_10/judge_results_gibberish/judge_results_gemma4/summary.json")
+# df_qwen3 = load_summary_json("gibberish_10/judge_results_gibberish/judge_results_qwen3/summary.json")
+
+df = load_summary_json("judge_defence_malicious/summary.json")
+df_gemma3 = load_summary_json("judge_defence_malicious/summary_gemma3.json")
 
 def normalize_cs_tags(lang):
     if lang.startswith("cs-"):
@@ -41,7 +44,7 @@ def relabel_multilingual(lang):
     return f"en-{lang}"
 
 # GIBBERISH 
-df_all = pd.concat([df, df_gemma3, df_gemma4, df_salmonn], ignore_index=True)
+df_all = pd.concat([df, df_gemma3], ignore_index=True)
 
 # drop duplicate (model, language) pairs — keep first occurrence
 df_all = df_all.drop_duplicates(subset=["model", "language"])
@@ -50,7 +53,7 @@ df_all = df_all.drop_duplicates(subset=["model", "language"])
 pivot = df_all.pivot(
     index="model",
     columns="language",
-    values="jailbroken_rate"
+    values="complied_rate"
 )
 
 # reorder columns: 'en' first, then single-lang baselines (no hyphen, not 'en'), then mixed (hyphenated)
@@ -68,8 +71,8 @@ summary = (
     .rename(columns={
         "refused_rate":    "refusal",
         "deflected_rate":  "deflection",
-        "jailbroken_rate": "JSR",
-    })[["model", "language", "refusal", "deflection", "JSR"]]
+        "complied_rate": "compliance",
+    })[["model", "language", "refusal", "deflection", "compliance"]]
     .reset_index(drop=True)
 )
 
@@ -83,7 +86,6 @@ sns.heatmap(
     fmt=".2f",
     cmap="Reds"
 )
-plt.title("Jailbreak Rate by Model and Language")
 plt.xlabel("Language")
 plt.ylabel("Model")
 plt.tight_layout()
@@ -98,8 +100,8 @@ languages = ordered_cols  # already computed: ["en"] + single_lang + mixed_lang
 #    We plot jailbroken_rate (JSR) across languages; swap the `metric` variable to
 #    plot refusal or deflection instead.
  
-metric      = "jailbroken_rate"
-metric_label = "Jailbreak Success Rate (%)"
+metric      = "complied_rate"
+metric_label = "Compliance (%)"
  
 fig, ax = plt.subplots(figsize=(10, 5))
  
@@ -117,7 +119,6 @@ for model in models:
         label=model,
     )
  
-ax.set_title("Jailbreak Rate by Model across Languages")
 ax.set_xlabel("Language")
 ax.set_ylabel(metric_label)
 ax.set_xticks(range(len(languages)))
@@ -134,7 +135,7 @@ plt.close()
 metrics = {
     "refused_rate":   "Refusal",
     "deflected_rate": "Deflection",
-    "jailbroken_rate": "JSR",
+    "complied_rate": "compliance",
 }
  
 import numpy as np
@@ -173,7 +174,6 @@ for ax, model in zip(axes_flat, models):
             label=label,
         )
  
-    ax.set_title(model)
     ax.set_xlabel("Language")
     ax.set_xticks(x)
     ax.set_xticklabels(languages, rotation=45, ha="right")
@@ -194,7 +194,6 @@ fig.legend(
     loc="upper right",
     bbox_to_anchor=(1.0, 1.0),
 )
-fig.suptitle("Refusal / Deflection / JSR by Language and Model", y=1.02)
 plt.tight_layout()
 plt.savefig("barchart_metrics_by_language.png", bbox_inches="tight")
 plt.close()
